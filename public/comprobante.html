@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comprobante digital · K’anba Cuevas Vivas</title>
+  <meta name="description" content="Comprobante digital de pago de tu reserva en K’anba.">
+  <meta name="theme-color" content="#0e2420">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body class="subpage receipt-page">
+  <header class="page-header">
+    <div class="container page-header-inner">
+      <a class="brand brand-light" href="/" aria-label="K’anba, inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><path d="M5 35V20a15 15 0 0 1 30 0v15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 31c-4.7-3.6-7-6.8-7-10.4a7 7 0 0 1 14 0c0 3.6-2.3 6.8-7 10.4Z" fill="currentColor"/><path d="M19 25.8c.1-2.9.8-4.7 1.8-6.3.6 2 1.9 3 2.4 5 .3 1.2-.4 2.5-2 2.8-1.6.3-2.3-.7-2.2-1.5Z" fill="#0e2420"/></svg>
+        </span>
+        <span class="brand-type"><strong>K’anba</strong><small>Cuevas Vivas</small></span>
+      </a>
+      <nav class="page-nav" aria-label="Navegación">
+        <a href="/mi-reserva.html">Mi reserva</a>
+        <a class="btn btn-primary btn-sm" href="/#reservar">Reservar</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-band">
+    <div class="container">
+      <p class="eyebrow eyebrow-light"><span class="pulse-dot"></span> Documento de pago</p>
+      <h1 class="display">Comprobante digital</h1>
+      <p class="page-lead">Este comprobante acredita el pago de tu reserva. Puedes imprimirlo o guardarlo como PDF y presentarlo en recepción si lo necesitas.</p>
+    </div>
+  </section>
+
+  <main class="page-main">
+    <div class="container">
+      <div class="receipt-wrap" id="receiptWrap" hidden>
+        <article class="receipt-card" id="receiptCard">
+          <div class="receipt-head">
+            <div class="receipt-brand">
+              <strong>K’anba</strong>
+              <span>Cuevas Vivas · Lanquín</span>
+              <small id="businessName">K’anba Cuevas Vivas · Operadora local</small>
+              <small id="businessDetails">Lanquín, Alta Verapaz, Guatemala · NIT 1234567-8</small>
+            </div>
+            <div class="receipt-meta">
+              <h1>Comprobante</h1>
+              <strong id="receiptNumber">REC-0000-00000</strong>
+              <span id="receiptDate">Emitido: —</span>
+              <span id="receiptStatus">Pago aprobado</span>
+            </div>
+          </div>
+
+          <div class="receipt-parties">
+            <div>
+              <h3>Facturado a</h3>
+              <strong id="customerName">—</strong>
+              <span id="customerEmail">—</span>
+              <span id="customerPhone">—</span>
+              <span id="customerCountry">—</span>
+            </div>
+            <div>
+              <h3>Reserva</h3>
+              <strong id="reservationCode">—</strong>
+              <span id="reservationTour">—</span>
+              <span id="reservationDate">—</span>
+              <span id="reservationPax">—</span>
+            </div>
+          </div>
+
+          <table class="receipt-table" aria-label="Detalle del comprobante">
+            <thead>
+              <tr><th>Descripción</th><th>Cant.</th><th>Precio unit.</th><th>Importe</th></tr>
+            </thead>
+            <tbody id="receiptLines"></tbody>
+          </table>
+
+          <div class="receipt-totals">
+            <table>
+              <tbody>
+                <tr><td>Subtotal</td><td id="subtotal">Q0.00</td></tr>
+                <tr><td>IVA incluido (12%)</td><td id="tax">Q0.00</td></tr>
+                <tr class="grand"><td>Total pagado</td><td id="total">Q0.00</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="receipt-payment">
+            <div><span>Método de pago</span><strong id="paymentMethod">Tarjeta</strong></div>
+            <div><span>Referencia</span><strong id="paymentReference">—</strong></div>
+            <div><span>Pasarela</span><strong id="paymentProvider">KanbaPay Sandbox</strong></div>
+            <div><span>Fecha de pago</span><strong id="paymentDate">—</strong></div>
+          </div>
+
+          <div class="receipt-stamp">Pago<br>aprobado<br>K’anba</div>
+
+          <p class="receipt-note">
+            <strong>Notas:</strong> Los precios se expresan en quetzales guatemaltecos (GTQ) e incluyen impuestos. Este documento es un comprobante de pago y no sustituye una factura electrónica ante la SAT. Las políticas de cancelación y reembolso están disponibles en el sitio web. Para consultas escribe a <span id="businessEmail">reservas@kanba.gt</span> indicando el número de reserva.
+          </p>
+        </article>
+
+        <div class="receipt-actions">
+          <button class="btn btn-primary" type="button" id="printReceipt">Imprimir o guardar PDF</button>
+          <a class="btn btn-outline" id="backConfirm" href="/confirmacion.html">Volver a la confirmación</a>
+          <a class="btn btn-ghost-dark" id="goReservation" href="/mi-reserva.html">Gestionar mi reserva</a>
+          <a class="btn btn-ghost-dark" id="verifyLink" href="/verificar.html">Verificar comprobante</a>
+        </div>
+      </div>
+
+      <div class="panel-card state-card" id="receiptState">
+        <div class="state-icon amber" id="receiptStateIcon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v6M12 16.5v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h2 id="receiptStateTitle">Cargando comprobante…</h2>
+        <p id="receiptStateText">Estamos verificando el pago de tu reserva.</p>
+        <div class="state-actions" id="receiptStateActions"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="mini-footer">
+    <div class="container mini-footer-inner">
+      <span>© <span id="year">2026</span> K’anba Cuevas Vivas · Sitio demostrativo</span>
+      <div class="mini-links">
+        <a href="/">Inicio</a>
+        <a href="/mi-reserva.html">Mi reserva</a>
+        <a href="/#politicas">Políticas</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/js/receipt.js" defer></script>
+</body>
+</html>

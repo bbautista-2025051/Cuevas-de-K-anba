@@ -1,0 +1,57 @@
+From: "K’anba Reservas" <reservas@kanba.gt>
+To: sofia.ramirez@example.com
+Subject: Tu reserva expiró · KAN-2026-01033 · K’anba
+Date: Thu, 12 Nov 2026 17:24:46 GMT
+Message-ID: <mail_mwdtiphm_b4sb70@kanba.gt>
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="kanba-mail_mwdtiphm_b4sb70"
+
+--kanba-mail_mwdtiphm_b4sb70
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+El río siguió su curso
+
+Hola Sofía Ramírez, El plazo para completar el pago de la reserva KAN-2026-01033 venció. Los cupos fueron liberados automáticamente para otros visitantes. No se realizó ningún cargo. Si aún quieres venir, puedes reservar de nuevo y elegir otro horario disponible.
+
+K’anba Cuevas Vivas · Lanquín, Alta Verapaz, Guatemala
+
+
+--kanba-mail_mwdtiphm_b4sb70
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>El río siguió su curso</title></head>
+<body style="margin:0;padding:0;background:#f2ede2;font-family:Georgia,'Times New Roman',serif;color:#16211d;">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">El plazo de pago venció y los cupos fueron liberados.</div>
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#f2ede2;padding:24px 12px;">
+<tr><td align="center">
+<table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;width:100%;background:#fffdf7;border-radius:18px;overflow:hidden;box-shadow:0 18px 50px rgba(14,36,32,.14);">
+  <tr><td style="background:#0e2420;padding:26px 34px;">
+    <div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#b8d98c;">K’anba · Cuevas Vivas</div>
+    <div style="font-family:Georgia,serif;font-size:27px;color:#f6f1e6;margin-top:6px;line-height:1.1;">Donde el río se esconde</div>
+  </td></tr>
+  <tr><td style="padding:34px 34px 10px;">
+    <h1 style="font-family:Georgia,serif;font-size:30px;line-height:1.15;margin:0 0 14px;color:#0e2420;font-weight:normal;">El río siguió su curso</h1>
+    <p style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#33443c;margin:0 0 14px;">Hola Sofía Ramírez,</p>
+        <p style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#33443c;margin:0 0 14px;">El plazo para completar el pago de la reserva <strong>KAN-2026-01033</strong> venció. Los cupos fueron liberados automáticamente para otros visitantes.</p>
+        <p style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#33443c;margin:0 0 14px;">No se realizó ningún cargo. Si aún quieres venir, puedes reservar de nuevo y elegir otro horario disponible.</p>
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin:26px 0 8px;"><tr><td style="border-radius:999px;background:#2f6b57;">
+      <a href="http://localhost:3000/#reservar" style="display:inline-block;padding:14px 28px;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;color:#fffdf7;text-decoration:none;border-radius:999px;">Reservar de nuevo</a>
+    </td></tr></table>
+  </td></tr>
+  <tr><td style="padding:16px 34px 30px;">
+    <div style="background:#f2ede2;border-radius:12px;padding:16px 18px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#4a5b53;">Si crees que esto es un error o el pago se cobró, escríbenos a reservas@kanba.gt con el número de reserva.</div>
+  </td></tr>
+  <tr><td style="background:#0e2420;padding:22px 34px;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:1.7;color:#a9bdb3;">
+    <strong style="color:#f6f1e6;">K’anba Cuevas Vivas</strong><br>
+    Lanquín, Alta Verapaz, Guatemala · +502 4000 2026<br>
+    <a href="http://localhost:3000" style="color:#b8d98c;text-decoration:none;">kanba.gt</a> · Este es un correo transaccional generado automáticamente.
+  </td></tr>
+</table>
+<div style="font-family:Arial,Helvetica,sans-serif;font-size:10px;color:#8a9a92;padding:16px 8px;">Sitio y sistema demostrativos. No es el sitio oficial de las Cuevas de K’anba.</div>
+</td></tr></table></body></html>
+
+--kanba-mail_mwdtiphm_b4sb70--
