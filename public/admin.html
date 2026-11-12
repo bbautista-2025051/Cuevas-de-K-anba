@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administración · K’anba Cuevas Vivas</title>
+  <meta name="description" content="Panel administrativo de reservas, disponibilidad, contenido y configuración de K’anba Cuevas Vivas.">
+  <meta name="theme-color" content="#0b1a16">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin-body">
+  <!-- Acceso -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-glow" aria-hidden="true"></div>
+    <form class="login-card" id="loginForm" novalidate>
+      <a class="brand brand-light login-brand" href="/" aria-label="K’anba, inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><path d="M5 35V20a15 15 0 0 1 30 0v15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 31c-4.7-3.6-7-6.8-7-10.4a7 7 0 0 1 14 0c0 3.6-2.3 6.8-7 10.4Z" fill="currentColor"/><path d="M19 25.8c.1-2.9.8-4.7 1.8-6.3.6 2 1.9 3 2.4 5 .3 1.2-.4 2.5-2 2.8-1.6.3-2.3-.7-2.2-1.5Z" fill="#0e2420"/></svg>
+        </span>
+        <span class="brand-type"><strong>K’anba</strong><small>Cuevas Vivas</small></span>
+      </a>
+      <p class="eyebrow eyebrow-light"><span class="pulse-dot"></span> Acceso restringido</p>
+      <h1>Administración</h1>
+      <p class="login-lead">Gestiona reservas, cupos, contenido, correos y reembolsos del sitio de K’anba.</p>
+      <label class="field field-dark">
+        <span>Contraseña</span>
+        <input type="password" id="loginPassword" name="password" autocomplete="current-password" placeholder="••••••••" required>
+      </label>
+      <div class="form-error" id="loginError" role="alert" hidden></div>
+      <button class="btn btn-primary login-submit" type="submit" id="loginButton">Entrar al panel</button>
+      <p class="login-note">Demo: <code>kanba2026</code>. Cambia la contraseña desde Configuración. La sesión se guarda en una cookie HttpOnly.</p>
+    </form>
+  </div>
+
+  <!-- Panel -->
+  <div class="admin-shell" id="adminShell" hidden>
+    <aside class="admin-sidebar" id="adminSidebar" aria-label="Navegación administrativa">
+      <div class="admin-brand">
+        <a class="brand brand-light" href="/" aria-label="K’anba, inicio">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><path d="M5 35V20a15 15 0 0 1 30 0v15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 31c-4.7-3.6-7-6.8-7-10.4a7 7 0 0 1 14 0c0 3.6-2.3 6.8-7 10.4Z" fill="currentColor"/><path d="M19 25.8c.1-2.9.8-4.7 1.8-6.3.6 2 1.9 3 2.4 5 .3 1.2-.4 2.5-2 2.8-1.6.3-2.3-.7-2.2-1.5Z" fill="#0e2420"/></svg>
+          </span>
+          <span class="brand-type"><strong>K’anba</strong><small>Administración</small></span>
+        </a>
+        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Cerrar menú">×</button>
+      </div>
+      <nav class="admin-nav">
+        <p class="nav-label">Operación</p>
+        <button type="button" class="nav-item is-active" data-view="overview">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="3" width="8" height="5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="10" width="8" height="11" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="13" width="8" height="8" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg></span>
+          Resumen
+        </button>
+        <button type="button" class="nav-item" data-view="reservations">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 3v4M16 3v4M3 10h18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+          Reservas
+        </button>
+        <button type="button" class="nav-item" data-view="availability">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V9m5 11V4m5 16v-7m5 7V6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          Disponibilidad
+        </button>
+        <button type="button" class="nav-item" data-view="tours">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17 9 7l4 6 3-4 5 8H3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="7" cy="6" r="1.6" fill="currentColor"/></svg></span>
+          Tours
+        </button>
+        <p class="nav-label">Sitio</p>
+        <button type="button" class="nav-item" data-view="content">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h10M4 19h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          Contenido
+        </button>
+        <button type="button" class="nav-item" data-view="gallery">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="9" cy="9" r="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m4 18 5-5 4 4 3-3 4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+          Galería
+        </button>
+        <button type="button" class="nav-item" data-view="videos">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m10 9 5 3-5 3V9Z" fill="currentColor"/></svg></span>
+          Videos
+        </button>
+        <p class="nav-label">Control</p>
+        <button type="button" class="nav-item" data-view="emails">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+          Correos
+          <span class="nav-badge" id="emailBadge" hidden>0</span>
+        </button>
+        <button type="button" class="nav-item" data-view="refunds">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 9a8 8 0 0 1 14-2l2 3M20 15a8 8 0 0 1-14 2l-2-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M20 4v6h-6M4 20v-6h6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Reembolsos
+          <span class="nav-badge" id="refundBadge" hidden>0</span>
+        </button>
+        <button type="button" class="nav-item" data-view="settings">
+          <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1M7.7 16.3l-2.1 2.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+          Configuración
+        </button>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="admin-user">
+          <span class="avatar">K</span>
+          <div><strong>Administración</strong><small id="sessionInfo">Sesión activa</small></div>
+        </div>
+        <div class="sidebar-links">
+          <a href="/" target="_blank" rel="noopener">Ver sitio ↗</a>
+          <button type="button" id="logoutButton">Cerrar sesión</button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-scrim" id="sidebarScrim" hidden></div>
+
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="topbar-title">
+          <span class="topbar-kicker" id="viewKicker">Operación</span>
+          <h1 id="viewTitle">Resumen</h1>
+        </div>
+        <div class="topbar-actions">
+          <span class="sync-pill" id="syncPill"><span></span> Datos en vivo</span>
+          <button class="icon-button" type="button" id="refreshButton" title="Actualizar datos" aria-label="Actualizar datos">
+            <svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 6.3M20 5v6h-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <main class="admin-content" id="adminContent">
+        <!-- Resumen -->
+        <section class="admin-view is-active" id="view-overview" data-view-panel="overview">
+          <div class="kpi-grid" id="overviewKpis"></div>
+          <div class="admin-grid two">
+            <div class="admin-card">
+              <div class="card-head">
+                <div><span class="card-kicker">Últimos 7 días</span><h2>Reservas y ingresos</h2></div>
+                <span class="card-meta" id="chartTotal">—</span>
+              </div>
+              <div class="bar-chart" id="overviewChart"></div>
+            </div>
+            <div class="admin-card">
+              <div class="card-head"><div><span class="card-kicker">Hoy</span><h2>Ocupación y almacenamiento</h2></div></div>
+              <div class="ring-wrap" id="occupancyRing"></div>
+              <div class="mini-stats" id="storageStats"></div>
+            </div>
+          </div>
+          <div class="admin-grid two">
+            <div class="admin-card">
+              <div class="card-head">
+                <div><span class="card-kicker">Agenda</span><h2>Próximos tours confirmados</h2></div>
+                <button class="text-link" type="button" data-go="reservations">Ver reservas →</button>
+              </div>
+              <div class="table-wrap"><table class="data-table" id="upcomingTable"></table></div>
+            </div>
+            <div class="admin-card">
+              <div class="card-head">
+                <div><span class="card-kicker">Actividad</span><h2>Reservas recientes</h2></div>
+                <button class="text-link" type="button" data-go="reservations">Todas →</button>
+              </div>
+              <div class="table-wrap"><table class="data-table" id="recentTable"></table></div>
+            </div>
+          </div>
+          <div class="admin-card">
+            <div class="card-head">
+              <div><span class="card-kicker">Reembolsos</span><h2>Solicitudes pendientes</h2></div>
+              <button class="text-link" type="button" data-go="refunds">Gestionar →</button>
+            </div>
+            <div id="overviewRefunds" class="refund-list"></div>
+          </div>
+        </section>
+
+        <!-- Reservas -->
+        <section class="admin-view" id="view-reservations" data-view-panel="reservations" hidden>
+          <div class="toolbar">
+            <div class="toolbar-search">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <input type="search" id="reservationSearch" placeholder="Buscar código, nombre, correo o tour…" autocomplete="off">
+            </div>
+            <select id="reservationStatus" class="select-compact" aria-label="Filtrar por estado">
+              <option value="all">Todos los estados</option>
+              <option value="pending_payment">Pago pendiente</option>
+              <option value="confirmed">Confirmadas</option>
+              <option value="cancelled">Canceladas</option>
+              <option value="expired">Expiradas</option>
+            </select>
+            <button class="btn btn-primary btn-compact" type="button" id="refreshReservations">Actualizar</button>
+          </div>
+          <div class="admin-card no-pad">
+            <div class="list-head"><span id="reservationCount">—</span><span class="muted">Haz clic en una reserva para gestionarla.</span></div>
+            <div class="table-wrap"><table class="data-table reservations-table" id="reservationsTable"></table></div>
+          </div>
+        </section>
+
+        <!-- Disponibilidad -->
+        <section class="admin-view" id="view-availability" data-view-panel="availability" hidden>
+          <div class="toolbar">
+            <label class="inline-field">Ventana
+              <select id="availabilityDays" class="select-compact">
+                <option value="7">7 días</option>
+                <option value="14" selected>14 días</option>
+                <option value="21">21 días</option>
+                <option value="30">30 días</option>
+              </select>
+            </label>
+            <button class="btn btn-primary btn-compact" type="button" id="refreshAvailability">Actualizar</button>
+            <span class="toolbar-note" id="availabilityNote"></span>
+          </div>
+          <div class="admin-card">
+            <div class="card-head"><div><span class="card-kicker">Cupos</span><h2>Ocupación por salida</h2></div><span class="legend"><i class="open"></i> Disponible <i class="last"></i> Últimos <i class="full"></i> Agotado</span></div>
+            <div class="availability-grid" id="availabilityGrid"></div>
+          </div>
+          <div class="admin-grid two">
+            <div class="admin-card">
+              <div class="card-head"><div><span class="card-kicker">Bloqueos</span><h2>Registrar cierre</h2></div></div>
+              <form id="closureForm" class="stack-form">
+                <label class="field"><span>Fecha</span><input type="date" id="closureDate" required></label>
+                <label class="field"><span>Alcance</span><select id="closureTour"><option value="all">Todos los tours</option></select></label>
+                <label class="field"><span>Motivo</span><input type="text" id="closureReason" maxlength="200" placeholder="Mantenimiento, crecida del río…" required></label>
+                <button class="btn btn-primary" type="submit" id="closureSubmit">Registrar cierre</button>
+              </form>
+            </div>
+            <div class="admin-card">
+              <div class="card-head"><div><span class="card-kicker">Agenda</span><h2>Cierres programados</h2></div><span class="card-meta" id="closureCount">—</span></div>
+              <div id="closureList" class="closure-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tours -->
+        <section class="admin-view" id="view-tours" data-view-panel="tours" hidden>
+          <div class="toolbar">
+            <span class="toolbar-note" id="toursNote"></span>
+            <button class="btn btn-primary btn-compact" type="button" id="newTourButton">+ Nuevo tour</button>
+          </div>
+          <div class="tour-admin-grid" id="toursGrid"></div>
+        </section>
+
+        <!-- Contenido -->
+        <section class="admin-view" id="view-content" data-view-panel="content" hidden>
+          <div class="toolbar">
+            <span class="toolbar-note">Edita los textos del sitio público. Los cambios se publican al guardar.</span>
+            <div class="toolbar-actions">
+              <button class="btn btn-outline btn-compact" type="button" id="reloadContent">Descartar cambios</button>
+              <button class="btn btn-primary btn-compact" type="button" id="saveContent">Guardar contenido</button>
+            </div>
+          </div>
+          <div class="content-tabs" id="contentTabs" role="tablist"></div>
+          <div id="contentPanels"></div>
+        </section>
+
+        <!-- Galería -->
+        <section class="admin-view" id="view-gallery" data-view-panel="gallery" hidden>
+          <div class="toolbar">
+            <span class="toolbar-note" id="galleryNote"></span>
+            <div class="toolbar-actions">
+              <button class="btn btn-outline btn-compact" type="button" id="galleryAddUrl">+ Añadir por URL</button>
+              <label class="btn btn-outline btn-compact upload-button">Subir imagen
+                <input type="file" id="galleryUpload" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+              </label>
+              <button class="btn btn-primary btn-compact" type="button" id="saveGallery">Guardar galería</button>
+            </div>
+          </div>
+          <div class="gallery-admin-grid" id="galleryGrid"></div>
+        </section>
+
+        <!-- Videos -->
+        <section class="admin-view" id="view-videos" data-view-panel="videos" hidden>
+          <div class="toolbar">
+            <span class="toolbar-note" id="videosNote"></span>
+            <div class="toolbar-actions">
+              <button class="btn btn-primary btn-compact" type="button" id="newVideoButton">+ Nuevo video</button>
+              <button class="btn btn-outline btn-compact" type="button" id="saveVideos">Guardar videos</button>
+            </div>
+          </div>
+          <div class="video-admin-grid" id="videosGrid"></div>
+        </section>
+
+        <!-- Correos -->
+        <section class="admin-view" id="view-emails" data-view-panel="emails" hidden>
+          <div class="toolbar">
+            <span class="toolbar-note">Bandeja de salida: cada correo se guarda como archivo .eml en <code>data/outbox</code>.</span>
+            <button class="btn btn-primary btn-compact" type="button" id="refreshEmails">Actualizar</button>
+          </div>
+          <div class="admin-card no-pad">
+            <div class="list-head"><span id="emailCount">—</span><span class="muted">Haz clic para previsualizar el correo.</span></div>
+            <div id="emailsList" class="email-list"></div>
+          </div>
+        </section>
+
+        <!-- Reembolsos -->
+        <section class="admin-view" id="view-refunds" data-view-panel="refunds" hidden>
+          <div class="admin-card no-pad">
+            <div class="list-head"><span id="refundCount">—</span><button class="text-link" type="button" id="refreshRefunds">Actualizar</button></div>
+            <div id="refundsList" class="refund-list"></div>
+          </div>
+        </section>
+
+        <!-- Configuración -->
+        <section class="admin-view" id="view-settings" data-view-panel="settings" hidden>
+          <form id="settingsForm">
+            <div class="admin-grid two">
+              <div class="admin-card">
+                <div class="card-head"><div><span class="card-kicker">Negocio</span><h2>Datos de la operación</h2></div></div>
+                <div class="form-grid" id="settingsBusiness"></div>
+              </div>
+              <div class="admin-card">
+                <div class="card-head"><div><span class="card-kicker">Reservas</span><h2>Reglas de venta</h2></div></div>
+                <div class="form-grid" id="settingsBooking"></div>
+              </div>
+            </div>
+            <div class="admin-grid two">
+              <div class="admin-card">
+                <div class="card-head"><div><span class="card-kicker">Pagos</span><h2>Pasarela</h2></div><span class="tag">Sandbox</span></div>
+                <div class="form-grid" id="settingsPayments"></div>
+              </div>
+              <div class="admin-card">
+                <div class="card-head"><div><span class="card-kicker">Correo</span><h2>SMTP saliente</h2></div></div>
+                <div class="form-grid" id="settingsSmtp"></div>
+                <p class="form-hint">Si dejas el host vacío, los correos se guardan en la bandeja de salida y en <code>data/outbox</code> sin enviarse.</p>
+              </div>
+            </div>
+            <div class="save-bar">
+              <span id="settingsNote">Los cambios se aplican de inmediato al sitio público.</span>
+              <button class="btn btn-primary" type="submit" id="saveSettings">Guardar configuración</button>
+            </div>
+          </form>
+          <div class="admin-card password-card">
+            <div class="card-head"><div><span class="card-kicker">Seguridad</span><h2>Cambiar contraseña</h2></div></div>
+            <form id="passwordForm" class="form-grid three">
+              <label class="field"><span>Contraseña actual</span><input type="password" id="currentPassword" autocomplete="current-password" required></label>
+              <label class="field"><span>Nueva contraseña</span><input type="password" id="nextPassword" autocomplete="new-password" minlength="8" required></label>
+              <label class="field"><span>Confirmar nueva</span><input type="password" id="confirmPassword" autocomplete="new-password" minlength="8" required></label>
+              <div class="form-error field-full" id="passwordError" role="alert" hidden></div>
+              <button class="btn btn-primary field-full" type="submit" id="savePassword">Actualizar contraseña</button>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-root" id="modalRoot" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-panel" id="modalPanel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div><span class="modal-kicker" id="modalKicker">Detalle</span><h2 id="modalTitle">—</h2></div>
+        <button class="icon-button" type="button" data-close-modal aria-label="Cerrar">×</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/js/admin.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,1209 @@
+{
+  "meta": {
+    "version": 1,
+    "createdAt": "2026-11-12T17:07:37.562Z",
+    "updatedAt": "2026-11-12T17:26:18.000Z"
+  },
+  "admin": {
+    "password": {
+      "salt": "27ded038d77f811612ce1952661dfe0c",
+      "hash": "65e924f6438c688a6415ada1cd58b7457a130f9168bc3c0ccca3727caf44bd269b118e69cac92b212d385f3f3dd35ebef69987f1ceda07059b314f9ff40d7f6f"
+    },
+    "updatedAt": "2026-11-12T17:07:37.562Z"
+  },
+  "counters": {
+    "reservation": 1040,
+    "receipt": 486
+  },
+  "content": {
+    "brand": {
+      "name": "K’anba",
+      "sub": "Cuevas Vivas",
+      "tagline": "Donde el río se esconde",
+      "claim": "Una aventura de agua, piedra y candela en el corazón de Alta Verapaz."
+    },
+    "hero": {
+      "kicker": "Lanquín · Alta Verapaz · Guatemala",
+      "title": "K’anba",
+      "subtitle": "Donde el río se esconde.",
+      "text": "Entra a una cueva viva de río subterráneo. Con una vela en la mano, el sonido del agua y un guía q’eqchi’, cruzarás pasadizos, cascadas y pozas de luz imposible. A minutos de Semuc Champey.",
+      "image": "/assets/img/kanba-cave-02.jpg",
+      "imageAlt": "Interior de una cueva de Lanquín iluminado por candelas",
+      "badge": "Cupos limitados · 12 personas por grupo",
+      "openText": "Abierto todos los días · 08:00 a 17:00",
+      "rating": "4.9",
+      "reviews": "312"
+    },
+    "intro": {
+      "kicker": "La cueva",
+      "title": "Un río que corre bajo la montaña",
+      "lead": "K’anba es una cueva de río, no un salón iluminado. Aquí el agua marca el camino: a veces a los tobillos, a veces al pecho. La piedra caliza se abre en galerías de cinco a diez metros de ancho y el Cahabón sigue su viaje secreto bajo la selva.",
+      "paragraphs": [
+        "El sistema explorado supera los 3.3 kilómetros, aunque la visita guiada recorre los primeros 400 metros: un tramo seguro, profundo y lleno de formas que la luz de la candela convierte en otra cosa. Al salir, el río te devuelve a la superficie y puedes flotar en cámara lenta por el Cahabón.",
+        "Para el pueblo q’eqchi’, la cueva no es solo un atractivo: es un umbral. El agua, la oscuridad y las formaciones de piedra han sido parte de su cosmovisión durante generaciones. Nuestros guías son locales y comparten esa lectura del territorio en cada grupo.",
+        "En 2004, espeleólogos guatemaltecos con apoyo de colegas estadounidenses exploraron y levantaron el sistema; el trabajo de topografía concluyó en marzo de 2005. Hoy la visita se hace en grupos pequeños, con equipo de seguridad y reglas claras para proteger el ecosistema."
+      ],
+      "stats": [
+        {
+          "value": "3.3",
+          "suffix": " km",
+          "label": "de galerías exploradas"
+        },
+        {
+          "value": "400",
+          "suffix": " m",
+          "label": "de recorrido guiado"
+        },
+        {
+          "value": "90",
+          "suffix": "%",
+          "label": "del trayecto es agua"
+        },
+        {
+          "value": "12",
+          "suffix": "",
+          "label": "personas máximo por grupo"
+        }
+      ],
+      "image": "/assets/img/kanba-cave-04.jpg",
+      "image2": "/assets/img/kanba-river-01.jpg"
+    },
+    "values": [
+      {
+        "icon": "flame",
+        "title": "La candela es la brújula",
+        "text": "Sin luz eléctrica dentro de la cueva. Una vela por persona, un guía al frente y una cuerda que une al grupo. La oscuridad no se atraviesa: se escucha."
+      },
+      {
+        "icon": "water",
+        "title": "El río dicta el paso",
+        "text": "Caminas, te sostienes de la roca y nadas tramos cortos. Hay una cascada que se sube con cuerda y saltos opcionales a pozas profundas. Se siente más de lo que se ve."
+      },
+      {
+        "icon": "leaf",
+        "title": "Custodia q’eqchi’",
+        "text": "Guías de comunidades de Lanquín lideran cada expedición. Parte del ingreso se destina a conservación, mantenimiento de senderos y educación ambiental local."
+      }
+    ],
+    "timeline": [
+      {
+        "year": "2004",
+        "title": "Primera gran exploración",
+        "text": "Espeleólogos guatemaltecos, con apoyo internacional, documentan las galerías y el río interior."
+      },
+      {
+        "year": "2005",
+        "title": "Levantamiento topográfico",
+        "text": "En marzo concluye la topografía del sistema, que supera los 3.3 km de desarrollo conocido."
+      },
+      {
+        "year": "2010",
+        "title": "Turismo de aventura",
+        "text": "La cueva se integra a las rutas de Semuc Champey. Nacen los recorridos con candela y el tubing."
+      },
+      {
+        "year": "Hoy",
+        "title": "Turismo comunitario",
+        "text": "Grupos pequeños, guías locales y reglas de conservación para que la cueva siga viva."
+      }
+    ],
+    "toursIntro": {
+      "kicker": "Experiencias",
+      "title": "Elige cómo entrar a la cueva",
+      "text": "Cinco formas de vivir K’anba. Todas incluyen guía local certificado, candela, casco, chaleco salvavidas y entrada. Los cupos se confirman al pagar."
+    },
+    "bookingIntro": {
+      "kicker": "Reserva en línea",
+      "title": "Tu lugar bajo tierra",
+      "text": "Selecciona experiencia, fecha, horario y participantes. Bloqueamos tus cupos por 20 minutos mientras completas el pago."
+    },
+    "galleryIntro": {
+      "kicker": "Archivo visual",
+      "title": "La cueva, el río y la selva",
+      "text": "Una colección de imágenes del karst de Lanquín, el Cahabón y Semuc Champey. Fotografías de referencia del entorno y del sistema subterráneo."
+    },
+    "videosIntro": {
+      "kicker": "En movimiento",
+      "title": "Antes de entrar, mírala",
+      "text": "Seis ventanas a la experiencia: la candela, el agua, la cascada y el paisaje que rodea la cueva."
+    },
+    "mapIntro": {
+      "kicker": "Cómo llegar",
+      "title": "Un desvío antes del puente",
+      "text": "K’anba está sobre la ruta a Semuc Champey, en Lanquín. Si vienes desde Cobán, el último tramo es de terracería: recomendamos doble tracción o transporte local.",
+      "address": "Cuevas de K’anba, Lanquín, Alta Verapaz, Guatemala",
+      "lat": 15.537628,
+      "lng": -89.955361,
+      "plusCode": "G2QV+3V2 Chicanutz, Guatemala",
+      "directions": [
+        {
+          "label": "Desde Lanquín",
+          "value": "11 km · 25–35 min en pickup o 4x4"
+        },
+        {
+          "label": "Desde Semuc Champey",
+          "value": "10 min caminando · 400 m antes del puente"
+        },
+        {
+          "label": "Desde Cobán",
+          "value": "80 km · 2 h aprox. (último tramo de terracería)"
+        },
+        {
+          "label": "Desde Ciudad de Guatemala",
+          "value": "294 km · 5–6 h por CA-14"
+        }
+      ],
+      "note": "No cruces el puente principal hacia Semuc Champey: el acceso a K’anba está antes, a la derecha. Hay parqueo comunitario y recepción."
+    },
+    "infoIntro": {
+      "kicker": "Antes de bajar",
+      "title": "Prepárate bien. La cueva no perdona la prisa.",
+      "text": "K’anba es una aventura acuática real. Lee los requisitos, las recomendaciones y las restricciones antes de reservar. Si tienes dudas de salud, consulta a tu médico."
+    },
+    "requirements": [
+      "Edad mínima: 8 años acompañados por un adulto; 12 años para el recorrido completo sin acompañamiento permanente.",
+      "Saber nadar o usar chaleco salvavidas (obligatorio en todos los tramos profundos).",
+      "Condición física moderada: caminar sobre roca húmeda, agacharse, trepar y nadar distancias cortas.",
+      "Firmar la carta de responsabilidad y aceptar las instrucciones del guía antes de entrar.",
+      "Presentar documento de identidad o pasaporte en recepción (puede ser digital).",
+      "Llegar 20 minutos antes del horario reservado para equipo y briefing.",
+      "Calzado cerrado con agarre que se pueda mojar. No se permite entrar descalzo ni con chanclas sueltas.",
+      "Para menores de edad: autorización firmada por madre, padre o tutor legal."
+    ],
+    "recommendations": [
+      "Viaja en temporada seca (noviembre a abril) para agua más clara y senderos más firmes.",
+      "Elige el primer horario del día: menos calor, menos gente y mejor luz para fotos al salir.",
+      "Lleva ropa de cambio completa, toalla y una bolsa impermeable para el teléfono.",
+      "Usa protector solar y repelente biodegradables; se aplican antes de entrar, no dentro de la cueva.",
+      "Lleva efectivo en billetes pequeños para transporte, propinas y compras locales. No hay cajero en el parque.",
+      "Come algo ligero antes del tour. Evita comidas pesadas y alcohol.",
+      "Si usas lentes de contacto, considera gafas de agua o una correa de sujeción.",
+      "Respeta los lugares sagrados q’eqchi’ y pide permiso antes de fotografiar a personas de la comunidad."
+    ],
+    "restrictions": [
+      "No se permite el ingreso a personas embarazadas, con problemas cardíacos, epilepsia no controlada, claustrofobia severa o lesiones recientes.",
+      "Prohibido el alcohol y las drogas antes o durante la actividad. El guía puede negar el ingreso sin reembolso.",
+      "No se permite fumar, encender fuego ni usar velas fuera de los soportes entregados.",
+      "No se permite tocar, romper ni llevarse estalactitas, estalagmitas, rocas o material biológico.",
+      "No se permite alimentar animales, molestar murciélagos ni usar flash directo sobre las colonias.",
+      "No se permite el ingreso con mascotas, vidrio, alimentos, bocinas o drones sin permiso.",
+      "No se permite la desnudez, los gritos, empujar o separarse del grupo dentro de la cueva.",
+      "El uso de casco y chaleco salvavidas es obligatorio y no es negociable. Menores siempre de la mano de un adulto.",
+      "La cueva puede cerrarse por lluvia fuerte, crecida del río o mantenimiento. En ese caso se reprograma o reembolsa."
+    ],
+    "policiesIntro": {
+      "kicker": "Transparencia",
+      "title": "Políticas de reserva, cancelación y reembolso",
+      "text": "Reservar en línea implica aceptar estas condiciones. Están diseñadas para proteger al visitante, al equipo local y al ecosistema. Última actualización: enero de 2026."
+    },
+    "policies": [
+      {
+        "id": "reserva",
+        "title": "Reservas y bloqueo de cupos",
+        "summary": "Los cupos se separan durante 20 minutos mientras completas el pago.",
+        "items": [
+          "Toda reserva se crea con un número único (formato KAN-AAAA-#####) y un enlace privado de pago.",
+          "Al iniciar el proceso, los cupos quedan bloqueados temporalmente por 20 minutos.",
+          "Si el pago no se completa en ese plazo, la reserva expira automáticamente y los cupos vuelven a estar disponibles.",
+          "La reserva queda confirmada únicamente cuando la pasarela de pago aprueba el importe total.",
+          "Recibirás un correo de confirmación y un comprobante digital inmediatamente después del pago aprobado."
+        ]
+      },
+      {
+        "id": "pago",
+        "title": "Pagos y comprobantes",
+        "summary": "Pago en línea con tarjeta a través de pasarela segura; el cargo se procesa en quetzales.",
+        "items": [
+          "Los precios se publican en quetzales guatemaltecos (GTQ) e incluyen impuestos aplicables.",
+          "El cargo se realiza en el momento de la compra mediante la pasarela de pagos habilitada.",
+          "No almacenamos números completos de tarjeta ni códigos CVV. Solo conservamos los últimos cuatro dígitos y la marca.",
+          "El comprobante digital se envía al correo registrado y puede imprimirse o guardarse como PDF.",
+          "Si el pago es rechazado, los cupos se mantienen bloqueados hasta que venza el plazo o completes otro intento."
+        ]
+      },
+      {
+        "id": "cancelacion",
+        "title": "Cancelación por el visitante",
+        "summary": "Reembolso del 100% hasta 72 h antes; 50% entre 72 y 24 h; sin reembolso con menos de 24 h.",
+        "items": [
+          "Con 72 horas o más de anticipación: reembolso del 100% del importe pagado.",
+          "Entre 72 y 24 horas antes: reembolso del 50%.",
+          "Con menos de 24 horas o no presentación (no-show): no aplica reembolso.",
+          "Las solicitudes se registran desde “Mi reserva” o escribiendo a reservas@kanba.gt con el número de reserva.",
+          "Los reembolsos se procesan al medio de pago original y pueden tardar de 5 a 10 días hábiles en reflejarse.",
+          "Se permite un cambio de fecha sin cargo hasta 48 horas antes, sujeto a disponibilidad y una sola vez por reserva."
+        ]
+      },
+      {
+        "id": "clima",
+        "title": "Clima, seguridad y cierres",
+        "summary": "La cueva es un entorno natural: si no es seguro entrar, se reprograma o se reembolsa.",
+        "items": [
+          "La operación puede suspenderse por lluvia intensa, crecida del río, rayos o mantenimiento.",
+          "Si la empresa cancela la actividad, el visitante elige reprogramación sin costo o reembolso del 100%.",
+          "Si el visitante decide no continuar por miedo, fatiga o condiciones personales, no aplica reembolso una vez iniciado el briefing.",
+          "El guía tiene la última palabra sobre la seguridad del grupo y puede excluir a una persona del recorrido.",
+          "Los itinerarios pueden ajustarse por condiciones del camino, tráfico o causas de fuerza mayor."
+        ]
+      },
+      {
+        "id": "reembolsos",
+        "title": "Reembolsos y registro",
+        "summary": "Cada cancelación y reembolso queda registrado con folio, importe, método y fecha.",
+        "items": [
+          "Toda cancelación genera un registro interno con folio, fecha, motivo e importe calculado.",
+          "Los reembolsos aprobados se registran en el libro de reembolsos con estado “pendiente” o “procesado”.",
+          "El reembolso se emite al medio de pago original cuando la pasarela lo permite.",
+          "Si la pasarela no permite reversa automática, se coordina transferencia bancaria con el titular.",
+          "Recibirás un correo cuando el reembolso sea procesado, con el número de referencia.",
+          "Los cargos por conversión de moneda o comisiones bancarias del emisor no son reembolsables por K’anba."
+        ]
+      },
+      {
+        "id": "privacidad",
+        "title": "Datos personales y privacidad",
+        "summary": "Usamos tus datos solo para operar la reserva y cumplir obligaciones legales.",
+        "items": [
+          "Recopilamos nombre, correo, teléfono, país y documento de identidad cuando se solicita.",
+          "Los datos se usan para confirmar la reserva, emitir comprobantes, gestionar cancelaciones y seguridad del grupo.",
+          "No vendemos ni compartimos datos con terceros ajenos a la operación del tour o la pasarela de pago.",
+          "Puedes solicitar acceso, corrección o eliminación escribiendo a reservas@kanba.gt.",
+          "Las tarjetas se procesan en la pasarela; K’anba no recibe ni almacena el número completo.",
+          "Los correos transaccionales son necesarios para la reserva y no requieren consentimiento publicitario."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "q": "¿Necesito saber nadar para entrar a K’anba?",
+        "a": "No es indispensable si usas chaleco salvavidas, que es obligatorio. Aun así, debes sentirte cómodo con agua al pecho y con la oscuridad. Si no sabes nadar y sientes ansiedad, elige el tour “K’anba Suave” por senderos y pozas."
+      },
+      {
+        "q": "¿Qué tan oscura y estrecha es la cueva?",
+        "a": "La ruta es oscura y húmeda, con pasadizos de 5 a 10 metros de ancho y algunos tramos bajos. No es una cueva de gatear durante horas, pero sí exige confianza. Personas con claustrofobia severa no deberían entrar."
+      },
+      {
+        "q": "¿Puedo llevar mi teléfono o cámara?",
+        "a": "Sí, con funda impermeable y correa. La condensación y los salpicones son constantes. No se permite flash sobre los murciélagos ni drones. El guía puede pedirte guardar el equipo en tramos de nado."
+      },
+      {
+        "q": "¿Cómo llego sin auto?",
+        "a": "Desde Lanquín salen pickups y tuk-tuks hacia Semuc Champey; pide bajarte en el desvío de K’anba, antes del puente. También ofrecemos transporte de ida y vuelta en el tour K’anba + Semuc Champey."
+      },
+      {
+        "q": "¿Qué pasa si llueve?",
+        "a": "La cueva puede cerrarse por seguridad si el río crece. Te avisaremos por correo o teléfono. Puedes reprogramar sin costo o solicitar reembolso del 100% si la cancelación es nuestra."
+      },
+      {
+        "q": "¿Hay estacionamiento y vestidores?",
+        "a": "Sí: parqueo comunitario, recepción, baños y un área rústica para cambiarte. No hay casilleros de alta seguridad; viaja con lo indispensable y deja objetos de valor en tu hospedaje."
+      },
+      {
+        "q": "¿Es accesible para silla de ruedas?",
+        "a": "La cueva no es accesible. El sendero de K’anba Suave tiene tramos irregulares y escaleras; podemos adaptar el ritmo, pero no garantizamos acceso universal. Escríbenos para evaluar tu caso."
+      },
+      {
+        "q": "¿Los guías hablan inglés?",
+        "a": "Sí, todos los tours regulares tienen guía bilingüe español/inglés. Otros idiomas se coordinan con anticipación según disponibilidad."
+      }
+    ],
+    "contact": {
+      "phone": "+502 4000 2026",
+      "whatsapp": "+50240002026",
+      "email": "reservas@kanba.gt",
+      "address": "Cuevas de K’anba, Lanquín, Alta Verapaz, Guatemala",
+      "hours": "Todos los días · 08:00 a 17:00",
+      "instagram": "@kanba.cuevas",
+      "facebook": "K’anba Cuevas Vivas",
+      "emergency": "+502 4000 2027"
+    },
+    "footerNote": "Sitio demostrativo creado con fines educativos. No es el sitio oficial de las Cuevas de K’anba. Las fotografías del entorno provienen de Wikimedia Commons y se usan con sus licencias Creative Commons.",
+    "gallery": [
+      {
+        "id": "img_01",
+        "src": "/assets/img/kanba-cave-01.jpg",
+        "caption": "Luz de candela sobre la roca caliza",
+        "category": "cueva",
+        "credit": "Wikimedia Commons · CC BY-SA 3.0"
+      },
+      {
+        "id": "img_02",
+        "src": "/assets/img/kanba-cave-02.jpg",
+        "caption": "Galería húmeda del karst de Lanquín",
+        "category": "cueva",
+        "credit": "Wikimedia Commons · CC BY 2.0"
+      },
+      {
+        "id": "img_03",
+        "src": "/assets/img/kanba-cave-03.jpg",
+        "caption": "Formaciones y sombras del río subterráneo",
+        "category": "cueva",
+        "credit": "Wikimedia Commons · CC BY 2.0"
+      },
+      {
+        "id": "img_04",
+        "src": "/assets/img/kanba-cave-04.jpg",
+        "caption": "El techo de piedra y sus pliegues",
+        "category": "cueva",
+        "credit": "Wikimedia Commons · CC BY-SA 4.0"
+      },
+      {
+        "id": "img_05",
+        "src": "/assets/img/kanba-cave-05.jpg",
+        "caption": "La boca de la cueva, umbral entre dos mundos",
+        "category": "cueva",
+        "credit": "Wikimedia Commons · CC BY-SA 4.0"
+      },
+      {
+        "id": "img_06",
+        "src": "/assets/img/kanba-cave-06.jpg",
+        "caption": "El Cahabón reaparece entre las rocas",
+        "category": "cueva",
+        "credit": "Wikimedia Commons · CC BY 2.0"
+      },
+      {
+        "id": "img_07",
+        "src": "/assets/img/kanba-river-01.jpg",
+        "caption": "Aguas turquesa del Cahabón",
+        "category": "rio",
+        "credit": "Wikimedia Commons · CC BY-SA 3.0"
+      },
+      {
+        "id": "img_08",
+        "src": "/assets/img/kanba-river-02.jpg",
+        "caption": "El río Cahabón a su paso por Semuc Champey",
+        "category": "rio",
+        "credit": "Wikimedia Commons · CC BY 3.0"
+      },
+      {
+        "id": "img_09",
+        "src": "/assets/img/kanba-jungle-01.jpg",
+        "caption": "Selva húmeda de Alta Verapaz",
+        "category": "selva",
+        "credit": "Wikimedia Commons · CC BY 2.0"
+      },
+      {
+        "id": "img_10",
+        "src": "/assets/img/kanba-jungle-02.jpg",
+        "caption": "El verde profundo de la montaña",
+        "category": "selva",
+        "credit": "Wikimedia Commons · CC BY 2.0"
+      },
+      {
+        "id": "img_11",
+        "src": "/assets/img/kanba-jungle-03.jpg",
+        "caption": "Sendero entre helechos y roca",
+        "category": "selva",
+        "credit": "Wikimedia Commons · CC BY 2.0"
+      },
+      {
+        "id": "img_12",
+        "src": "/assets/img/kanba-jungle-04.jpg",
+        "caption": "El bosque que guarda el río",
+        "category": "selva",
+        "credit": "Wikimedia Commons · CC BY 2.0"
+      },
+      {
+        "id": "img_13",
+        "src": "/assets/img/kanba-pools-01.jpg",
+        "caption": "Pozas escalonadas de Semuc Champey",
+        "category": "semuc",
+        "credit": "Wikimedia Commons · CC BY-SA 4.0"
+      },
+      {
+        "id": "img_14",
+        "src": "/assets/img/kanba-pools-02.jpg",
+        "caption": "El puente natural de piedra caliza",
+        "category": "semuc",
+        "credit": "Wikimedia Commons · CC BY-SA 4.0"
+      },
+      {
+        "id": "img_15",
+        "src": "/assets/img/kanba-pools-03.jpg",
+        "caption": "Agua clara sobre el puente de roca",
+        "category": "semuc",
+        "credit": "Wikimedia Commons · CC BY-SA 4.0"
+      },
+      {
+        "id": "img_16",
+        "src": "/assets/img/kanba-pools-04.jpg",
+        "caption": "Piscinas naturales en la selva",
+        "category": "semuc",
+        "credit": "Wikimedia Commons · CC BY-SA 4.0"
+      },
+      {
+        "id": "img_17",
+        "src": "/assets/img/kanba-pools-05.jpg",
+        "caption": "El mirador sobre las pozas",
+        "category": "semuc",
+        "credit": "Wikimedia Commons · CC BY-SA 4.0"
+      },
+      {
+        "id": "img_18",
+        "src": "/assets/img/kanba-pools-06.jpg",
+        "caption": "Un santuario de agua turquesa",
+        "category": "semuc",
+        "credit": "Wikimedia Commons · CC BY-SA 3.0"
+      }
+    ],
+    "videos": [
+      {
+        "id": "vid_01",
+        "youtubeId": "kZusYOYxpA8",
+        "title": "K’anba: cuevas y río Cahabón",
+        "description": "Un recorrido audiovisual por los pasadizos, el río subterráneo y el entorno de Semuc Champey.",
+        "category": "Cueva"
+      },
+      {
+        "id": "vid_02",
+        "youtubeId": "vjk9xwiBmMs",
+        "title": "La cueva de los Goonies",
+        "description": "Así se siente avanzar a oscuras, con candela en mano, entre roca y agua.",
+        "category": "Aventura"
+      },
+      {
+        "id": "vid_03",
+        "youtubeId": "Ia55CKzelwk",
+        "title": "Semuc Champey desde el mirador",
+        "description": "La vista que explica por qué este rincón de Alta Verapaz es irrepetible.",
+        "category": "Entorno"
+      },
+      {
+        "id": "vid_04",
+        "youtubeId": "dG2SJhAwo1s",
+        "title": "Saltos, cuevas y tubing",
+        "description": "La combinación clásica: cueva, cascada, columpio y flotada por el Cahabón.",
+        "category": "Aventura"
+      },
+      {
+        "id": "vid_05",
+        "youtubeId": "-hWjchb0uFI",
+        "title": "Cobán y Lanquín en ruta",
+        "description": "El camino hacia las cuevas: montaña, neblina y comunidades q’eqchi’.",
+        "category": "Ruta"
+      },
+      {
+        "id": "vid_06",
+        "youtubeId": "CCIO_iSdJVI",
+        "title": "Guía de viaje: Semuc Champey",
+        "description": "Consejos prácticos para combinar las pozas, el mirador y la cueva en un solo día.",
+        "category": "Guía"
+      }
+    ]
+  },
+  "tours": [
+    {
+      "id": "candela",
+      "name": "Ritual de las Candelas",
+      "badge": "El clásico",
+      "description": "La experiencia original: entras con una vela, caminas por el río subterráneo, subes la cascada con cuerda y sales flotando por el Cahabón. Adrenalina pura en grupos pequeños.",
+      "longDescription": "Un recorrido de dos horas por los primeros 400 metros de la cueva. El guía abre camino con una candela; el grupo avanza por agua a la cintura, pasa junto a formaciones de calcita y sube una cascada con cuerda anudada. Incluye un salto opcional a una poza profunda y flotada corta en el río al salir.",
+      "duration": "2 horas",
+      "durationMinutes": 120,
+      "price": 120,
+      "times": [
+        "08:30",
+        "10:30",
+        "13:00"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "capacity": 12,
+      "minParticipants": 1,
+      "maxParticipants": 12,
+      "difficulty": "Aventura moderada",
+      "minAge": 8,
+      "meetingPoint": "Recepción K’anba · desvío antes del puente",
+      "includes": [
+        "Guía local bilingüe",
+        "Candela y soporte",
+        "Casco y chaleco salvavidas",
+        "Entrada a la cueva",
+        "Té caliente al salir"
+      ],
+      "notIncludes": [
+        "Transporte desde Lanquín",
+        "Fotos profesionales",
+        "Propinas"
+      ],
+      "image": "/assets/img/kanba-cave-01.jpg",
+      "active": true,
+      "featured": true
+    },
+    {
+      "id": "esencial",
+      "name": "K’anba Esencial + Tubing",
+      "badge": "Más vendido",
+      "description": "Cueva + cascada + columpio + flotada de 30 minutos por el Cahabón. La combinación perfecta para un día completo de aventura.",
+      "longDescription": "Recorrido guiado por la cueva con candela y saltos opcionales. Después, caminata breve hasta la cascada, salto desde el columpio gigante y flotada en inner tube por el río Cahabón. Ideal para quienes quieren la experiencia completa sin el traslado largo.",
+      "duration": "3 horas",
+      "durationMinutes": 180,
+      "price": 185,
+      "times": [
+        "09:00",
+        "13:30"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "capacity": 14,
+      "minParticipants": 1,
+      "maxParticipants": 14,
+      "difficulty": "Aventura moderada",
+      "minAge": 10,
+      "meetingPoint": "Recepción K’anba · desvío antes del puente",
+      "includes": [
+        "Guía local bilingüe",
+        "Candela, casco y chaleco",
+        "Entrada a la cueva",
+        "Tubing y columpio",
+        "Duchas rústicas y vestidores"
+      ],
+      "notIncludes": [
+        "Transporte",
+        "Almuerzo",
+        "Fotos",
+        "Propinas"
+      ],
+      "image": "/assets/img/kanba-river-01.jpg",
+      "active": true,
+      "featured": true
+    },
+    {
+      "id": "semuc",
+      "name": "K’anba + Semuc Champey",
+      "badge": "Día completo",
+      "description": "Cueva, cascada, tubing y las pozas turquesa de Semuc Champey con mirador. Transporte desde Lanquín y almuerzo incluidos.",
+      "longDescription": "Salida desde Lanquín en pickup 4x4. Primero K’anba: cueva con candela, cascada y tubing. Luego Semuc Champey: caminata al mirador, tiempo libre en las pozas y almuerzo típico. Regreso al atardecer. Un solo día para los dos imperdibles de Alta Verapaz.",
+      "duration": "7 horas",
+      "durationMinutes": 420,
+      "price": 350,
+      "times": [
+        "07:30"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "capacity": 16,
+      "minParticipants": 2,
+      "maxParticipants": 16,
+      "difficulty": "Día completo · exigencia moderada",
+      "minAge": 10,
+      "meetingPoint": "Parque central de Lanquín",
+      "includes": [
+        "Transporte 4x4 ida y vuelta desde Lanquín",
+        "Guía bilingüe",
+        "Entrada a K’anba y Semuc Champey",
+        "Equipo de cueva y tubing",
+        "Almuerzo típico",
+        "Caminata al mirador"
+      ],
+      "notIncludes": [
+        "Bebidas adicionales",
+        "Cena",
+        "Propinas",
+        "Traslado desde otros municipios"
+      ],
+      "image": "/assets/img/kanba-pools-01.jpg",
+      "active": true,
+      "featured": true
+    },
+    {
+      "id": "nocturna",
+      "name": "K’anba Nocturna · Murciélagos",
+      "badge": "Solo viernes y sábado",
+      "description": "La cueva al caer la noche, cuando las colonias de murciélagos despiertan. Leyendas q’eqchi’, candela y sonido de río.",
+      "longDescription": "Un recorrido especial de fin de semana al atardecer. Entramos con candela cuando la luz exterior desaparece y escuchamos el despertar de los murciélagos. El guía comparte relatos q’eqchi’ sobre el inframundo y el río. No incluye nado profundo; sí vadeo y pasadizos.",
+      "duration": "2.5 horas",
+      "durationMinutes": 150,
+      "price": 160,
+      "times": [
+        "17:15"
+      ],
+      "days": [
+        5,
+        6
+      ],
+      "capacity": 10,
+      "minParticipants": 2,
+      "maxParticipants": 10,
+      "difficulty": "Aventura suave",
+      "minAge": 10,
+      "meetingPoint": "Recepción K’anba · desvío antes del puente",
+      "includes": [
+        "Guía local q’eqchi’",
+        "Candela y casco",
+        "Entrada nocturna",
+        "Chocolate caliente",
+        "Préstamo de linterna frontal"
+      ],
+      "notIncludes": [
+        "Transporte",
+        "Cena",
+        "Fotografía con flash",
+        "Propinas"
+      ],
+      "image": "/assets/img/kanba-cave-03.jpg",
+      "active": true,
+      "featured": false
+    },
+    {
+      "id": "privado",
+      "name": "Expedición Privada Q’eqchi’",
+      "badge": "Solo tu grupo",
+      "description": "La cueva a tu ritmo, con guía exclusivo y fotógrafo opcional. Ideal para familias, equipos y viajeros que buscan otra profundidad.",
+      "longDescription": "Reserva privada de la cueva para tu grupo (2 a 6 personas). El guía adapta el ritmo y la ruta a tu nivel. Incluye briefing extendido, equipo completo y una parada interpretativa sobre geología y cosmovisión q’eqchi’. Opción de fotógrafo local con anticipación.",
+      "duration": "2.5 horas",
+      "durationMinutes": 150,
+      "price": 420,
+      "times": [
+        "08:00",
+        "11:00",
+        "14:00"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "capacity": 6,
+      "minParticipants": 2,
+      "maxParticipants": 6,
+      "difficulty": "A tu ritmo",
+      "minAge": 8,
+      "meetingPoint": "Recepción K’anba · desvío antes del puente",
+      "includes": [
+        "Guía exclusivo bilingüe",
+        "Equipo completo",
+        "Entrada",
+        "Charla de geología y cosmovisión",
+        "Té y fruta de temporada"
+      ],
+      "notIncludes": [
+        "Fotógrafo (opcional, Q250)",
+        "Transporte",
+        "Almuerzo"
+      ],
+      "image": "/assets/img/kanba-cave-04.jpg",
+      "active": true,
+      "featured": false
+    },
+    {
+      "id": "suave",
+      "name": "K’anba Suave · Senderos y Pozas",
+      "badge": "Sin cueva profunda",
+      "description": "Para quien prefiere no nadar en oscuridad: sendero interpretativo, mirador de la boca de la cueva, pozas y cascada. Una versión serena del entorno.",
+      "longDescription": "Caminata guiada por el sendero del río Cahabón hasta el mirador de la boca de la cueva. Interpretación de flora, geología y cultura q’eqchi’. Luego, tiempo en las pozas poco profundas y la cascada. No se entra a los pasadizos profundos ni se requiere nadar.",
+      "duration": "2.5 horas",
+      "durationMinutes": 150,
+      "price": 110,
+      "times": [
+        "09:30",
+        "12:00",
+        "15:00"
+      ],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "capacity": 15,
+      "minParticipants": 1,
+      "maxParticipants": 15,
+      "difficulty": "Fácil · apto para familias",
+      "minAge": 5,
+      "meetingPoint": "Recepción K’anba · desvío antes del puente",
+      "includes": [
+        "Guía local",
+        "Entrada al sendero y mirador",
+        "Chaleco para pozas",
+        "Agua purificada",
+        "Bastón de caminata"
+      ],
+      "notIncludes": [
+        "Cueva profunda",
+        "Tubing",
+        "Transporte",
+        "Almuerzo"
+      ],
+      "image": "/assets/img/kanba-jungle-01.jpg",
+      "active": true,
+      "featured": false
+    }
+  ],
+  "settings": {
+    "business": {
+      "legalName": "K’anba Cuevas Vivas · Operadora local",
+      "nit": "1234567-8",
+      "address": "Lanquín, Alta Verapaz, Guatemala",
+      "phone": "+502 4000 2026",
+      "email": "reservas@kanba.gt"
+    },
+    "booking": {
+      "holdMinutes": 20,
+      "advanceDays": 120,
+      "cutoffHours": 2,
+      "currency": "GTQ",
+      "exchangeRate": 7.8,
+      "maxSeatsPerOrder": 12
+    },
+    "payments": {
+      "provider": "KanbaPay Sandbox",
+      "mode": "sandbox",
+      "merchantId": "KANBA-GT-001",
+      "publicKey": "pk_sandbox_kanba_2026",
+      "secretKey": "sk_sandbox_kanba_2026",
+      "webhookSecret": "whsec_kanba_demo_2026",
+      "statement": "KANBA CUEVAS"
+    },
+    "smtp": {
+      "host": "",
+      "port": 465,
+      "secure": true,
+      "user": "",
+      "pass": "",
+      "fromEmail": "reservas@kanba.gt",
+      "fromName": "K’anba Reservas"
+    }
+  },
+  "reservations": [
+    {
+      "id": "res_seed_01",
+      "code": "KAN-2026-01031",
+      "token": "TVmRVnS0qlf6250Bft-m5GPPXnOUa4MI",
+      "tourId": "candela",
+      "tourName": "Ritual de las Candelas",
+      "date": "2026-11-14",
+      "time": "10:30",
+      "participants": 2,
+      "unitPrice": 120,
+      "total": 240,
+      "currency": "GTQ",
+      "customer": {
+        "name": "Ana Lucía Pérez",
+        "email": "ana.perez@example.com",
+        "phone": "+502 5555 1122",
+        "country": "Guatemala",
+        "document": "DPI 2456 78901 0101",
+        "notes": "Primera vez en cueva, prefieren grupo tranquilo."
+      },
+      "status": "confirmed",
+      "createdAt": "2026-11-11T05:07:37.866Z",
+      "updatedAt": "2026-11-11T06:07:37.866Z",
+      "holdExpiresAt": "2026-11-11T06:07:37.866Z",
+      "paidAt": "2026-11-11T06:07:37.866Z",
+      "payment": {
+        "intentId": "pi_seed_01",
+        "provider": "KanbaPay Sandbox",
+        "status": "paid",
+        "amount": 240,
+        "currency": "GTQ",
+        "last4": "4242",
+        "brand": "Visa",
+        "reference": "PAY-8F2K19",
+        "paidAt": "2026-11-11T06:07:37.866Z"
+      },
+      "receipt": {
+        "number": "REC-2026-00481",
+        "issuedAt": "2026-11-11T06:07:37.866Z"
+      },
+      "history": [
+        {
+          "at": "2026-11-11T05:07:37.866Z",
+          "type": "created",
+          "label": "Reserva creada y cupos bloqueados"
+        },
+        {
+          "at": "2026-11-11T06:07:37.866Z",
+          "type": "paid",
+          "label": "Pago aprobado · confirmación automática"
+        }
+      ]
+    },
+    {
+      "id": "res_seed_02",
+      "code": "KAN-2026-01032",
+      "token": "g1t8-ipVBcxzwEN7ZjyMrQnbaR7M6Je0",
+      "tourId": "semuc",
+      "tourName": "K’anba + Semuc Champey",
+      "date": "2026-11-17",
+      "time": "07:30",
+      "participants": 4,
+      "unitPrice": 350,
+      "total": 1400,
+      "currency": "GTQ",
+      "customer": {
+        "name": "Marco Villagrán",
+        "email": "marco.v@example.com",
+        "phone": "+502 4444 8899",
+        "country": "Guatemala",
+        "document": "",
+        "notes": "Dos adultos y dos adolescentes de 13 y 15 años."
+      },
+      "status": "confirmed",
+      "createdAt": "2026-11-11T21:07:37.866Z",
+      "updatedAt": "2026-11-11T22:07:37.866Z",
+      "holdExpiresAt": "2026-11-11T22:07:37.866Z",
+      "paidAt": "2026-11-11T22:07:37.866Z",
+      "payment": {
+        "intentId": "pi_seed_02",
+        "provider": "KanbaPay Sandbox",
+        "status": "paid",
+        "amount": 1400,
+        "currency": "GTQ",
+        "last4": "1881",
+        "brand": "Mastercard",
+        "reference": "PAY-1K7M42",
+        "paidAt": "2026-11-11T22:07:37.866Z"
+      },
+      "receipt": {
+        "number": "REC-2026-00482",
+        "issuedAt": "2026-11-11T22:07:37.866Z"
+      },
+      "history": [
+        {
+          "at": "2026-11-11T21:07:37.866Z",
+          "type": "created",
+          "label": "Reserva creada y cupos bloqueados"
+        },
+        {
+          "at": "2026-11-11T22:07:37.866Z",
+          "type": "paid",
+          "label": "Pago aprobado · confirmación automática"
+        }
+      ]
+    },
+    {
+      "id": "res_seed_03",
+      "code": "KAN-2026-01033",
+      "token": "83klPXdih8yjO0KGxEF4S_gXXJU1wIqv",
+      "tourId": "esencial",
+      "tourName": "K’anba Esencial + Tubing",
+      "date": "2026-11-13",
+      "time": "13:30",
+      "participants": 2,
+      "unitPrice": 185,
+      "total": 370,
+      "currency": "GTQ",
+      "customer": {
+        "name": "Sofía Ramírez",
+        "email": "sofia.ramirez@example.com",
+        "phone": "+502 3333 7788",
+        "country": "Guatemala",
+        "document": "",
+        "notes": ""
+      },
+      "status": "expired",
+      "createdAt": "2026-11-12T17:04:37.866Z",
+      "updatedAt": "2026-11-12T17:24:46.837Z",
+      "holdExpiresAt": "2026-11-12T17:24:37.866Z",
+      "paidAt": null,
+      "payment": {
+        "intentId": "pi_seed_03",
+        "provider": "KanbaPay Sandbox",
+        "status": "expired",
+        "amount": 370,
+        "currency": "GTQ",
+        "last4": null,
+        "brand": null,
+        "reference": null,
+        "paidAt": null
+      },
+      "receipt": null,
+      "history": [
+        {
+          "at": "2026-11-12T17:04:37.866Z",
+          "type": "created",
+          "label": "Reserva creada y cupos bloqueados por 20 minutos"
+        },
+        {
+          "at": "2026-11-12T17:24:46.837Z",
+          "type": "expired",
+          "label": "Plazo de pago vencido · cupos liberados automáticamente"
+        }
+      ]
+    },
+    {
+      "id": "res_seed_04",
+      "code": "KAN-2026-01034",
+      "token": "IX3TkkU1LuzJ3FbOQknO8K5j995EaN4g",
+      "tourId": "candela",
+      "tourName": "Ritual de las Candelas",
+      "date": "2026-11-10",
+      "time": "08:30",
+      "participants": 2,
+      "unitPrice": 120,
+      "total": 240,
+      "currency": "GTQ",
+      "customer": {
+        "name": "Diego Morales",
+        "email": "diego.morales@example.com",
+        "phone": "+502 2222 4455",
+        "country": "Guatemala",
+        "document": "",
+        "notes": ""
+      },
+      "status": "cancelled",
+      "createdAt": "2026-11-04T17:07:37.867Z",
+      "updatedAt": "2026-11-08T17:07:37.867Z",
+      "holdExpiresAt": "2026-11-04T17:07:37.867Z",
+      "paidAt": "2026-11-04T17:07:37.867Z",
+      "cancelledAt": "2026-11-08T17:07:37.867Z",
+      "cancellation": {
+        "reason": "Cambio de itinerario de viaje",
+        "policy": "72 horas o más · 100%",
+        "percent": 100,
+        "refundAmount": 240,
+        "requestedAt": "2026-11-08T17:07:37.867Z",
+        "by": "customer"
+      },
+      "payment": {
+        "intentId": "pi_seed_04",
+        "provider": "KanbaPay Sandbox",
+        "status": "refunded",
+        "amount": 240,
+        "currency": "GTQ",
+        "last4": "4242",
+        "brand": "Visa",
+        "reference": "PAY-3J9P55",
+        "paidAt": "2026-11-04T17:07:37.867Z"
+      },
+      "receipt": {
+        "number": "REC-2026-00455",
+        "issuedAt": "2026-11-04T17:07:37.867Z"
+      },
+      "history": [
+        {
+          "at": "2026-11-04T17:07:37.867Z",
+          "type": "created",
+          "label": "Reserva creada"
+        },
+        {
+          "at": "2026-11-04T17:07:37.867Z",
+          "type": "paid",
+          "label": "Pago aprobado"
+        },
+        {
+          "at": "2026-11-08T17:07:37.867Z",
+          "type": "cancelled",
+          "label": "Cancelación registrada · reembolso 100%"
+        }
+      ]
+    },
+    {
+      "id": "res_seed_05",
+      "code": "KAN-2026-01035",
+      "token": "rsx3eyrdZeVg2i_fWllhVypbDYqoxTYS",
+      "tourId": "nocturna",
+      "tourName": "K’anba Nocturna · Murciélagos",
+      "date": "2026-11-11",
+      "time": "17:15",
+      "participants": 1,
+      "unitPrice": 160,
+      "total": 160,
+      "currency": "GTQ",
+      "customer": {
+        "name": "Elena Cruz",
+        "email": "elena.cruz@example.com",
+        "phone": "+502 6666 3311",
+        "country": "México",
+        "document": "",
+        "notes": ""
+      },
+      "status": "expired",
+      "createdAt": "2026-11-11T15:07:37.867Z",
+      "updatedAt": "2026-11-11T16:07:37.867Z",
+      "holdExpiresAt": "2026-11-11T16:07:37.867Z",
+      "paidAt": null,
+      "payment": {
+        "intentId": "pi_seed_05",
+        "provider": "KanbaPay Sandbox",
+        "status": "expired",
+        "amount": 160,
+        "currency": "GTQ",
+        "last4": null,
+        "brand": null,
+        "reference": null,
+        "paidAt": null
+      },
+      "receipt": null,
+      "history": [
+        {
+          "at": "2026-11-11T15:07:37.867Z",
+          "type": "created",
+          "label": "Reserva creada y cupos bloqueados"
+        },
+        {
+          "at": "2026-11-11T16:07:37.867Z",
+          "type": "expired",
+          "label": "Plazo de pago vencido · cupos liberados automáticamente"
+        }
+      ]
+    }
+  ],
+  "closures": [
+    {
+      "id": "clo_seed_01",
+      "date": "2026-11-21",
+      "tourId": "candela",
+      "reason": "Mantenimiento de cuerdas y pasarelas en la cascada",
+      "createdAt": "2026-11-12T17:07:37.562Z"
+    }
+  ],
+  "refunds": [
+    {
+      "id": "ref_seed_01",
+      "reservationCode": "KAN-2026-01034",
+      "customerName": "Diego Morales",
+      "customerEmail": "diego.morales@example.com",
+      "amount": 240,
+      "currency": "GTQ",
+      "percent": 100,
+      "method": "Tarjeta original · Visa ****4242",
+      "status": "processed",
+      "reason": "Cambio de itinerario de viaje",
+      "requestedAt": "2026-11-08T17:07:37.867Z",
+      "processedAt": "2026-11-09T17:07:37.868Z",
+      "reference": "RF-2026-00091"
+    }
+  ],
+  "emails": [
+    {
+      "id": "mail_mwdtiphm_b4sb70",
+      "to": "sofia.ramirez@example.com",
+      "subject": "Tu reserva expiró · KAN-2026-01033 · K’anba",
+      "template": "expired",
+      "reservationCode": "KAN-2026-01033",
+      "status": "sent",
+      "provider": "outbox",
+      "createdAt": "2026-11-12T17:24:46.858Z",
+      "html": "<!doctype html>\n<html lang=\"es\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>El río siguió su curso</title></head>\n<body style=\"margin:0;padding:0;background:#f2ede2;font-family:Georgia,'Times New Roman',serif;color:#16211d;\">\n<div style=\"display:none;max-height:0;overflow:hidden;opacity:0;\">El plazo de pago venció y los cupos fueron liberados.</div>\n<table role=\"presentation\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" style=\"background:#f2ede2;padding:24px 12px;\">\n<tr><td align=\"center\">\n<table role=\"presentation\" width=\"600\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" style=\"max-width:600px;width:100%;background:#fffdf7;border-radius:18px;overflow:hidden;box-shadow:0 18px 50px rgba(14,36,32,.14);\">\n  <tr><td style=\"background:#0e2420;padding:26px 34px;\">\n    <div style=\"font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#b8d98c;\">K’anba · Cuevas Vivas</div>\n    <div style=\"font-family:Georgia,serif;font-size:27px;color:#f6f1e6;margin-top:6px;line-height:1.1;\">Donde el río se esconde</div>\n  </td></tr>\n  <tr><td style=\"padding:34px 34px 10px;\">\n    <h1 style=\"font-family:Georgia,serif;font-size:30px;line-height:1.15;margin:0 0 14px;color:#0e2420;font-weight:normal;\">El río siguió su curso</h1>\n    <p style=\"font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#33443c;margin:0 0 14px;\">Hola Sofía Ramírez,</p>\n        <p style=\"font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#33443c;margin:0 0 14px;\">El plazo para completar el pago de la reserva <strong>KAN-2026-01033</strong> venció. Los cupos fueron liberados automáticamente para otros visitantes.</p>\n        <p style=\"font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#33443c;margin:0 0 14px;\">No se realizó ningún cargo. Si aún quieres venir, puedes reservar de nuevo y elegir otro horario disponible.</p>\n    <table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" style=\"margin:26px 0 8px;\"><tr><td style=\"border-radius:999px;background:#2f6b57;\">\n      <a href=\"http://localhost:3000/#reservar\" style=\"display:inline-block;padding:14px 28px;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;color:#fffdf7;text-decoration:none;border-radius:999px;\">Reservar de nuevo</a>\n    </td></tr></table>\n  </td></tr>\n  <tr><td style=\"padding:16px 34px 30px;\">\n    <div style=\"background:#f2ede2;border-radius:12px;padding:16px 18px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#4a5b53;\">Si crees que esto es un error o el pago se cobró, escríbenos a reservas@kanba.gt con el número de reserva.</div>\n  </td></tr>\n  <tr><td style=\"background:#0e2420;padding:22px 34px;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:1.7;color:#a9bdb3;\">\n    <strong style=\"color:#f6f1e6;\">K’anba Cuevas Vivas</strong><br>\n    Lanquín, Alta Verapaz, Guatemala · +502 4000 2026<br>\n    <a href=\"http://localhost:3000\" style=\"color:#b8d98c;text-decoration:none;\">kanba.gt</a> · Este es un correo transaccional generado automáticamente.\n  </td></tr>\n</table>\n<div style=\"font-family:Arial,Helvetica,sans-serif;font-size:10px;color:#8a9a92;padding:16px 8px;\">Sitio y sistema demostrativos. No es el sitio oficial de las Cuevas de K’anba.</div>\n</td></tr></table></body></html>",
+      "text": "El río siguió su curso\n\nHola Sofía Ramírez, El plazo para completar el pago de la reserva KAN-2026-01033 venció. Los cupos fueron liberados automáticamente para otros visitantes. No se realizó ningún cargo. Si aún quieres venir, puedes reservar de nuevo y elegir otro horario disponible.\n\nK’anba Cuevas Vivas · Lanquín, Alta Verapaz, Guatemala\n",
+      "error": null
+    },
+    {
+      "id": "mail_seed_01",
+      "to": "ana.perez@example.com",
+      "subject": "Reserva confirmada · KAN-2026-01031",
+      "template": "confirmation",
+      "reservationCode": "KAN-2026-01031",
+      "status": "sent",
+      "provider": "outbox",
+      "createdAt": "2026-11-11T06:07:37.866Z",
+      "html": "<p>Hola Ana Lucía, tu reserva en K’anba está confirmada. Código <strong>KAN-2026-01031</strong>.</p>",
+      "text": "Hola Ana Lucía, tu reserva en K’anba está confirmada. Código KAN-2026-01031."
+    },
+    {
+      "id": "mail_seed_02",
+      "to": "ana.perez@example.com",
+      "subject": "Comprobante REC-2026-00481 · K’anba",
+      "template": "receipt",
+      "reservationCode": "KAN-2026-01031",
+      "status": "sent",
+      "provider": "outbox",
+      "createdAt": "2026-11-11T06:07:37.866Z",
+      "html": "<p>Adjuntamos tu comprobante digital REC-2026-00481 por Q240.00.</p>",
+      "text": "Comprobante REC-2026-00481 por Q240.00."
+    },
+    {
+      "id": "mail_seed_03",
+      "to": "marco.v@example.com",
+      "subject": "Reserva confirmada · KAN-2026-01032",
+      "template": "confirmation",
+      "reservationCode": "KAN-2026-01032",
+      "status": "sent",
+      "provider": "outbox",
+      "createdAt": "2026-11-11T22:07:37.866Z",
+      "html": "<p>Tu reserva KAN-2026-01032 está confirmada.</p>",
+      "text": "Tu reserva KAN-2026-01032 está confirmada."
+    },
+    {
+      "id": "mail_seed_04",
+      "to": "sofia.ramirez@example.com",
+      "subject": "Completa tu pago · KAN-2026-01033",
+      "template": "pending",
+      "reservationCode": "KAN-2026-01033",
+      "status": "sent",
+      "provider": "outbox",
+      "createdAt": "2026-11-12T17:04:37.866Z",
+      "html": "<p>Bloqueamos tus cupos por 20 minutos. Completa el pago para confirmar.</p>",
+      "text": "Bloqueamos tus cupos por 20 minutos. Completa el pago para confirmar."
+    },
+    {
+      "id": "mail_seed_05",
+      "to": "elena.cruz@example.com",
+      "subject": "Tu reserva expiró · KAN-2026-01035",
+      "template": "expired",
+      "reservationCode": "KAN-2026-01035",
+      "status": "sent",
+      "provider": "outbox",
+      "createdAt": "2026-11-11T16:07:37.867Z",
+      "html": "<p>El plazo de pago venció y los cupos fueron liberados automáticamente.</p>",
+      "text": "El plazo de pago venció y los cupos fueron liberados automáticamente."
+    }
+  ],
+  "sessions": {
+    "G0_N8y0rs5uxvi6sMNvFpa-pGSwsIJzU": {
+      "createdAt": "2026-11-12T17:07:59.888Z",
+      "expiresAt": "2026-11-13T01:07:59.888Z",
+      "ip": "127.0.0.1"
+    },
+    "dlF6P4qKiJfxzq_xa3jzOXNPydQ7RO9X": {
+      "createdAt": "2026-11-12T17:08:32.947Z",
+      "expiresAt": "2026-11-13T01:08:32.947Z",
+      "ip": "127.0.0.1"
+    },
+    "9uGGxo-Pifbhh1fjsXAGuuY-IiDCPuRp": {
+      "createdAt": "2026-11-12T17:08:48.310Z",
+      "expiresAt": "2026-11-13T01:08:48.310Z",
+      "ip": "127.0.0.1"
+    },
+    "1-YVg8XCA_V-CfoOfjgPW2QDpbRPiUrM": {
+      "createdAt": "2026-11-12T17:17:31.356Z",
+      "expiresAt": "2026-11-13T01:17:31.356Z",
+      "ip": "127.0.0.1"
+    },
+    "9y4NRAPf_mjLAOcsCdHf1K4NoR5t3e_8": {
+      "createdAt": "2026-11-12T17:24:43.897Z",
+      "expiresAt": "2026-11-13T01:24:43.897Z",
+      "ip": "127.0.0.1"
+    },
+    "3l5TMaOLUnZqdB-98xY1_oTnhK4nlxMH": {
+      "createdAt": "2026-11-12T17:25:46.574Z",
+      "expiresAt": "2026-11-13T01:25:46.574Z",
+      "ip": "127.0.0.1"
+    },
+    "CE3S1JrRk16K0zvSrLQDMz9DvXICQesg": {
+      "createdAt": "2026-11-12T17:26:18.000Z",
+      "expiresAt": "2026-11-13T01:26:18.000Z",
+      "ip": "127.0.0.1"
+    }
+  }
+}

@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cuevas de K’anba · Lanquín, Alta Verapaz, Guatemala</title>
+  <meta name="description" content="Cuevas de río subterráneo en Lanquín, Alta Verapaz. Aventura con guías q’eqchi’, candela y río Cahabón, cerca de Semuc Champey.">
+  <meta name="theme-color" content="#0e2420">
+  <meta property="og:title" content="K’anba · Donde el río se esconde">
+  <meta property="og:description" content="Cueva de río, candela y aventura en Lanquín, Alta Verapaz. A minutos de Semuc Champey.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/assets/img/kanba-cave-02.jpg">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="/assets/img/kanba-cave-02.jpg" fetchpriority="high">
+  <link rel="stylesheet" href="/vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="K’anba, inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><path d="M5 35V20a15 15 0 0 1 30 0v15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 31c-4.7-3.6-7-6.8-7-10.4a7 7 0 0 1 14 0c0 3.6-2.3 6.8-7 10.4Z" fill="currentColor"/><path d="M19 25.8c.1-2.9.8-4.7 1.8-6.3.6 2 1.9 3 2.4 5 .3 1.2-.4 2.5-2 2.8-1.6.3-2.3-.7-2.2-1.5Z" fill="#0e2420"/></svg>
+        </span>
+        <span class="brand-type"><strong>K’anba</strong><small>Cuevas Vivas</small></span>
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
+        <a href="/">La cueva</a>
+        <a href="/tours.html">Tours</a>
+        <a href="/galeria.html">Galería</a>
+        <a href="/ubicacion.html">Ubicación</a>
+        <a href="/informacion.html">Información</a>
+        <a href="/politicas.html">Políticas</a>
+        <a class="nav-mobile-only" href="/mi-reserva.html">Mi reserva</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="link-subtle" href="/mi-reserva.html">Mi reserva</a>
+        <a class="btn btn-primary btn-sm" href="/reservar.html">Reservar</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainNav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+      <div class="hero-media">
+        <img id="heroImage" src="/assets/img/kanba-cave-02.jpg" alt="Interior de una cueva de Lanquín iluminado por candelas" fetchpriority="high">
+        <div class="hero-veil"></div>
+        <div class="hero-glow"></div>
+      </div>
+      <div class="hero-fireflies" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+      <div class="hero-inner container">
+        <div class="hero-copy">
+          <p class="eyebrow eyebrow-light"><span class="pulse-dot"></span><span id="heroKicker">Lanquín · Alta Verapaz · Guatemala</span></p>
+          <h1 class="hero-title"><span id="heroTitle">Cuevas de K’anba</span></h1>
+          <p class="hero-subtitle" id="heroSubtitle">Río subterráneo y aventura q’eqchi’</p>
+          <p class="hero-text" id="heroText">Entra a una cueva viva de río subterráneo. Con una vela en la mano, el sonido del agua y un guía q’eqchi’, cruzarás pasadizos, cascadas y pozas de luz imposible. A minutos de Semuc Champey.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="/reservar.html">
+              Reservar mi descenso
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="btn btn-glass btn-lg" href="/tours.html">Ver experiencias</a>
+          </div>
+          <div class="hero-meta">
+            <div class="meta-block">
+              <div class="stars" aria-label="Calificación 4.9 de 5">
+                <svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9Z" fill="currentColor"/></svg>
+                <svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9Z" fill="currentColor"/></svg>
+                <svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9Z" fill="currentColor"/></svg>
+                <svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9Z" fill="currentColor"/></svg>
+                <svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9Z" fill="currentColor"/></svg>
+              </div>
+              <span><strong id="heroRating">4.9</strong> · <span id="heroReviews">312</span> viajeros</span>
+            </div>
+            <span class="meta-divider" aria-hidden="true"></span>
+            <div class="meta-block">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <span id="heroOpen">Abierto todos los días · 08:00 a 17:00</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <div class="hero-card-head">
+            <span class="hero-card-label">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19v-7a9 9 0 0 1 18 0v7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M8 19v-4.4a4 4 0 0 1 8 0V19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              Hoy en la cueva
+            </span>
+            <span class="status-pill"><span class="pulse-dot"></span> Abierto</span>
+          </div>
+
+          <div class="hero-card-temp">
+            <div class="temp-block">
+              <div class="temp-value">18<span class="temp-unit">°</span></div>
+              <ul class="temp-sub">
+                <li><i class="t-dot t-lime"></i>Agua <strong>22&nbsp;°C</strong></li>
+                <li><i class="t-dot t-amber"></i>Sensación <strong>húmeda</strong></li>
+              </ul>
+            </div>
+            <div class="humidity-gauge" role="img" aria-label="Humedad relativa 98 por ciento">
+              <svg viewBox="0 0 72 72" aria-hidden="true">
+                <circle class="gauge-track" cx="36" cy="36" r="29"/>
+                <circle class="gauge-fill" cx="36" cy="36" r="29" pathLength="100"/>
+              </svg>
+              <div class="gauge-text"><strong>98</strong><small>% HUM</small></div>
+            </div>
+          </div>
+
+          <ul class="hero-card-rows">
+            <li>
+              <span class="hc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.1" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.6 19c.6-3.1 2.7-4.9 5.4-4.9s4.8 1.8 5.4 4.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M15.5 5.4a3 3 0 0 1 0 5.7M17 14.4c1.7.6 2.8 2.2 3 4.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+              <span class="hc-label">Grupos</span>
+              <strong class="hc-value">máx. 12</strong>
+            </li>
+            <li>
+              <span class="hc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17 9.5 6.5 13 12l2.5-3.5L21 17H3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+              <span class="hc-label">Dificultad</span>
+              <strong class="hc-value">Moderada</strong>
+            </li>
+            <li>
+              <span class="hc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+              <span class="hc-label">Coordenadas</span>
+              <strong class="hc-value hc-mono">15.5376, −89.9554</strong>
+            </li>
+          </ul>
+
+          <a class="hero-card-link" href="/ubicacion.html">
+            <span>Cómo llegar</span>
+            <span class="link-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </aside>
+      </div>
+
+      <div class="hero-scroll" aria-hidden="true"><span>Desciende</span><i></i></div>
+      <div class="hero-side-note">15° 32′ 15″ N · 89° 57′ 19″ W</div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-inner">
+        <div class="marquee-track">
+          <span class="mq-word">Cueva de río</span><svg class="mq-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7L12 2Z" fill="currentColor"/></svg><span class="mq-word it">Candela</span><svg class="mq-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7L12 2Z" fill="currentColor"/></svg><span class="mq-word">Q’eqchi’</span><svg class="mq-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7L12 2Z" fill="currentColor"/></svg><span class="mq-word it">Río Cahabón</span><svg class="mq-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7L12 2Z" fill="currentColor"/></svg><span class="mq-word">Semuc Champey</span><svg class="mq-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7L12 2Z" fill="currentColor"/></svg><span class="mq-word it">Alta Verapaz</span><svg class="mq-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7L12 2Z" fill="currentColor"/></svg>
+          <span class="mq-word">Cueva de río</span><svg class="mq-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7L12 2Z" fill="currentColor"/></svg><span class="mq-word it">Candela</span><svg class="mq-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7L12 2Z" fill="currentColor"/></svg><span class="mq-word">Q’eqchi’</span><svg class="mq-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7L12 2Z" fill="currentColor"/></svg><span class="mq-word it">Río Cahabón</span><svg class="mq-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7L12 2Z" fill="currentColor"/></svg><span class="mq-word">Semuc Champey</span><svg class="mq-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7L12 2Z" fill="currentColor"/></svg><span class="mq-word it">Alta Verapaz</span><svg class="mq-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7L12 2Z" fill="currentColor"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTRO -->
+    <section class="section intro" id="cueva">
+      <div class="container intro-grid">
+        <div class="intro-copy">
+          <p class="eyebrow"><span class="line"></span><span id="introKicker">La cueva</span></p>
+          <h2 class="display" id="introTitle">Un río que corre bajo la montaña</h2>
+          <p class="lead" id="introLead">K’anba es una cueva de río subterráneo, no un salón iluminado. El agua es la vía de acceso: según la temporada, se camina a los tobillos, al pecho o en barco. El recorrido sigue el curso natural del río Cahabón, que ha tallado el karst de Lanquín durante milenios.</p>
+          <div id="introParagraphs" class="prose"></div>
+          <div class="intro-signature">
+            <svg viewBox="0 0 64 32" aria-hidden="true"><path d="M3 26c8-2 10-12 16-12s7 9 12 9 6-13 12-13 6 9 11 9 5-4 7-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <span>Guías de Lanquín · Comunidad q’eqchi’</span>
+          </div>
+        </div>
+        <div class="intro-visual">
+          <figure class="intro-figure intro-figure-main">
+            <img id="introImage" src="/assets/img/kanba-cave-04.jpg" alt="Formaciones de roca caliza en una cueva de Lanquín" loading="lazy" decoding="async">
+            <figcaption>Bajo la montaña, el Cahabón sigue su curso.</figcaption>
+          </figure>
+          <figure class="intro-figure intro-figure-small">
+            <img id="introImage2" src="/assets/img/kanba-river-01.jpg" alt="Aguas turquesa del río Cahabón" loading="lazy" decoding="async">
+          </figure>
+          <div class="intro-stamp" aria-hidden="true">
+            <svg viewBox="0 0 120 120"><defs><path id="circlePath" d="M60,60 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"/></defs><text><textPath href="#circlePath">K’ANBA · LANQUÍN · ALTA VERAPAZ · 2005 · </textPath></text><path d="M60 44c-7 6-10 10-10 15a10 10 0 0 0 20 0c0-5-3-9-10-15Z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="container stats" id="stats">
+        <div class="stat"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20v-7a9 9 0 0 1 18 0v7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M8 20v-4.5a4 4 0 0 1 8 0V20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><div class="stat-main"><span class="stat-value" data-count="3.3">3.3</span><span class="stat-unit">km</span><span class="stat-label">de galerías exploradas</span></div></div>
+        <div class="stat"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="19" r="2.2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="19" cy="5" r="2.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.3 17.2 16.7 6.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="1.6 3"/></svg></span><div class="stat-main"><span class="stat-value" data-count="400">400</span><span class="stat-unit">m</span><span class="stat-label">de recorrido guiado</span></div></div>
+        <div class="stat"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s5.6 6 5.6 10.2a5.6 5.6 0 0 1-11.2 0C6.4 9 12 3 12 3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span><div class="stat-main"><span class="stat-value" data-count="90">90</span><span class="stat-unit">%</span><span class="stat-label">del trayecto es agua</span></div></div>
+        <div class="stat"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3.6 19c.6-3.1 2.7-4.9 5.4-4.9s4.8 1.8 5.4 4.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M15.5 5.4a3 3 0 0 1 0 5.7M17 14.4c1.7.6 2.8 2.2 3 4.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><div class="stat-main"><span class="stat-value" data-count="12">12</span><span class="stat-unit"></span><span class="stat-label">personas máximo por grupo</span></div></div>
+      </div>
+
+      <div class="container timeline-wrap">
+        <div class="timeline" id="timeline"></div>
+      </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="section values-section">
+      <div class="container">
+        <div class="section-head center">
+          <p class="eyebrow center"><span class="line"></span>La experiencia<span class="line"></span></p>
+          <h2 class="display">No verás la cueva. La vas a sentir.</h2>
+        </div>
+        <div class="values-grid" id="valuesGrid"></div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-band">
+      <div class="cta-media"><img src="/assets/img/kanba-pools-01.jpg" alt="Pozas turquesa de Semuc Champey" loading="lazy"><div></div></div>
+      <div class="container cta-inner">
+        <p class="eyebrow eyebrow-light"><span class="pulse-dot"></span> La temporada seca es corta</p>
+        <h2 class="display">La cueva no espera.<br><em>Nosotros te guardamos el lugar.</em></h2>
+        <p>Elige tu fecha, asegura tus cupos y recibe tu comprobante al instante. Cancelación flexible hasta 72 horas antes.</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary btn-lg" href="/reservar.html">Reservar ahora</a>
+          <a class="btn btn-glass btn-lg" href="https://wa.me/50240002026" target="_blank" rel="noopener">Hablar con un guía</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contacto">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand brand-light" href="/">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><path d="M5 35V20a15 15 0 0 1 30 0v15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 31c-4.7-3.6-7-6.8-7-10.4a7 7 0 0 1 14 0c0 3.6-2.3 6.8-7 10.4Z" fill="currentColor"/></svg>
+          </span>
+          <span class="brand-type"><strong>K’anba</strong><small>Cuevas Vivas</small></span>
+        </a>
+        <p>Una cueva viva de río subterráneo en Lanquín, Alta Verapaz. Aventura con guías q’eqchi’, candela y respeto por el territorio.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+          <a href="https://wa.me/50240002026" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Explorar</h4>
+        <a href="/">La cueva</a>
+        <a href="/tours.html">Tours</a>
+        <a href="/galeria.html">Galería</a>
+        <a href="/videos.html">Videos</a>
+        <a href="/ubicacion.html">Cómo llegar</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Reservas</h4>
+        <a href="/reservar.html">Reservar en línea</a>
+        <a href="/mi-reserva.html">Mi reserva</a>
+        <a href="/informacion.html">Requisitos</a>
+        <a href="/politicas.html">Políticas</a>
+        <a href="/admin.html">Panel administrativo</a>
+      </div>
+
+      <div class="footer-col footer-contact">
+        <h4>Contacto</h4>
+        <a href="tel:+50240002026" id="footerPhone">+502 4000 2026</a>
+        <a href="mailto:reservas@kanba.gt" id="footerEmail">reservas@kanba.gt</a>
+        <span id="footerAddress">Cuevas de K’anba, Lanquín, Alta Verapaz, Guatemala</span>
+        <span id="footerHours">Todos los días · 08:00 a 17:00</span>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>© <span id="year">2026</span> K’anba Cuevas Vivas. Todos los derechos reservados.</span>
+      <span class="footer-legal-links"><a href="/politicas.html">Privacidad</a><a href="/politicas.html">Términos</a><a href="/admin.html">Administración</a></span>
+      <span class="footer-payments">Pagos seguros · <strong>VISA</strong> <strong>Mastercard</strong> <strong>AMEX</strong></span>
+    </div>
+    <p class="footer-disclaimer container" id="footerNote">Sitio demo educativo sobre las Cuevas de K’anba, Lanquín, Alta Verapaz, Guatemala. No es la oficina oficial.</p>
+  </footer>
+
+  <!-- Mobile booking bar -->
+  <div class="mobile-bar" id="mobileBar">
+    <div><span>Desde</span><strong>Q110 <small>/ persona</small></strong></div>
+    <a class="btn btn-primary" href="/reservar.html">Reservar</a>
+    <a class="mobile-bar-wa" href="https://wa.me/50240002026" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 8.7c.2-.5.4-.5.6-.5h.5c.2 0 .4 0 .6.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c-.1.1-.2.3 0 .6.5.8 1.1 1.4 2 1.8.3.1.5.1.6 0l.7-.8c.1-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.4 0 .2 0 1-.5 1.5-.5.5-1.2.8-2.5.4-1.3-.4-2.9-1.3-4-2.7-1-1.2-1.5-2.4-1.5-3.2 0-.8.3-1.3.4-1.5Z" fill="currentColor"/></svg>
+    </a>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Galería de fotografías" hidden>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar galería">×</button>
+    <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Fotografía anterior">‹</button>
+    <figure>
+      <img id="lightboxImage" src="" alt="">
+      <figcaption><span id="lightboxCaption"></span><small id="lightboxCredit"></small></figcaption>
+    </figure>
+    <button class="lightbox-nav next" id="lightboxNext" aria-label="Fotografía siguiente">›</button>
+    <span class="lightbox-counter" id="lightboxCounter"></span>
+  </div>
+
+  <!-- Video modal -->
+  <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Reproductor de video" hidden>
+    <div class="video-modal-inner">
+      <button class="video-modal-close" id="videoClose" aria-label="Cerrar video">×</button>
+      <div class="video-embed" id="videoEmbed"></div>
+      <div class="video-modal-meta"><strong id="videoTitle"></strong><span id="videoDesc"></span></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="/vendor/leaflet/leaflet.js" defer></script>
+  <script src="/js/site.js?v=3" defer></script>
+</body>
+</html>
