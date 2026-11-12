@@ -1,0 +1,14 @@
+{
+  "name": "kanba-cuevas-vivas",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Sitio web y sistema de reservas para las Cuevas de K'anba, Lanquín, Alta Verapaz, Guatemala.",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

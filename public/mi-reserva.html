@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi reserva · K’anba Cuevas Vivas</title>
+  <meta name="description" content="Consulta, paga, descarga el comprobante o cancela tu reserva en las Cuevas de K’anba.">
+  <meta name="theme-color" content="#0e2420">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body class="subpage">
+  <header class="page-header">
+    <div class="container page-header-inner">
+      <a class="brand brand-light" href="/" aria-label="K’anba, inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><path d="M5 35V20a15 15 0 0 1 30 0v15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 31c-4.7-3.6-7-6.8-7-10.4a7 7 0 0 1 14 0c0 3.6-2.3 6.8-7 10.4Z" fill="currentColor"/><path d="M19 25.8c.1-2.9.8-4.7 1.8-6.3.6 2 1.9 3 2.4 5 .3 1.2-.4 2.5-2 2.8-1.6.3-2.3-.7-2.2-1.5Z" fill="#0e2420"/></svg>
+        </span>
+        <span class="brand-type"><strong>K’anba</strong><small>Cuevas Vivas</small></span>
+      </a>
+      <nav class="page-nav" aria-label="Navegación">
+        <a href="/#tours">Experiencias</a>
+        <a href="/#politicas">Políticas</a>
+        <a class="btn btn-primary btn-sm" href="/#reservar">Reservar</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-band">
+    <div class="container">
+      <p class="eyebrow eyebrow-light"><span class="pulse-dot"></span> Autoservicio</p>
+      <h1 class="display">Tu reserva, bajo control</h1>
+      <p class="page-lead">Consulta los detalles, completa un pago pendiente, descarga tu comprobante o solicita una cancelación con el código de reserva y el correo del titular.</p>
+    </div>
+  </section>
+
+  <main class="page-main">
+    <div class="container">
+      <section class="panel-card lookup-card" id="lookupCard">
+        <h2>Consultar mi reserva</h2>
+        <p class="panel-sub">Ingresa el código que recibiste por correo (formato KAN-AAAA-#####) y el correo con el que hiciste la reserva.</p>
+        <form class="lookup-form" id="lookupForm" novalidate>
+          <label class="field">
+            <span>Código de reserva</span>
+            <input type="text" name="code" id="lookupCode" placeholder="KAN-2026-01031" autocomplete="off" required>
+          </label>
+          <label class="field">
+            <span>Correo del titular</span>
+            <input type="email" name="email" id="lookupEmail" placeholder="tucorreo@ejemplo.com" autocomplete="email" required>
+          </label>
+          <button class="btn btn-primary" type="submit" id="lookupButton">Buscar reserva</button>
+        </form>
+        <div class="form-error" id="lookupError" role="alert" hidden></div>
+        <p class="lookup-hint">¿No encuentras tu código? Revisa el correo de confirmación o <a href="https://wa.me/50240002026" target="_blank" rel="noopener">escríbenos por WhatsApp</a>. También puedes abrir directamente el enlace privado que recibiste.</p>
+      </section>
+
+      <section class="panel-card reservation-card" id="reservationCard" hidden>
+        <div class="res-head">
+          <div>
+            <span class="status-chip light" id="resStatus">Reserva</span>
+            <h2 id="resTitle" style="margin-top:10px;">Reserva</h2>
+            <p id="resSubtitle">—</p>
+            <span class="res-code" id="resCode">—</span>
+          </div>
+          <div style="text-align:right;">
+            <span class="policy-pill" id="resPolicy">Política de cancelación</span>
+          </div>
+        </div>
+
+        <div class="detail-grid" id="resDetails"></div>
+
+        <div class="res-actions" id="resActions"></div>
+
+        <div class="cancel-block" id="cancelBlock" hidden>
+          <h3>Solicitar cancelación</h3>
+          <p id="cancelPolicyText">El reembolso se calcula según la anticipación con la que canceles. La solicitud queda registrada y recibirás un correo con el resultado.</p>
+          <button class="btn btn-ghost-dark" type="button" id="toggleCancel">Quiero cancelar esta reserva</button>
+          <form class="cancel-form" id="cancelForm" hidden>
+            <label class="field">
+              <span>Motivo de la cancelación</span>
+              <textarea name="reason" id="cancelReason" rows="3" maxlength="300" placeholder="Cuéntanos brevemente por qué necesitas cancelar." required></textarea>
+            </label>
+            <div class="form-error" id="cancelError" role="alert" hidden></div>
+            <div class="cancel-actions">
+              <button class="btn btn-danger" type="submit" id="cancelSubmit">Confirmar cancelación</button>
+              <button class="btn btn-ghost-dark" type="button" id="cancelBack">Volver</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="history" id="resHistory">
+          <h3>Historial</h3>
+          <ol id="historyList"></ol>
+        </div>
+      </section>
+
+      <section class="panel-card state-card" id="resState" hidden>
+        <div class="state-icon amber" id="resStateIcon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v6M12 16.5v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h2 id="resStateTitle">Buscando tu reserva</h2>
+        <p id="resStateText">Estamos consultando los datos.</p>
+        <div class="state-actions" id="resStateActions"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="mini-footer">
+    <div class="container mini-footer-inner">
+      <span>© <span id="year">2026</span> K’anba Cuevas Vivas · Sitio demostrativo</span>
+      <div class="mini-links">
+        <a href="/">Inicio</a>
+        <a href="/#politicas">Políticas</a>
+        <a href="https://wa.me/50240002026" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/js/reservation.js?v=2" defer></script>
+</body>
+</html>

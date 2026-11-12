@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verificar comprobante · K’anba Cuevas Vivas</title>
+  <meta name="description" content="Verifica la autenticidad de un comprobante de reserva de K’anba con su código.">
+  <meta name="theme-color" content="#0e2420">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body class="subpage">
+  <header class="page-header">
+    <div class="container page-header-inner">
+      <a class="brand brand-light" href="/" aria-label="K’anba, inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><path d="M5 35V20a15 15 0 0 1 30 0v15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 31c-4.7-3.6-7-6.8-7-10.4a7 7 0 0 1 14 0c0 3.6-2.3 6.8-7 10.4Z" fill="currentColor"/><path d="M19 25.8c.1-2.9.8-4.7 1.8-6.3.6 2 1.9 3 2.4 5 .3 1.2-.4 2.5-2 2.8-1.6.3-2.3-.7-2.2-1.5Z" fill="#0e2420"/></svg>
+        </span>
+        <span class="brand-type"><strong>K’anba</strong><small>Cuevas Vivas</small></span>
+      </a>
+      <nav class="page-nav" aria-label="Navegación">
+        <a href="/#tours">Experiencias</a>
+        <a href="/mi-reserva.html">Mi reserva</a>
+        <a class="btn btn-primary btn-sm" href="/#reservar">Reservar</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-band">
+    <div class="container">
+      <p class="eyebrow eyebrow-light"><span class="pulse-dot"></span> Control de autenticidad</p>
+      <h1 class="display">Verifica un comprobante</h1>
+      <p class="page-lead">Confirma que una reserva está confirmada y pagada. La verificación es pública, pero no expone datos personales ni el detalle del pago.</p>
+    </div>
+  </section>
+
+  <main class="page-main">
+    <div class="container">
+      <section class="panel-card lookup-card verify-card" id="verifyCard">
+        <h2>Verificar por código</h2>
+        <p class="panel-sub">Ingresa el código de reserva que aparece en el comprobante (formato KAN-AAAA-#####).</p>
+        <form class="lookup-form" id="verifyForm" novalidate>
+          <label class="field" style="grid-column:1 / -1;">
+            <span>Código de reserva</span>
+            <input type="text" name="code" id="verifyCode" placeholder="KAN-2026-01031" autocomplete="off" required>
+          </label>
+          <button class="btn btn-primary" type="submit" id="verifyButton">Verificar</button>
+        </form>
+        <div class="form-error" id="verifyError" role="alert" hidden></div>
+        <p class="lookup-hint">La verificación consulta el registro de reservas confirmadas. Si el código no existe o la reserva fue cancelada, el resultado será negativo. También puedes revisar el detalle completo desde <a href="/mi-reserva.html">Mi reserva</a> con el correo del titular.</p>
+      </section>
+
+      <section class="verify-result" id="verifyResult" hidden aria-live="polite"></section>
+
+      <section class="panel-card" style="max-width:620px;margin:16px auto 0;">
+        <h2>¿Cómo funciona?</h2>
+        <p class="panel-sub" style="margin-bottom:0;">Cada comprobante incluye un número de reserva único y un enlace a esta página. La consulta se realiza en tiempo real contra el historial de reservas confirmadas del sistema. No se muestran correo, teléfono, documento ni datos de tarjeta.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="mini-footer">
+    <div class="container mini-footer-inner">
+      <span>© <span id="year">2026</span> K’anba Cuevas Vivas · Sitio demostrativo</span>
+      <div class="mini-links">
+        <a href="/">Inicio</a>
+        <a href="/mi-reserva.html">Mi reserva</a>
+        <a href="/#politicas">Políticas</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/js/verify.js" defer></script>
+</body>
+</html>
