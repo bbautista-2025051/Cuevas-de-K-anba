@@ -1259,6 +1259,162 @@
   }
 
   /* ------------------------------------------------------------------ */
+  /* Cafetería · flipbook del menú                                        */
+  /* ------------------------------------------------------------------ */
+
+  const FB_NAMES = ['Desayunos', 'Almuerzos', 'Cenas', 'Postres', 'Bebidas'];
+
+  function fbClamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
+
+  function fbEndpaper() {
+    const back = document.createElement('div');
+    back.className = 'flip-back';
+    back.innerHTML = '<div class="flip-back-inner"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 35V20a15 15 0 0 1 30 0v15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 31c-4.7-3.6-7-6.8-7-10.4a7 7 0 0 1 14 0c0 3.6-2.3 6.8-7 10.4Z" fill="currentColor"/></svg><strong>LA CANDELA</strong><span>café de la cueva · est. 2019</span></div>';
+    return back;
+  }
+
+  function setupFlipbook() {
+    const wrap = document.getElementById('flipbook');
+    if (!wrap) return;
+    const surface = document.getElementById('bookSurface');
+    const pages = Array.from(surface.querySelectorAll('.flip-page'));
+    if (!pages.length) return;
+    const prevBtn = document.getElementById('bookPrev');
+    const nextBtn = document.getElementById('bookNext');
+    const dots = Array.from(wrap.querySelectorAll('.book-dot'));
+    const nameEl = document.getElementById('bookName');
+    const nowEl = document.getElementById('bookNow');
+
+    /* Número de página grabado en cada hoja */
+    pages.forEach((page, i) => {
+      const num = document.createElement('span');
+      num.className = 'page-number';
+      num.textContent = `— ${i + 1} —`;
+      page.append(num);
+    });
+
+    let index = 0;
+    let animating = false;
+
+    function render() {
+      pages.forEach((page, i) => {
+        page.hidden = i !== index;
+        page.classList.toggle('is-current', i === index);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === index);
+        dot.setAttribute('aria-selected', String(i === index));
+      });
+      if (nameEl) nameEl.textContent = FB_NAMES[index] || '';
+      if (nowEl) nowEl.textContent = String(index + 1);
+      if (prevBtn) prevBtn.disabled = index === 0;
+      if (nextBtn) nextBtn.disabled = index === pages.length - 1;
+    }
+
+    function createLeaf() {
+      const leaf = document.createElement('div');
+      leaf.className = 'flip-leaf';
+      leaf.setAttribute('aria-hidden', 'true');
+      const front = pages[index].cloneNode(true);
+      front.hidden = false;
+      front.classList.add('flip-front');
+      front.classList.remove('is-current');
+      front.removeAttribute('data-page');
+      front.removeAttribute('id');
+      front.setAttribute('aria-hidden', 'true');
+      leaf.append(front, fbEndpaper());
+      surface.append(leaf);
+      return leaf;
+    }
+
+    function flipTo(target) {
+      target = fbClamp(target, 0, pages.length - 1);
+      if (animating || target === index) return;
+      animating = true;
+      const direction = target > index ? 'next' : 'prev';
+      const sign = direction === 'next' ? -1 : 1;
+      const leaf = createLeaf();
+      index = target;
+      render();
+      // Forzar flujo de estilos y aplicar el giro (con respaldo si rAF no corre)
+      const apply = () => {
+        leaf.classList.add('flipping');
+        leaf.style.transform = `rotateY(${sign * 180}deg)`;
+      };
+      requestAnimationFrame(apply);
+      window.setTimeout(apply, 60);
+      window.setTimeout(() => { leaf.remove(); animating = false; }, 720);
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => flipTo(index - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => flipTo(index + 1));
+    dots.forEach((dot) => dot.addEventListener('click', () => flipTo(Number(dot.dataset.goto))));
+
+    surface.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') { event.preventDefault(); flipTo(index + 1); }
+      if (event.key === 'ArrowLeft') { event.preventDefault(); flipTo(index - 1); }
+    });
+
+    /* Arrastre con mouse o dedo */
+    const drag = { active: false, decided: false, direction: null, target: index, startX: 0, startY: 0, width: 1, leaf: null, progress: 0 };
+
+    surface.addEventListener('pointerdown', (event) => {
+      if (animating) return;
+      if (event.target.closest('button, a, input, select, textarea')) return;
+      drag.active = true;
+      drag.decided = false;
+      drag.direction = null;
+      drag.leaf = null;
+      drag.progress = 0;
+      drag.startX = event.clientX;
+      drag.startY = event.clientY;
+      try { surface.setPointerCapture(event.pointerId); } catch { /* no crítico */ }
+    });
+
+    surface.addEventListener('pointermove', (event) => {
+      if (!drag.active) return;
+      const dx = event.clientX - drag.startX;
+      const dy = event.clientY - drag.startY;
+      if (!drag.decided) {
+        if (Math.abs(dx) < 14 && Math.abs(dy) < 14) return;
+        if (Math.abs(dy) >= Math.abs(dx)) { drag.active = false; return; }
+        drag.direction = dx < 0 ? 'next' : 'prev';
+        drag.target = drag.direction === 'next' ? index + 1 : index - 1;
+        if (drag.target < 0 || drag.target >= pages.length) { drag.active = false; return; }
+        drag.width = Math.max(160, surface.clientWidth);
+        drag.leaf = createLeaf();
+        drag.decided = true;
+      }
+      event.preventDefault();
+      const sign = drag.direction === 'next' ? -1 : 1;
+      drag.progress = fbClamp(Math.abs(dx) / drag.width, 0, 1);
+      drag.leaf.style.transition = 'none';
+      drag.leaf.style.transform = `rotateY(${sign * drag.progress * 180}deg)`;
+    });
+
+    const endDrag = () => {
+      if (!drag.active) return;
+      drag.active = false;
+      if (!drag.decided) return;
+      const { leaf, target, direction, progress } = drag;
+      const sign = direction === 'next' ? -1 : 1;
+      const complete = progress > 0.36;
+      animating = true;
+      leaf.style.transition = '';
+      leaf.classList.add('flipping');
+      leaf.style.transform = complete ? `rotateY(${sign * 180}deg)` : 'rotateY(0deg)';
+      if (complete) { index = target; render(); }
+      window.setTimeout(() => { leaf.remove(); animating = false; }, 620);
+    };
+    surface.addEventListener('pointerup', endDrag);
+    surface.addEventListener('pointercancel', endDrag);
+
+    render();
+  }
+
+  /* ------------------------------------------------------------------ */
   /* Teclado global                                                     */
   /* ------------------------------------------------------------------ */
 
@@ -1285,6 +1441,7 @@
     setupHeader();
     setupWizard();
     setupScrollProgress();
+    setupFlipbook();
     setupLightbox();
     setupVideoModal();
     setupMapButtons();

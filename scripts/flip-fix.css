@@ -1,0 +1,41 @@
+
+/* ============================================================
+   Cafetería · Corrección flipbook (menú impreso + formato retrato)
+   ============================================================ */
+.cafe-layout { grid-template-columns: minmax(0, .85fr) minmax(260px, .6fr); }
+.flipbook { max-width: 520px; margin: 0 auto 0 0; width: 100%; }
+.book-surface { height: clamp(600px, 72vh, 780px); }
+
+/* Lista del menú impresa, oscura sobre papel */
+.flip-page .item-name { color: var(--text); font-size: .93rem; font-weight: 650; line-height: 1.5; }
+.flip-page .item-name small { display: block; font-weight: 400; font-style: italic; color: var(--muted); font-size: .8em; }
+.flip-page .item-price { color: var(--moss); font-family: var(--display); font-weight: 700; font-size: 1rem; white-space: nowrap; }
+.flip-page .menu-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.flip-page .menu-list li { display: flex; align-items: baseline; gap: 10px; }
+.flip-page .leader { flex: 1; min-width: 18px; border-bottom: 2px dotted rgba(23, 37, 31, .3); transform: translateY(-4px); }
+.flip-page .menu-group { margin-bottom: 1.2rem; }
+.flip-page .menu-group:last-child { margin-bottom: 0; }
+.flip-page .menu-group h4 {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  font-family: var(--display); font-style: italic; font-weight: 500;
+  color: var(--deep); font-size: 1.02rem;
+  border-bottom: 1px solid rgba(14, 36, 32, .22); padding-bottom: 5px; margin: 0 0 9px;
+}
+.flip-page .menu-group h4 span {
+  font-family: var(--sans); font-style: normal; font-size: 8.5px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--muted); font-weight: 800;
+}
+.flip-page .menu-group ul {
+  list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px;
+}
+.flip-page .menu-group li { display: flex; align-items: baseline; gap: 10px; }
+
+@media (max-width: 1024px) {
+  .cafe-layout { grid-template-columns: 1fr; }
+  .flipbook { margin: 0 auto; }
+  .book-surface { height: clamp(480px, 62vh, 660px); }
+}
+@media (max-width: 680px) {
+  .flipbook { max-width: none; }
+  .book-surface { height: 62vh; }
+}

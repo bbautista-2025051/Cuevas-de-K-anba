@@ -1,0 +1,129 @@
+
+/* ============================================================
+   Cafetería · flipbook del menú
+   ============================================================ */
+.flipbook {
+  position: relative;
+  margin-right: 14px;
+  perspective: 1600px;
+  --spine: 26px;
+}
+.book-surface {
+  position: relative;
+  height: clamp(540px, 64vh, 700px);
+  border-radius: 10px 24px 24px 10px;
+  transform-style: preserve-3d;
+}
+.book-surface::after { /* canto de páginas apiladas, lado derecho */
+  content: "";
+  position: absolute; top: 3px; right: -6px; bottom: 3px; width: 6px;
+  border-radius: 0 4px 4px 0;
+  background: repeating-linear-gradient(90deg, #f3ecdc 0 2px, #dcd3bd 2px 4px);
+  box-shadow: 2px 4px 10px rgba(8, 19, 16, .25);
+}
+.flip-page {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; gap: 0;
+  overflow: auto; overflow-x: hidden;
+  background-color: var(--paper);
+  background-image: repeating-linear-gradient(180deg, transparent 0 30px, rgba(14,36,32,.05) 30px 31px);
+  border-radius: 10px 24px 24px 10px;
+  padding: 18px clamp(14px, 3vw, 26px) 44px calc(var(--spine) + 6px);
+  box-shadow: inset 18px 0 32px -14px rgba(14, 36, 32, .3), 0 26px 54px rgba(8, 19, 16, .28);
+  scrollbar-width: thin;
+}
+.flip-page::before { /* lomo */
+  content: "";
+  position: absolute; left: 0; top: 0; bottom: 0; width: var(--spine);
+  border-radius: 10px 0 0 10px;
+  background: linear-gradient(90deg, rgba(14,36,32,.34), rgba(14,36,32,.09) 60%, transparent);
+  pointer-events: none;
+}
+.flip-page[hidden] { display: none; }
+.flip-page .menu-list, .flip-page .menu-group { flex: none; }
+.page-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  border-bottom: 2px solid var(--deep); padding-bottom: 8px; margin: 0 0 13px;
+}
+.page-head h3 { font-family: var(--display); font-size: 1.5rem; font-weight: 600; font-style: italic; color: var(--deep); margin: 0; }
+.page-kicker { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; font-weight: 800; color: var(--moss); white-space: nowrap; }
+.page-number {
+  position: absolute; bottom: 12px; right: 20px;
+  font-family: var(--display); font-size: .72rem; letter-spacing: .3em; color: var(--muted);
+}
+
+/* Hoja voladora (arrastre y volteo) */
+.flip-leaf {
+  position: absolute; inset: 0; z-index: 9; pointer-events: none;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  border-radius: 10px 24px 24px 10px;
+  will-change: transform;
+}
+.flip-leaf > * {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: inherit; overflow: hidden;
+}
+.flip-leaf .flip-front {
+  box-shadow: -18px 14px 38px rgba(0, 0, 0, .4);
+  overflow: auto; overflow-x: hidden;
+  scrollbar-width: none;
+}
+.flip-leaf .flip-front::-webkit-scrollbar { display: none; }
+.flip-leaf.flipping { transition: transform .55s cubic-bezier(.42, .12, .28, 1); }
+.flip-leaf::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(100deg, transparent 8%, rgba(8, 19, 16, .42) 46%, transparent 82%);
+  opacity: 0; animation: leafShade .55s ease-out forwards;
+}
+@keyframes leafShade { 0% { opacity: 0; } 42% { opacity: 1; } 100% { opacity: 0; } }
+.flip-back {
+  transform: rotateY(180deg);
+  background-color: var(--paper);
+  background-image: repeating-linear-gradient(180deg, transparent 0 30px, rgba(14,36,32,.05) 30px 31px);
+  display: grid; place-items: center;
+  box-shadow: inset 18px 0 32px -14px rgba(14, 36, 32, .3);
+}
+.flip-back-inner { display: flex; flex-direction: column; align-items: center; gap: 12px; color: var(--moss); text-align: center; }
+.flip-back-inner svg { width: 52px; height: 52px; }
+.flip-back-inner strong { font-family: var(--display); font-size: 1.5rem; letter-spacing: .32em; color: var(--deep); font-weight: 500; }
+.flip-back-inner span { font-size: 8px; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); font-weight: 800; }
+
+/* Pie del libro: flechas, puntos y nombre */
+.book-foot { display: flex; align-items: center; gap: 12px; margin-top: 16px; justify-content: space-between; }
+.book-arrow {
+  flex: none; width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid rgba(246, 241, 230, .2);
+  background: var(--deep); color: var(--cream); cursor: pointer;
+  display: grid; place-items: center;
+  transition: transform .25s ease, background .25s ease, opacity .25s ease;
+}
+.book-arrow svg { width: 20px; height: 20px; }
+.book-arrow:hover:not(:disabled) { background: var(--forest, #123c32); transform: translateY(-2px); }
+.book-arrow:disabled { opacity: .32; cursor: default; }
+.book-meta { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 120px; }
+.book-name { font-family: var(--display); font-style: italic; font-size: .8rem; color: var(--moss); letter-spacing: .06em; }
+.book-dots { display: flex; gap: 8px; }
+.book-dot {
+  width: 9px; height: 9px; border-radius: 50%; border: 1px solid rgba(14,36,32,.35);
+  background: transparent; cursor: pointer; padding: 0;
+  transition: background .25s ease, transform .25s ease, border-color .25s ease;
+}
+.book-dot:hover { border-color: var(--moss); transform: scale(1.25); }
+.book-dot.is-active { background: var(--moss); border-color: var(--moss); transform: scale(1.3); }
+.book-count { font-variant-numeric: tabular-nums; font-size: .68rem; letter-spacing: .14em; color: var(--muted); font-weight: 800; }
+.book-count b { color: var(--deep); }
+
+@media (max-width: 1024px) {
+  .flipbook { margin-right: 0; }
+  .book-surface { height: clamp(480px, 58vh, 640px); }
+}
+@media (max-width: 680px) {
+  .book-surface { height: 62vh; }
+  .page-head h3 { font-size: 1.2rem; }
+  .page-kicker { font-size: 8px; }
+  .book-foot { gap: 10px; }
+  .book-arrow { width: 42px; height: 42px; }
+  .book-meta { min-width: 0; }
+  .book-count { display: none; }
+}
