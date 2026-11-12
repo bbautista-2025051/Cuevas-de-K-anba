@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reserva confirmada · K’anba Cuevas Vivas</title>
+  <meta name="description" content="Confirmación de tu reserva en las Cuevas de K’anba, Lanquín.">
+  <meta name="theme-color" content="#0e2420">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body class="subpage">
+  <header class="page-header">
+    <div class="container page-header-inner">
+      <a class="brand brand-light" href="/" aria-label="K’anba, inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><path d="M5 35V20a15 15 0 0 1 30 0v15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 31c-4.7-3.6-7-6.8-7-10.4a7 7 0 0 1 14 0c0 3.6-2.3 6.8-7 10.4Z" fill="currentColor"/><path d="M19 25.8c.1-2.9.8-4.7 1.8-6.3.6 2 1.9 3 2.4 5 .3 1.2-.4 2.5-2 2.8-1.6.3-2.3-.7-2.2-1.5Z" fill="#0e2420"/></svg>
+        </span>
+        <span class="brand-type"><strong>K’anba</strong><small>Cuevas Vivas</small></span>
+      </a>
+      <nav class="page-nav" aria-label="Navegación">
+        <a href="/#tours">Experiencias</a>
+        <a href="/mi-reserva.html">Mi reserva</a>
+        <a class="btn btn-primary btn-sm" href="/#reservar">Reservar</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-band">
+    <div class="container">
+      <p class="eyebrow eyebrow-light"><span class="pulse-dot"></span> Confirmación de reserva</p>
+      <h1 class="display" id="confirmBandTitle">Tu lugar bajo tierra está listo</h1>
+      <p class="page-lead" id="confirmBandLead">Gracias por reservar con guías locales de Lanquín. Revisa los detalles y llega 20 minutos antes.</p>
+    </div>
+  </section>
+
+  <main class="page-main">
+    <div class="container">
+      <section class="panel-card confirm-card" id="confirmCard">
+        <div class="confirm-top">
+          <div class="confirm-check" id="confirmIcon">
+            <svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m8 12.2 2.7 2.7L16.4 9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <p class="eyebrow" style="justify-content:center;"><span class="line"></span><span id="confirmStatusText">Reserva confirmada</span><span class="line"></span></p>
+          <h2 class="confirm-code" id="confirmCode">KAN-0000-00000</h2>
+          <p id="confirmLead">Estamos cargando tu reserva…</p>
+        </div>
+
+        <div class="confirm-grid" id="confirmGrid"></div>
+
+        <div class="confirm-actions" id="confirmActions"></div>
+        <p class="confirm-note" id="confirmNote">El correo de confirmación y el comprobante se envían automáticamente al titular. Si no los ves, revisa la carpeta de spam.</p>
+      </section>
+
+      <div class="panel-card state-card" id="confirmState" hidden>
+        <div class="state-icon amber" id="confirmStateIcon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v6M12 16.5v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h2 id="confirmStateTitle">Verificando</h2>
+        <p id="confirmStateText">Estamos buscando tu reserva.</p>
+        <div class="state-actions" id="confirmStateActions"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="mini-footer">
+    <div class="container mini-footer-inner">
+      <span>© <span id="year">2026</span> K’anba Cuevas Vivas · Sitio demostrativo</span>
+      <div class="mini-links">
+        <a href="/">Inicio</a>
+        <a href="/mi-reserva.html">Mi reserva</a>
+        <a href="/#politicas">Políticas</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/js/confirmation.js" defer></script>
+</body>
+</html>

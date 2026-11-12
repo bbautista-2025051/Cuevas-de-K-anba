@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reserva tu descenso · K’anba Cuevas Vivas</title>
+  <meta name="description" content="Reserva en línea tu entrada a las Cuevas de K’anba: elige tour, fecha, horario y cupos con pago seguro en línea.">
+  <meta name="theme-color" content="#0e2420">
+  <meta property="og:title" content="K’anba · Donde el río se esconde">
+  <meta property="og:description" content="Cueva de río, candela y aventura en Lanquín, Alta Verapaz. A minutos de Semuc Champey.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/assets/img/kanba-cave-02.jpg">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="K’anba, inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><path d="M5 35V20a15 15 0 0 1 30 0v15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 31c-4.7-3.6-7-6.8-7-10.4a7 7 0 0 1 14 0c0 3.6-2.3 6.8-7 10.4Z" fill="currentColor"/><path d="M19 25.8c.1-2.9.8-4.7 1.8-6.3.6 2 1.9 3 2.4 5 .3 1.2-.4 2.5-2 2.8-1.6.3-2.3-.7-2.2-1.5Z" fill="#0e2420"/></svg>
+        </span>
+        <span class="brand-type"><strong>K’anba</strong><small>Cuevas Vivas</small></span>
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
+        <a href="/">La cueva</a>
+        <a href="/tours.html">Tours</a>
+        <a href="/galeria.html">Galería</a>
+        <a href="/ubicacion.html">Ubicación</a>
+        <a href="/informacion.html">Información</a>
+        <a href="/politicas.html">Políticas</a>
+        <a class="nav-mobile-only" href="/mi-reserva.html">Mi reserva</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="link-subtle" href="/mi-reserva.html">Mi reserva</a>
+        <a class="btn btn-primary btn-sm" href="/reservar.html">Reservar</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainNav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <!-- BOOKING -->
+    <section class="booking-section" id="reservar">
+      <div class="booking-texture" aria-hidden="true"></div>
+      <div class="container">
+        <div class="section-head center light">
+          <p class="eyebrow eyebrow-light center"><span class="line"></span><span id="bookingKicker">Reserva en línea</span><span class="line"></span></p>
+          <h2 class="display" id="bookingTitle">Tu lugar bajo tierra</h2>
+          <p id="bookingText">Selecciona experiencia, fecha, horario y participantes. Bloqueamos tus cupos durante 20 minutos mientras completas el pago.</p>
+        </div>
+
+        <div class="booking-layout">
+          <div class="wizard" id="bookingWizard">
+            <ol class="wizard-steps" aria-label="Pasos de la reserva">
+              <li class="active" data-step-indicator="1"><span>01</span><div><strong>Experiencia</strong><small>Qué vas a vivir</small></div></li>
+              <li data-step-indicator="2"><span>02</span><div><strong>Fecha y hora</strong><small>Cupos reales</small></div></li>
+              <li data-step-indicator="3"><span>03</span><div><strong>Datos</strong><small>Pago seguro</small></div></li>
+            </ol>
+
+            <div class="wizard-panel" data-panel="1">
+              <div class="panel-head">
+                <h3>1. Elige tu experiencia</h3>
+                <p>Los cupos mostrados se actualizan en tiempo real.</p>
+              </div>
+              <div class="tour-options" id="tourOptions"></div>
+              <div class="wizard-actions">
+                <span class="wizard-hint">Puedes cambiarla después.</span>
+                <button class="btn btn-primary" data-next="2" type="button">Elegir fecha <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+              </div>
+            </div>
+
+            <div class="wizard-panel" data-panel="2" hidden>
+              <div class="panel-head">
+                <h3>2. Fecha y horario</h3>
+                <p>Próximos 30 días. Los días tachados no tienen cupo para este tour.</p>
+              </div>
+              <div class="date-strip-wrap">
+                <button class="strip-arrow" id="datePrev" aria-label="Fechas anteriores" type="button"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+                <div class="date-strip" id="dateStrip" role="listbox" aria-label="Fechas disponibles"></div>
+                <button class="strip-arrow" id="dateNext" aria-label="Fechas siguientes" type="button"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+              </div>
+              <div class="time-section">
+                <h4>Horarios disponibles <span id="selectedDateLabel"></span></h4>
+                <div class="time-slots" id="timeSlots"></div>
+              </div>
+              <div class="inline-note" id="availabilityNote" hidden></div>
+              <div class="wizard-actions">
+                <button class="btn btn-ghost-dark" data-prev="1" type="button">Atrás</button>
+                <button class="btn btn-primary" data-next="3" id="toStep3" type="button" disabled>Agregar participantes <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+              </div>
+            </div>
+
+            <div class="wizard-panel" data-panel="3" hidden>
+              <div class="panel-head">
+                <h3>3. Participantes y datos del viajero</h3>
+                <p>El titular recibirá la confirmación y el comprobante por correo.</p>
+              </div>
+
+              <div class="participants-row">
+                <div>
+                  <h4>¿Cuántos son?</h4>
+                  <p id="participantHelp">Máximo 12 por grupo.</p>
+                </div>
+                <div class="stepper" role="group" aria-label="Cantidad de participantes">
+                  <button type="button" id="minusPax" aria-label="Quitar participante">−</button>
+                  <output id="paxValue" aria-live="polite">2</output>
+                  <button type="button" id="plusPax" aria-label="Agregar participante">+</button>
+                </div>
+              </div>
+
+              <form class="booking-form" id="bookingForm" novalidate>
+                <div class="form-grid">
+                  <label class="field">
+                    <span>Nombre completo <em>*</em></span>
+                    <input type="text" name="name" autocomplete="name" placeholder="Como aparece en tu documento" required>
+                    <small class="field-error" data-error="name"></small>
+                  </label>
+                  <label class="field">
+                    <span>Correo electrónico <em>*</em></span>
+                    <input type="email" name="email" autocomplete="email" placeholder="tucorreo@ejemplo.com" required>
+                    <small class="field-error" data-error="email"></small>
+                  </label>
+                  <label class="field">
+                    <span>Teléfono / WhatsApp <em>*</em></span>
+                    <input type="tel" name="phone" autocomplete="tel" placeholder="+502 5555 5555" required>
+                    <small class="field-error" data-error="phone"></small>
+                  </label>
+                  <label class="field">
+                    <span>País <em>*</em></span>
+                    <input type="text" name="country" autocomplete="country-name" placeholder="Guatemala" required>
+                    <small class="field-error" data-error="country"></small>
+                  </label>
+                  <label class="field field-full">
+                    <span>Documento de identidad <small>(opcional)</small></span>
+                    <input type="text" name="document" placeholder="DPI, pasaporte o número de identificación">
+                  </label>
+                  <label class="field field-full">
+                    <span>Notas para el guía <small>(opcional)</small></span>
+                    <textarea name="notes" rows="3" maxlength="600" placeholder="Alergias, nivel de natación, edades de menores, ocasión especial…"></textarea>
+                  </label>
+                </div>
+
+                <label class="check">
+                  <input type="checkbox" name="acceptPolicies" required>
+                  <span>Acepto las <a href="/politicas.html" target="_blank" rel="noopener">políticas de reserva, cancelación y reembolso</a>.</span>
+                </label>
+                <label class="check">
+                  <input type="checkbox" name="acceptTerms" required>
+                  <span>He leído los requisitos y restricciones y acepto la <a href="/informacion.html" target="_blank" rel="noopener">carta de responsabilidad</a>.</span>
+                </label>
+
+                <div class="form-error" id="bookingError" role="alert" hidden></div>
+
+                <div class="wizard-actions">
+                  <button class="btn btn-ghost-dark" data-prev="2" type="button">Atrás</button>
+                  <button class="btn btn-primary btn-lg" type="submit" id="submitBooking">
+                    <span>Bloquear cupos y pagar</span>
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                  </button>
+                </div>
+                <p class="form-legal">Al continuar se crea una reserva con número único y un enlace de pago privado. El cupo se libera automáticamente si no pagas en <strong id="holdMinutesText">20</strong> minutos.</p>
+              </form>
+            </div>
+          </div>
+
+          <aside class="booking-summary" id="bookingSummary" aria-live="polite">
+            <div class="summary-head">
+              <span class="summary-label">Tu reserva</span>
+              <span class="summary-status" id="summaryStatus">Sin iniciar</span>
+            </div>
+            <div class="summary-empty" id="summaryEmpty">
+              <div class="summary-empty-icon">
+                <svg viewBox="0 0 48 48"><path d="M8 42V24a16 16 0 0 1 32 0v18" fill="none" stroke="currentColor" stroke-width="2"/><path d="M24 37c-5-4-7.5-7.2-7.5-11a7.5 7.5 0 0 1 15 0c0 3.8-2.5 7-7.5 11Z" fill="currentColor"/></svg>
+              </div>
+              <p>Elige una experiencia para ver aquí el resumen, los cupos y el total.</p>
+              <ul class="summary-benefits">
+                <li>Pago en línea seguro</li>
+                <li>Confirmación inmediata</li>
+                <li>Cancelación flexible</li>
+              </ul>
+            </div>
+            <div class="summary-content" id="summaryContent" hidden>
+              <div class="summary-tour">
+                <img id="summaryImage" src="/assets/img/kanba-cave-01.jpg" alt="">
+                <div><strong id="summaryTourName">—</strong><span id="summaryTourMeta">—</span></div>
+              </div>
+              <dl class="summary-lines">
+                <div><dt>Fecha</dt><dd id="summaryDate">—</dd></div>
+                <div><dt>Horario</dt><dd id="summaryTime">—</dd></div>
+                <div><dt>Participantes</dt><dd id="summaryPax">—</dd></div>
+                <div><dt>Precio unitario</dt><dd id="summaryUnit">—</dd></div>
+              </dl>
+              <div class="summary-total">
+                <div><span>Total a pagar</span><small>Impuestos incluidos · GTQ</small></div>
+                <strong id="summaryTotal">Q0.00</strong>
+              </div>
+              <div class="summary-hold">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span>Al continuar, tus cupos quedan bloqueados <strong>20 minutos</strong>.</span>
+              </div>
+            </div>
+            <div class="summary-foot">
+              <span><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m8.5 12 2.4 2.4 4.6-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg> Pago cifrado</span>
+              <span>Guías locales certificados</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contacto">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand brand-light" href="/">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><path d="M5 35V20a15 15 0 0 1 30 0v15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 31c-4.7-3.6-7-6.8-7-10.4a7 7 0 0 1 14 0c0 3.6-2.3 6.8-7 10.4Z" fill="currentColor"/></svg>
+          </span>
+          <span class="brand-type"><strong>K’anba</strong><small>Cuevas Vivas</small></span>
+        </a>
+        <p>Una cueva viva de río subterráneo en Lanquín, Alta Verapaz. Aventura con guías q’eqchi’, candela y respeto por el territorio.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+          <a href="https://wa.me/50240002026" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Explorar</h4>
+        <a href="/">La cueva</a>
+        <a href="/tours.html">Tours</a>
+        <a href="/galeria.html">Galería</a>
+        <a href="/videos.html">Videos</a>
+        <a href="/ubicacion.html">Cómo llegar</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Reservas</h4>
+        <a href="/reservar.html">Reservar en línea</a>
+        <a href="/mi-reserva.html">Mi reserva</a>
+        <a href="/informacion.html">Requisitos</a>
+        <a href="/politicas.html">Políticas</a>
+        <a href="/admin.html">Panel administrativo</a>
+      </div>
+
+      <div class="footer-col footer-contact">
+        <h4>Contacto</h4>
+        <a href="tel:+50240002026" id="footerPhone">+502 4000 2026</a>
+        <a href="mailto:reservas@kanba.gt" id="footerEmail">reservas@kanba.gt</a>
+        <span id="footerAddress">Cuevas de K’anba, Lanquín, Alta Verapaz, Guatemala</span>
+        <span id="footerHours">Todos los días · 08:00 a 17:00</span>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>© <span id="year">2026</span> K’anba Cuevas Vivas. Todos los derechos reservados.</span>
+      <span class="footer-legal-links"><a href="/politicas.html">Privacidad</a><a href="/politicas.html">Términos</a><a href="/admin.html">Administración</a></span>
+      <span class="footer-payments">Pagos seguros · <strong>VISA</strong> <strong>Mastercard</strong> <strong>AMEX</strong></span>
+    </div>
+    <p class="footer-disclaimer container" id="footerNote">Sitio demo educativo sobre las Cuevas de K’anba, Lanquín, Alta Verapaz, Guatemala. No es la oficina oficial.</p>
+  </footer>
+
+  <!-- Mobile booking bar -->
+  <div class="mobile-bar" id="mobileBar">
+    <div><span>Desde</span><strong>Q110 <small>/ persona</small></strong></div>
+    <a class="btn btn-primary" href="/reservar.html">Reservar</a>
+    <a class="mobile-bar-wa" href="https://wa.me/50240002026" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 8.7c.2-.5.4-.5.6-.5h.5c.2 0 .4 0 .6.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c-.1.1-.2.3 0 .6.5.8 1.1 1.4 2 1.8.3.1.5.1.6 0l.7-.8c.1-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.4 0 .2 0 1-.5 1.5-.5.5-1.2.8-2.5.4-1.3-.4-2.9-1.3-4-2.7-1-1.2-1.5-2.4-1.5-3.2 0-.8.3-1.3.4-1.5Z" fill="currentColor"/></svg>
+    </a>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Galería de fotografías" hidden>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar galería">×</button>
+    <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Fotografía anterior">‹</button>
+    <figure>
+      <img id="lightboxImage" src="" alt="">
+      <figcaption><span id="lightboxCaption"></span><small id="lightboxCredit"></small></figcaption>
+    </figure>
+    <button class="lightbox-nav next" id="lightboxNext" aria-label="Fotografía siguiente">›</button>
+    <span class="lightbox-counter" id="lightboxCounter"></span>
+  </div>
+
+  <!-- Video modal -->
+  <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Reproductor de video" hidden>
+    <div class="video-modal-inner">
+      <button class="video-modal-close" id="videoClose" aria-label="Cerrar video">×</button>
+      <div class="video-embed" id="videoEmbed"></div>
+      <div class="video-modal-meta"><strong id="videoTitle"></strong><span id="videoDesc"></span></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="/vendor/leaflet/leaflet.js" defer></script>
+  <script src="/js/site.js?v=3" defer></script>
+</body>
+</html>
