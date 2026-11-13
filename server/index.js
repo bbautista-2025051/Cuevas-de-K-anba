@@ -998,6 +998,7 @@ function serveStatic(req, res, url) {
   if (pathname === '/ubicacion') pathname = '/ubicacion.html';
   if (pathname === '/informacion') pathname = '/informacion.html';
   if (pathname === '/politicas') pathname = '/politicas.html';
+  if (pathname === '/cafeteria') pathname = '/cafeteria.html';
   if (pathname === '/admin') pathname = '/admin.html';
   if (pathname === '/pago') pathname = '/pago.html';
   if (pathname === '/confirmacion') pathname = '/confirmacion.html';

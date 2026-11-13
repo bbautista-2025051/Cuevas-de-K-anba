@@ -1,0 +1,77 @@
+
+/* ============================================================
+   Cafetería · libro del menú
+   ============================================================ */
+.cafe-book-wrap { position: relative; margin-right: 30px; perspective: 1500px; }
+.cafe-tabs {
+  position: absolute; right: -30px; top: 26px; z-index: 6;
+  display: flex; flex-direction: column; gap: 9px;
+}
+.cafe-tab {
+  cursor: pointer; border: 1px solid rgba(232,181,106,.38);
+  background: linear-gradient(180deg, #1b332c, #12261f);
+  color: var(--amber-soft); border-radius: 0 14px 14px 0;
+  padding: 9px 12px 10px; min-width: 94px; text-align: left;
+  display: flex; flex-direction: column; gap: 3px;
+  box-shadow: 4px 5px 14px rgba(0,0,0,.32);
+  transition: transform .3s var(--ease), background .3s ease, color .3s ease, border-color .3s ease;
+}
+.cafe-tab span { font-size: 7.5px; letter-spacing: .16em; text-transform: uppercase; color: rgba(246,241,230,.45); font-weight: 800; }
+.cafe-tab:hover { transform: translateX(5px); }
+.cafe-tab.is-active { background: var(--lime); border-color: var(--lime); color: #10261f; }
+.cafe-tab.is-active span { color: rgba(16,38,31,.7); }
+.cafe-tab:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+
+.cafe-book {
+  background: linear-gradient(158deg, #1e3830 0%, #132820 55%, #0d1e18 100%);
+  border-radius: var(--r-lg); border: 1px solid rgba(232,181,106,.42);
+  padding: clamp(.55rem, 1.5vw, .8rem);
+  box-shadow: inset 0 0 0 2px rgba(232,181,106,.22), var(--shadow-lg);
+}
+.book-page {
+  background-color: var(--paper);
+  background-image: repeating-linear-gradient(180deg, transparent 0 30px, rgba(14,36,32,.05) 30px 31px);
+  border-radius: 18px;
+  padding: clamp(1.1rem, 3vw, 1.6rem) clamp(1rem, 3vw, 1.6rem);
+  color: var(--text);
+  transform-origin: left center;
+  min-height: 520px;
+}
+.book-page.turning { animation: pageTurn .45s var(--ease); }
+@keyframes pageTurn {
+  from { opacity: 0; transform: rotateY(-14deg) translateX(-18px); }
+}
+
+.page-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 2px solid var(--deep); padding-bottom: 8px; margin-bottom: 13px; }
+.page-head h3 { font-family: var(--display); font-size: 1.5rem; font-weight: 600; font-style: italic; color: var(--deep); margin: 0; }
+.page-kicker { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; font-weight: 800; color: var(--moss); white-space: nowrap; }
+.menu-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.menu-list li { display: flex; align-items: baseline; gap: 10px; }
+
+/* Reestilo dark → claro para la página impresa */
+.book-page .menu-group { margin-bottom: 1.1rem; }
+.book-page .menu-group h4 {
+  color: var(--deep); border-bottom: 1px solid rgba(14,36,32,.2);
+  padding-bottom: 5px; font-size: 1rem;
+}
+.book-page .menu-group h4 span { color: var(--muted); }
+.book-page .item-name { color: var(--text); }
+.book-page .item-name small { color: var(--muted); font-weight: 400; }
+.book-page .leader { border-bottom: 2px dotted rgba(23,37,31,.28); transform: translateY(-4px); }
+.book-page .item-price { color: var(--moss); font-weight: 700; }
+
+@media (max-width: 1024px) {
+  .cafe-book-wrap { margin-right: 0; }
+  .cafe-tabs {
+    position: static; flex-direction: row; flex-wrap: nowrap; overflow-x: auto;
+    padding-bottom: 10px; gap: 8px; scrollbar-width: thin;
+  }
+  .cafe-tab { border-radius: 13px 13px 0 0; min-width: 88px; border-bottom: 0; box-shadow: none; }
+  .cafe-tab:hover { transform: none; }
+  .book-page { min-height: auto; }
+}
+@media (max-width: 680px) {
+  .page-head h3 { font-size: 1.2rem; }
+  .page-kicker { font-size: 8px; }
+  .menu-list li { gap: 7px; }
+}

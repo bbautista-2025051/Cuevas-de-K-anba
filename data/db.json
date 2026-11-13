@@ -2,7 +2,7 @@
   "meta": {
     "version": 1,
     "createdAt": "2026-11-12T17:07:37.562Z",
-    "updatedAt": "2026-11-12T17:26:18.000Z"
+    "updatedAt": "2026-11-13T01:26:25.714Z"
   },
   "admin": {
     "password": {
@@ -20,7 +20,7 @@
       "name": "K’anba",
       "sub": "Cuevas Vivas",
       "tagline": "Donde el río se esconde",
-      "claim": "Una aventura de agua, piedra y candela en el corazón de Alta Verapaz."
+      "claim": "Una aventura de agua, piedra y el río en el corazón de Alta Verapaz."
     },
     "hero": {
       "kicker": "Lanquín · Alta Verapaz · Guatemala",
@@ -28,7 +28,7 @@
       "subtitle": "Donde el río se esconde.",
       "text": "Entra a una cueva viva de río subterráneo. Con una vela en la mano, el sonido del agua y un guía q’eqchi’, cruzarás pasadizos, cascadas y pozas de luz imposible. A minutos de Semuc Champey.",
       "image": "/assets/img/kanba-cave-02.jpg",
-      "imageAlt": "Interior de una cueva de Lanquín iluminado por candelas",
+      "imageAlt": "Interior de una cueva de Lanquín iluminada con luz frontal",
       "badge": "Cupos limitados · 12 personas por grupo",
       "openText": "Abierto todos los días · 08:00 a 17:00",
       "rating": "4.9",
@@ -39,7 +39,7 @@
       "title": "Un río que corre bajo la montaña",
       "lead": "K’anba es una cueva de río, no un salón iluminado. Aquí el agua marca el camino: a veces a los tobillos, a veces al pecho. La piedra caliza se abre en galerías de cinco a diez metros de ancho y el Cahabón sigue su viaje secreto bajo la selva.",
       "paragraphs": [
-        "El sistema explorado supera los 3.3 kilómetros, aunque la visita guiada recorre los primeros 400 metros: un tramo seguro, profundo y lleno de formas que la luz de la candela convierte en otra cosa. Al salir, el río te devuelve a la superficie y puedes flotar en cámara lenta por el Cahabón.",
+        "El sistema explorado supera los 3.3 kilómetros, aunque la visita guiada recorre los primeros 400 metros: un tramo seguro, profundo y lleno de formas que la luz frontal convierte en otra cosa. Al salir, el río te devuelve a la superficie y puedes flotar en cámara lenta por el Cahabón.",
         "Para el pueblo q’eqchi’, la cueva no es solo un atractivo: es un umbral. El agua, la oscuridad y las formaciones de piedra han sido parte de su cosmovisión durante generaciones. Nuestros guías son locales y comparten esa lectura del territorio en cada grupo.",
         "En 2004, espeleólogos guatemaltecos con apoyo de colegas estadounidenses exploraron y levantaron el sistema; el trabajo de topografía concluyó en marzo de 2005. Hoy la visita se hace en grupos pequeños, con equipo de seguridad y reglas claras para proteger el ecosistema."
       ],
@@ -71,8 +71,8 @@
     "values": [
       {
         "icon": "flame",
-        "title": "La candela es la brújula",
-        "text": "Sin luz eléctrica dentro de la cueva. Una vela por persona, un guía al frente y una cuerda que une al grupo. La oscuridad no se atraviesa: se escucha."
+        "title": "El silencio es el sendero",
+        "text": "Sin luz eléctrica dentro de la cueva. Una linterna frontal por persona, un guía al frente y una cuerda que une al grupo. La oscuridad no se atraviesa: se escucha."
       },
       {
         "icon": "water",
@@ -99,7 +99,7 @@
       {
         "year": "2010",
         "title": "Turismo de aventura",
-        "text": "La cueva se integra a las rutas de Semuc Champey. Nacen los recorridos con candela y el tubing."
+        "text": "La cueva se integra a las rutas de Semuc Champey. Nacen los recorridos de aventura y el tubing."
       },
       {
         "year": "Hoy",
@@ -110,7 +110,7 @@
     "toursIntro": {
       "kicker": "Experiencias",
       "title": "Elige cómo entrar a la cueva",
-      "text": "Cinco formas de vivir K’anba. Todas incluyen guía local certificado, candela, casco, chaleco salvavidas y entrada. Los cupos se confirman al pagar."
+      "text": "Cinco formas de vivir K’anba. Todas incluyen guía local certificado, casco, chaleco salvavidas y entrada. Los cupos se confirman al pagar."
     },
     "bookingIntro": {
       "kicker": "Reserva en línea",
@@ -125,7 +125,7 @@
     "videosIntro": {
       "kicker": "En movimiento",
       "title": "Antes de entrar, mírala",
-      "text": "Seis ventanas a la experiencia: la candela, el agua, la cascada y el paisaje que rodea la cueva."
+      "text": "Seis ventanas a la experiencia: el río, la selva y la cascada y el paisaje que rodea la cueva."
     },
     "mapIntro": {
       "kicker": "Cómo llegar",
@@ -322,7 +322,7 @@
       {
         "id": "img_01",
         "src": "/assets/img/kanba-cave-01.jpg",
-        "caption": "Luz de candela sobre la roca caliza",
+        "caption": "Luz frontal sobre la roca caliza",
         "category": "cueva",
         "credit": "Wikimedia Commons · CC BY-SA 3.0"
       },
@@ -458,7 +458,7 @@
         "id": "vid_02",
         "youtubeId": "vjk9xwiBmMs",
         "title": "La cueva de los Goonies",
-        "description": "Así se siente avanzar a oscuras, con candela en mano, entre roca y agua.",
+        "description": "Así se siente avanzar a oscuras, con luz frontal al cuello, entre roca y agua.",
         "category": "Aventura"
       },
       {
@@ -494,10 +494,10 @@
   "tours": [
     {
       "id": "candela",
-      "name": "Ritual de las Candelas",
+      "name": "Ritual de la Cueva",
       "badge": "El clásico",
       "description": "La experiencia original: entras con una vela, caminas por el río subterráneo, subes la cascada con cuerda y sales flotando por el Cahabón. Adrenalina pura en grupos pequeños.",
-      "longDescription": "Un recorrido de dos horas por los primeros 400 metros de la cueva. El guía abre camino con una candela; el grupo avanza por agua a la cintura, pasa junto a formaciones de calcita y sube una cascada con cuerda anudada. Incluye un salto opcional a una poza profunda y flotada corta en el río al salir.",
+      "longDescription": "Un recorrido de dos horas por los primeros 400 metros de la cueva. El guía abre camino con la luz frontal; el grupo avanza por agua a la cintura, pasa junto a formaciones de calcita y sube una cascada con cuerda anudada. Incluye un salto opcional a una poza profunda y flotada corta en el río al salir.",
       "duration": "2 horas",
       "durationMinutes": 120,
       "price": 120,
@@ -523,7 +523,7 @@
       "meetingPoint": "Recepción K’anba · desvío antes del puente",
       "includes": [
         "Guía local bilingüe",
-        "Candela y soporte",
+        "Casco y linterna frontal",
         "Casco y chaleco salvavidas",
         "Entrada a la cueva",
         "Té caliente al salir"
@@ -542,7 +542,7 @@
       "name": "K’anba Esencial + Tubing",
       "badge": "Más vendido",
       "description": "Cueva + cascada + columpio + flotada de 30 minutos por el Cahabón. La combinación perfecta para un día completo de aventura.",
-      "longDescription": "Recorrido guiado por la cueva con candela y saltos opcionales. Después, caminata breve hasta la cascada, salto desde el columpio gigante y flotada en inner tube por el río Cahabón. Ideal para quienes quieren la experiencia completa sin el traslado largo.",
+      "longDescription": "Recorrido guiado por la cueva con luz frontal y saltos opcionales. Después, caminata breve hasta la cascada, salto desde el columpio gigante y flotada en inner tube por el río Cahabón. Ideal para quienes quieren la experiencia completa sin el traslado largo.",
       "duration": "3 horas",
       "durationMinutes": 180,
       "price": 185,
@@ -567,7 +567,7 @@
       "meetingPoint": "Recepción K’anba · desvío antes del puente",
       "includes": [
         "Guía local bilingüe",
-        "Candela, casco y chaleco",
+        "Linterna frontal, casco y chaleco",
         "Entrada a la cueva",
         "Tubing y columpio",
         "Duchas rústicas y vestidores"
@@ -587,7 +587,7 @@
       "name": "K’anba + Semuc Champey",
       "badge": "Día completo",
       "description": "Cueva, cascada, tubing y las pozas turquesa de Semuc Champey con mirador. Transporte desde Lanquín y almuerzo incluidos.",
-      "longDescription": "Salida desde Lanquín en pickup 4x4. Primero K’anba: cueva con candela, cascada y tubing. Luego Semuc Champey: caminata al mirador, tiempo libre en las pozas y almuerzo típico. Regreso al atardecer. Un solo día para los dos imperdibles de Alta Verapaz.",
+      "longDescription": "Salida desde Lanquín en pickup 4x4. Primero K’anba: cueva con luz frontal, cascada y tubing. Luego Semuc Champey: caminata al mirador, tiempo libre en las pozas y almuerzo típico. Regreso al atardecer. Un solo día para los dos imperdibles de Alta Verapaz.",
       "duration": "7 horas",
       "durationMinutes": 420,
       "price": 350,
@@ -631,8 +631,8 @@
       "id": "nocturna",
       "name": "K’anba Nocturna · Murciélagos",
       "badge": "Solo viernes y sábado",
-      "description": "La cueva al caer la noche, cuando las colonias de murciélagos despiertan. Leyendas q’eqchi’, candela y sonido de río.",
-      "longDescription": "Un recorrido especial de fin de semana al atardecer. Entramos con candela cuando la luz exterior desaparece y escuchamos el despertar de los murciélagos. El guía comparte relatos q’eqchi’ sobre el inframundo y el río. No incluye nado profundo; sí vadeo y pasadizos.",
+      "description": "La cueva al caer la noche, cuando las colonias de murciélagos despiertan. Leyendas q’eqchi’ y murmullo del río.",
+      "longDescription": "Un recorrido especial de fin de semana al atardecer. Entramos con luz frontal cuando la luz exterior desaparece y escuchamos el despertar de los murciélagos. El guía comparte relatos q’eqchi’ sobre el inframundo y el río. No incluye nado profundo; sí vadeo y pasadizos.",
       "duration": "2.5 horas",
       "durationMinutes": 150,
       "price": 160,
@@ -651,7 +651,7 @@
       "meetingPoint": "Recepción K’anba · desvío antes del puente",
       "includes": [
         "Guía local q’eqchi’",
-        "Candela y casco",
+        "Linterna frontal y casco",
         "Entrada nocturna",
         "Chocolate caliente",
         "Préstamo de linterna frontal"
@@ -799,7 +799,7 @@
       "code": "KAN-2026-01031",
       "token": "TVmRVnS0qlf6250Bft-m5GPPXnOUa4MI",
       "tourId": "candela",
-      "tourName": "Ritual de las Candelas",
+      "tourName": "Ritual de la Cueva",
       "date": "2026-11-14",
       "time": "10:30",
       "participants": 2,
@@ -955,7 +955,7 @@
       "code": "KAN-2026-01034",
       "token": "IX3TkkU1LuzJ3FbOQknO8K5j995EaN4g",
       "tourId": "candela",
-      "tourName": "Ritual de las Candelas",
+      "tourName": "Ritual de la Cueva",
       "date": "2026-11-10",
       "time": "08:30",
       "participants": 2,
@@ -1169,41 +1169,5 @@
       "text": "El plazo de pago venció y los cupos fueron liberados automáticamente."
     }
   ],
-  "sessions": {
-    "G0_N8y0rs5uxvi6sMNvFpa-pGSwsIJzU": {
-      "createdAt": "2026-11-12T17:07:59.888Z",
-      "expiresAt": "2026-11-13T01:07:59.888Z",
-      "ip": "127.0.0.1"
-    },
-    "dlF6P4qKiJfxzq_xa3jzOXNPydQ7RO9X": {
-      "createdAt": "2026-11-12T17:08:32.947Z",
-      "expiresAt": "2026-11-13T01:08:32.947Z",
-      "ip": "127.0.0.1"
-    },
-    "9uGGxo-Pifbhh1fjsXAGuuY-IiDCPuRp": {
-      "createdAt": "2026-11-12T17:08:48.310Z",
-      "expiresAt": "2026-11-13T01:08:48.310Z",
-      "ip": "127.0.0.1"
-    },
-    "1-YVg8XCA_V-CfoOfjgPW2QDpbRPiUrM": {
-      "createdAt": "2026-11-12T17:17:31.356Z",
-      "expiresAt": "2026-11-13T01:17:31.356Z",
-      "ip": "127.0.0.1"
-    },
-    "9y4NRAPf_mjLAOcsCdHf1K4NoR5t3e_8": {
-      "createdAt": "2026-11-12T17:24:43.897Z",
-      "expiresAt": "2026-11-13T01:24:43.897Z",
-      "ip": "127.0.0.1"
-    },
-    "3l5TMaOLUnZqdB-98xY1_oTnhK4nlxMH": {
-      "createdAt": "2026-11-12T17:25:46.574Z",
-      "expiresAt": "2026-11-13T01:25:46.574Z",
-      "ip": "127.0.0.1"
-    },
-    "CE3S1JrRk16K0zvSrLQDMz9DvXICQesg": {
-      "createdAt": "2026-11-12T17:26:18.000Z",
-      "expiresAt": "2026-11-13T01:26:18.000Z",
-      "ip": "127.0.0.1"
-    }
-  }
+  "sessions": {}
 }
