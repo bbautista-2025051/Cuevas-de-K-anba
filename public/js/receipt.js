@@ -95,7 +95,7 @@
       const desc = document.createElement('td');
       desc.textContent = tour.name || 'Experiencia K’anba';
       const note = document.createElement('small');
-      note.textContent = 'Guía local, candela, casco, chaleco salvavidas y entrada';
+      note.textContent = 'Guía local, casco, chaleco salvavidas y entrada';
       desc.append(note);
       const qty = document.createElement('td');
       qty.textContent = String(reservation.participants || 1);

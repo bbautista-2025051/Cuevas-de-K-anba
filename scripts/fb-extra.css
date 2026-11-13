@@ -1,0 +1,5 @@
+
+/* Ajustes flipbook */
+.book-surface { touch-action: pan-y; cursor: grab; }
+.book-surface:active { cursor: grabbing; }
+.flip-page.is-current { display: flex; }

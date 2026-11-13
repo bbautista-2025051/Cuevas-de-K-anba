@@ -1051,7 +1051,7 @@
     const grid = el('div', 'form-grid');
     grid.append(
       formField('Identificador', 'id', tour?.id || '', { readOnly: editing, placeholder: 'se genera del nombre', hint: editing ? 'No se puede cambiar.' : undefined }),
-      formField('Nombre', 'name', tour?.name || '', { placeholder: 'Ritual de las Candelas' }),
+      formField('Nombre', 'name', tour?.name || '', { placeholder: 'Ritual de la Cueva' }),
       formField('Etiqueta', 'badge', tour?.badge || '', { placeholder: 'Más reservado' }),
       formField('Duración (texto)', 'duration', tour?.duration || '2 horas'),
       formField('Duración (minutos)', 'durationMinutes', tour?.durationMinutes || 120, { type: 'number', min: 30, max: 720 }),
