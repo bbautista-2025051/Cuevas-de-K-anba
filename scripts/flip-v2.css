@@ -1,0 +1,50 @@
+
+/* ============================================================
+   Cafetería · flipbook "carta de lujo" v2
+   ============================================================ */
+.book-surface { overflow: hidden; }
+.flip-page[hidden] { display: none !important; }
+
+/* Mantel de la mesa (textura de hilo) */
+.cafe-menu-section {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(900px 520px at 15% -10%, rgba(184, 217, 140, .16), transparent 60%),
+    radial-gradient(900px 520px at 110% 110%, rgba(232, 181, 106, .14), transparent 60%),
+    repeating-linear-gradient(45deg, rgba(14,36,32,.028) 0 2px, transparent 2px 14px),
+    repeating-linear-gradient(-45deg, rgba(14,36,32,.028) 0 2px, transparent 2px 14px);
+}
+
+/* Página: tipografía generosa (sin centrado vertical: las páginas largas deben poder desplazarse) */
+.flip-page {
+  padding: clamp(16px, 3.4vw, 26px) clamp(12px, 3vw, 22px) 46px calc(var(--spine) + 8px);
+  justify-content: flex-start;
+  gap: 0;
+}
+.page-head { margin-bottom: 16px; padding-bottom: 0; }
+.page-head h3 { font-size: clamp(1.9rem, 4.6vw, 2.35rem); letter-spacing: .01em; }
+.page-kicker { font-size: 10px; }
+
+.flip-page .item-name { font-size: 1.02rem; }
+.flip-page .item-price { font-size: 1.05rem; }
+.flip-page .menu-list { gap: 13px; }
+.flip-page .menu-list li { gap: 12px; }
+.flip-page .menu-group { margin-bottom: 1.5rem; }
+.flip-page .menu-group h4 { font-size: 1.14rem; }
+.flip-page .menu-group ul { gap: 11px; }
+
+/* Pie ornamental inferior (static, al final del contenido de la página) */
+.page-foot {
+  display: flex; justify-content: center; margin-top: 2px; padding-top: 12px;
+  border-top: 1px solid rgba(184, 217, 140, .18); pointer-events: none;
+}
+.page-foot span {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-size: 9px; letter-spacing: .34em; text-transform: uppercase; font-weight: 800;
+  color: rgba(246, 241, 230, .38);
+}
+.page-foot span::before,
+.page-foot span::after {
+  content: ""; width: 40px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184, 217, 140, .45), transparent);
+}

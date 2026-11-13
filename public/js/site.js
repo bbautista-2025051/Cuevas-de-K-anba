@@ -1262,7 +1262,7 @@
   /* Cafetería · flipbook del menú                                        */
   /* ------------------------------------------------------------------ */
 
-  const FB_NAMES = ['Desayunos', 'Almuerzos', 'Cenas', 'Postres', 'Bebidas'];
+  const FB_NAMES = ['Desayunos', 'Almuerzos', 'Cenas', 'Postres', 'Café', 'Frías & cosas de la casa', 'Alcohólicas'];
 
   function fbClamp(value, min, max) {
     return Math.min(max, Math.max(min, value));
@@ -1271,7 +1271,7 @@
   function fbEndpaper() {
     const back = document.createElement('div');
     back.className = 'flip-back';
-    back.innerHTML = '<div class="flip-back-inner"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 35V20a15 15 0 0 1 30 0v15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 31c-4.7-3.6-7-6.8-7-10.4a7 7 0 0 1 14 0c0 3.6-2.3 6.8-7 10.4Z" fill="currentColor"/></svg><strong>LA CANDELA</strong><span>café de la cueva · est. 2019</span></div>';
+    back.innerHTML = '<div class="flip-back-inner"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 35V20a15 15 0 0 1 30 0v15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 31c-4.7-3.6-7-6.8-7-10.4a7 7 0 0 1 14 0c0 3.6-2.3 6.8-7 10.4Z" fill="currentColor"/></svg><strong>EL SENDERO</strong><span>café de la cueva · est. 2019</span></div>';
     return back;
   }
 

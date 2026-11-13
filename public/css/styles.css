@@ -1228,7 +1228,7 @@ svg { display: block; }
 .gallery-item:nth-child(6) { animation-delay: .3s; }
 
 /* ============================================================
-   CafeterÃ­a La Candela
+   El Sendero — cafetería de la cueva
    ============================================================ */
 .cafe-hero {
   position: relative; overflow: hidden; color: var(--cream);
@@ -1352,7 +1352,7 @@ svg { display: block; }
 .flip-page {
   position: absolute; inset: 0;
   display: flex; flex-direction: column; gap: 0;
-  overflow: auto; overflow-x: hidden;
+  overflow: visible;
   background-color: var(--paper);
   background-image: repeating-linear-gradient(180deg, transparent 0 30px, rgba(14,36,32,.05) 30px 31px);
   border-radius: 10px 24px 24px 10px;
@@ -1394,10 +1394,8 @@ svg { display: block; }
 }
 .flip-leaf .flip-front {
   box-shadow: -18px 14px 38px rgba(0, 0, 0, .4);
-  overflow: auto; overflow-x: hidden;
-  scrollbar-width: none;
+  overflow: visible;
 }
-.flip-leaf .flip-front::-webkit-scrollbar { display: none; }
 .flip-leaf.flipping { transition: transform .55s cubic-bezier(.42, .12, .28, 1); }
 .flip-leaf::after {
   content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
@@ -1500,4 +1498,121 @@ svg { display: block; }
 @media (max-width: 680px) {
   .flipbook { max-width: none; }
   .book-surface { height: 62vh; }
+}
+
+/* ============================================================
+   Cafetería · flipbook "pizarra nocturna"
+   ============================================================ */
+.flip-page {
+  color: var(--cream);
+  background-color: #12241f;
+  background-image:
+    radial-gradient(900px 480px at 50% -12%, rgba(232, 181, 106, .22), transparent 62%),
+    radial-gradient(620px 480px at 105% 112%, rgba(118, 201, 187, .1), transparent 58%),
+    linear-gradient(165deg, #1a3129 0%, #12241f 46%, #0b1a16 100%);
+  border: 1px solid rgba(184, 217, 140, .3);
+  box-shadow: inset 0 0 90px rgba(0, 0, 0, .5), 0 26px 54px rgba(0, 0, 0, .45);
+  scrollbar-color: rgba(184, 217, 140, .45) transparent;
+}
+.flip-page::before {
+  background: linear-gradient(90deg, rgba(8, 19, 16, .72), rgba(8, 19, 16, .25) 60%, transparent);
+}
+
+/* Encabezado de cada página */
+.page-head { border-bottom: 0; padding-bottom: 0; margin-bottom: 14px; }
+.page-head h3 { color: var(--cream); font-size: 1.7rem; font-style: italic; letter-spacing: .02em; }
+.page-kicker { color: var(--lime); font-size: 9.5px; }
+.page-head::after {
+  content: ""; display: block; height: 2px; margin-top: 10px;
+  background: linear-gradient(90deg, var(--lime), rgba(184, 217, 140, .35) 55%, transparent);
+}
+
+/* Partición con rombos */
+.menu-group h4 { border-bottom: 0; padding-bottom: 0; margin: 18px 0 10px; color: var(--amber-soft); font-size: 1.08rem; }
+.menu-group h4 span { color: rgba(246, 241, 230, .42); }
+.menu-group h4::after {
+  content: "✦"; color: var(--amber); font-size: .72em; opacity: .85; letter-spacing: .5em; margin-left: 10px;
+}
+
+/* Filas del menú */
+.flip-page .item-name { color: var(--cream); }
+.flip-page .item-name small { color: rgba(246, 241, 230, .55); }
+.flip-page .item-price { color: var(--amber); }
+.flip-page .leader { border-bottom: 2px dotted rgba(184, 217, 140, .4); transform: translateY(-5px); }
+
+/* Número de página y pie */
+.page-number { color: rgba(246, 241, 230, .4); }
+.page-number::before, .page-number::after { content: "◆"; color: rgba(184, 217, 140, .45); margin: 0 8px; font-size: .7em; vertical-align: .12em; }
+
+/* Reverso de la hoja (papel volcado) */
+.flip-back {
+  background-color: #12241f;
+  background-image: radial-gradient(700px 500px at 50% -12%, rgba(232, 181, 106, .2), transparent 62%);
+  border: 1px solid rgba(184, 217, 140, .3);
+}
+.flip-back-inner { color: var(--lime); }
+.flip-back-inner strong { color: var(--cream); }
+.flip-back-inner span { color: rgba(246, 241, 230, .5); }
+
+/* Canto de páginas apiladas en el borde */
+.book-surface::after {
+  background: repeating-linear-gradient(90deg, #d8cfb8 0 2px, #b7ac90 2px 4px);
+}
+
+/* Controles al tono */
+.book-arrow { border-color: rgba(184, 217, 140, .28); background: #12241f; color: var(--lime); }
+.book-arrow:hover:not(:disabled) { background: #17301f; color: var(--lime-soft); }
+.book-dot { border-color: rgba(184, 217, 140, .4); }
+.book-dot.is-active { background: var(--lime); border-color: var(--lime); }
+.book-name { color: var(--moss); }
+.book-count b { color: var(--deep); }
+
+/* ============================================================
+   Cafetería · flipbook "carta de lujo" v2
+   ============================================================ */
+.book-surface { overflow: hidden; }
+.flip-page[hidden] { display: none !important; }
+
+/* Mantel de la mesa (textura de hilo) */
+.cafe-menu-section {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(900px 520px at 15% -10%, rgba(184, 217, 140, .16), transparent 60%),
+    radial-gradient(900px 520px at 110% 110%, rgba(232, 181, 106, .14), transparent 60%),
+    repeating-linear-gradient(45deg, rgba(14,36,32,.028) 0 2px, transparent 2px 14px),
+    repeating-linear-gradient(-45deg, rgba(14,36,32,.028) 0 2px, transparent 2px 14px);
+}
+
+/* Página: tipografía generosa (sin centrado vertical: las páginas largas deben poder desplazarse) */
+.flip-page {
+  padding: clamp(16px, 3.4vw, 26px) clamp(12px, 3vw, 22px) 46px calc(var(--spine) + 8px);
+  justify-content: flex-start;
+  gap: 0;
+}
+.page-head { margin-bottom: 16px; padding-bottom: 0; }
+.page-head h3 { font-size: clamp(1.9rem, 4.6vw, 2.35rem); letter-spacing: .01em; }
+.page-kicker { font-size: 10px; }
+
+.flip-page .item-name { font-size: 1.02rem; }
+.flip-page .item-price { font-size: 1.05rem; }
+.flip-page .menu-list { gap: 13px; }
+.flip-page .menu-list li { gap: 12px; }
+.flip-page .menu-group { margin-bottom: 1.5rem; }
+.flip-page .menu-group h4 { font-size: 1.14rem; }
+.flip-page .menu-group ul { gap: 11px; }
+
+/* Pie ornamental inferior (static, al final del contenido de la página) */
+.page-foot {
+  display: flex; justify-content: center; margin-top: 2px; padding-top: 12px;
+  border-top: 1px solid rgba(184, 217, 140, .18); pointer-events: none;
+}
+.page-foot span {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-size: 9px; letter-spacing: .34em; text-transform: uppercase; font-weight: 800;
+  color: rgba(246, 241, 230, .38);
+}
+.page-foot span::before,
+.page-foot span::after {
+  content: ""; width: 40px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184, 217, 140, .45), transparent);
 }
