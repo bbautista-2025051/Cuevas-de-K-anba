@@ -8,7 +8,12 @@ const money = (n, currency = 'GTQ') =>
 
 function baseUrl() {
   const d = getDb();
-  return (d.settings.business.siteUrl || process.env.PUBLIC_URL || 'http://localhost:3000').replace(/\/$/, '');
+  return (
+    d.settings.business.siteUrl ||
+    process.env.PUBLIC_URL ||
+    process.env.RENDER_EXTERNAL_URL ||
+    'http://localhost:3000'
+  ).replace(/\/$/, '');
 }
 
 function esc(value = '') {

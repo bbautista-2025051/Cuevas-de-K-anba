@@ -20,6 +20,7 @@ Sitio web demostrativo y sistema de reservas para las Cuevas de K’anba, en Lan
 - [Pagos](#pagos)
 - [Pruebas y QA](#pruebas-y-qa)
 - [Reiniciar los datos](#reiniciar-los-datos)
+- [Despliegue en Render](#despliegue-en-render)
 - [Notas para producción](#notas-para-producción)
 
 ---
@@ -146,11 +147,14 @@ Los correos se guardan como archivos `.eml` en `data/outbox/` y también se list
 
 | Variable | Predeterminado | Descripción |
 | --- | --- | --- |
-| `PORT` | `3000` | Puerto HTTP. |
+| `PORT` | `3000` | Puerto HTTP. Render lo asigna automáticamente. |
 | `HOST` | `0.0.0.0` | Interfaz de escucha. |
 | `ADMIN_PASSWORD` | `kanba2026` | Contraseña usada solo al crear la base por primera vez. |
 | `FORCE_ADMIN_PASSWORD` | — | Con `1`, vuelve a aplicar `ADMIN_PASSWORD` al arrancar. |
 | `PUBLIC_URL` | `http://localhost:3000` | URL base usada en enlaces de correos. También se puede configurar en el panel (`business.siteUrl`). |
+| `RENDER_EXTERNAL_URL` | — | Render la define sola; se usa como `PUBLIC_URL` si esta no existe. |
+| `DATA_DIR` | `./data` | Carpeta de `db.json` y `outbox/`. En Render apunta al disco: `/var/data`. |
+| `UPLOADS_DIR` | `./public/uploads` | Carpeta de imágenes subidas desde el panel. En Render: `/var/data/uploads`. |
 
 Ejemplo en PowerShell:
 
@@ -168,6 +172,7 @@ node server/index.js
 .
 ├── package.json
 ├── README.md
+├── render.yaml               # Blueprint de Render (web service + disco persistente)
 ├── data/                     # creado en tiempo de ejecución
 │   ├── db.json               # contenido, tours, reservas, ajustes, sesiones
 │   └── outbox/               # correos generados en formato .eml
@@ -337,6 +342,71 @@ node server/index.js
 ```
 
 Se volverán a crear el contenido, los tours y las cinco reservas de ejemplo. Las imágenes subidas a `public/uploads/` no se eliminan automáticamente; puedes borrarlas si ya no están referenciadas.
+
+---
+
+## Despliegue en Render
+
+El proyecto ya incluye `render.yaml` (Blueprint de Render). Un solo **Web Service** sirve el sitio público, el panel y la API; no hace falta un servicio aparte para el frontend.
+
+### Arquitectura en Render
+
+```text
+Web Service (Node 22, npm start)
+├── /opt/render/project/src/public   → sitio, panel y assets (desde el repo)
+└── Disco persistente montado en /var/data
+    ├── db.json      → "base de datos" (reservas, tours, contenido, sesiones)
+    ├── outbox/      → correos .eml
+    └── uploads/     → imágenes subidas desde el panel
+```
+
+`DATA_DIR=/var/data` y `UPLOADS_DIR=/var/data/uploads` conectan la app al disco. Si el disco no existiera, la app seguiría funcionando pero perdería los datos en cada reinicio.
+
+### Pasos
+
+1. **Sube los cambios a GitHub** (rama `main`). Render despliega desde el repositorio `bbautista-2025051/Cuevas-de-K-anba`.
+2. En el panel de Render entra a **New + → Blueprint**.
+3. Selecciona el repositorio. Render detecta `render.yaml` y muestra el servicio `cuevas-de-kanba` con su disco de 1 GB.
+4. Pulsa **Apply**. Cuando lo pida, escribe el valor de `ADMIN_PASSWORD` (la contraseña del panel en producción). No queda guardada en el repositorio.
+5. Espera el primer deploy. El chequeo de salud es `GET /api/health`.
+6. Abre la URL del servicio:
+   - Sitio: `https://<servicio>.onrender.com`
+   - Panel: `https://<servicio>.onrender.com/admin.html`
+   - El primer arranque crea `db.json` con el contenido, los tours y las reservas de demostración.
+7. En **Panel → Configuración → Pagos / SMTP** reemplaza las llaves sandbox y configura el correo real.
+
+### Costo y límites
+
+- El disco persistente **no está disponible en el plan gratuito**. El blueprint usa `plan: starter` (unos US$7/mes) + disco de 1 GB (unos US$0.25/mes).
+- Usa **una sola instancia**. La base es un archivo JSON y el limitador de login vive en memoria: varias instancias se pisarían.
+- Render no respalda el disco automáticamente. Descarga `db.json` de vez en cuando desde la consola del servicio o guarda una copia externa.
+- Si más adelante necesitas varias instancias, usuarios concurrentes o reportes pesados, conviene migrar `server/store.js` a PostgreSQL (Render ofrece Postgres gestionado).
+
+### Operaciones útiles
+
+```bash
+# Ver la base dentro del servicio (Render → Shell)
+ls -la /var/data
+cat /var/data/db.json | head
+
+# Reiniciar los datos en producción (borra reservas y vuelve a sembrar)
+rm /var/data/db.json
+# luego reinicia el servicio desde el panel de Render
+```
+
+Para cambiar solo la contraseña sin borrar datos: **Panel → Configuración → Actualizar contraseña**, o define `FORCE_ADMIN_PASSWORD=1` junto con `ADMIN_PASSWORD` y reinicia una vez (después quita `FORCE_ADMIN_PASSWORD` para que el panel no se sobrescriba en cada arranque).
+
+### Probar el despliegue en local
+
+Para simular el disco de Render antes de subir:
+
+```powershell
+$env:DATA_DIR = "$env:TEMP\kanba-data"
+$env:UPLOADS_DIR = "$env:TEMP\kanba-data\uploads"
+$env:ADMIN_PASSWORD = "una-clave-segura"
+$env:PORT = "8080"
+node server/index.js
+```
 
 ---
 

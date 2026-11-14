@@ -19,7 +19,8 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const PUBLIC = path.join(ROOT, 'public');
-const UPLOADS = path.join(PUBLIC, 'uploads');
+// Las imágenes subidas desde el panel pueden vivir fuera del repo (disco persistente).
+const UPLOADS = path.resolve(process.env.UPLOADS_DIR || path.join(PUBLIC, 'uploads'));
 const PORT = Number(process.env.PORT || 3000);
 const HOST = process.env.HOST || '0.0.0.0';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'kanba2026';
@@ -983,6 +984,18 @@ async function handleApi(req, res, url) {
 /* Static                                                             */
 /* ------------------------------------------------------------------ */
 
+function resolveStaticPath(pathname) {
+  // /uploads/* se sirve desde UPLOADS_DIR; el resto desde public/.
+  const isUpload = pathname === '/uploads' || pathname.startsWith('/uploads/');
+  const baseDir = isUpload ? UPLOADS : PUBLIC;
+  const relPath = isUpload ? pathname.slice('/uploads'.length) || '/' : pathname;
+  const filePath = path.resolve(baseDir, '.' + relPath);
+  if (!filePath.startsWith(baseDir + path.sep) && filePath !== baseDir) {
+    return null;
+  }
+  return filePath;
+}
+
 function serveStatic(req, res, url) {
   let pathname;
   try {
@@ -1006,8 +1019,8 @@ function serveStatic(req, res, url) {
   if (pathname === '/mi-reserva') pathname = '/mi-reserva.html';
   if (pathname === '/favicon.ico') pathname = '/assets/favicon.svg';
 
-  const filePath = path.resolve(PUBLIC, '.' + pathname);
-  if (!filePath.startsWith(PUBLIC + path.sep) && filePath !== PUBLIC) {
+  const filePath = resolveStaticPath(pathname);
+  if (!filePath) {
     return sendError(res, 403, 'Acceso denegado.');
   }
   if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
@@ -1082,7 +1095,11 @@ server.listen(PORT, HOST, () => {
   console.log(`\n  K’anba · Cuevas Vivas`);
   console.log(`  http://localhost:${PORT}`);
   console.log(`  Panel: http://localhost:${PORT}/admin.html`);
-  console.log(`  Contraseña demo: ${ADMIN_PASSWORD}\n`);
+  if (process.env.NODE_ENV === 'production') {
+    console.log('');
+  } else {
+    console.log(`  Contraseña demo: ${ADMIN_PASSWORD}\n`);
+  }
 });
 
 export { server };

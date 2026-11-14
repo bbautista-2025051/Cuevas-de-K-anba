@@ -1,0 +1,33 @@
+# Blueprint de Render para K'anba · Cuevas Vivas
+# Documentación: https://render.com/docs/blueprint-spec
+#
+# Un único Web Service sirve el sitio público, el panel administrativo y la API.
+# La base de datos (data/db.json) y las imágenes subidas viven en un disco persistente.
+services:
+  - type: web
+    name: cuevas-de-kanba
+    runtime: node
+    plan: starter
+    region: oregon
+    branch: main
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    disk:
+      name: kanba-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "22"
+      # Base de datos JSON y bandeja de correos (.eml) en el disco persistente.
+      - key: DATA_DIR
+        value: /var/data
+      # Imágenes subidas desde el panel, también en el disco persistente.
+      - key: UPLOADS_DIR
+        value: /var/data/uploads
+      # Render pedirá este valor al crear el servicio (no se guarda en el repositorio).
+      - key: ADMIN_PASSWORD
+        sync: false

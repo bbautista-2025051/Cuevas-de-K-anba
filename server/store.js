@@ -6,7 +6,8 @@ import { hashPassword, randomToken } from './security.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const ROOT = path.resolve(__dirname, '..');
-export const DATA_DIR = path.join(ROOT, 'data');
+// En producción (por ejemplo Render) DATA_DIR apunta al disco persistente.
+export const DATA_DIR = path.resolve(process.env.DATA_DIR || path.join(ROOT, 'data'));
 const DB_FILE = path.join(DATA_DIR, 'db.json');
 const OUTBOX_DIR = path.join(DATA_DIR, 'outbox');
 
