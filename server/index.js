@@ -5,7 +5,8 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 import {
-  loadDb, getDb, saveDb, publicSite, publicTour, buildAvailability, occupancyFor,
+  initStore, flushDb, usesDatabase, saveUploadToDb, readUploadFromDb,
+  getDb, saveDb, publicSite, publicTour, buildAvailability, occupancyFor,
   createReservation, getReservation, findTour, closeExpiredHolds, seatsTaken,
   validateCustomer, dateToEpoch, formatDateLong, isoAddDays, todayISO, dayOfWeek,
   AppError, nextReceiptNumber, TZ
@@ -29,7 +30,7 @@ const SESSION_MS = 8 * 3600 * 1000;
 const MAX_BODY = 12 * 1024 * 1024;
 
 fs.mkdirSync(UPLOADS, { recursive: true });
-const db = loadDb();
+const db = await initStore();
 
 // Permite definir la contraseña inicial por variable de entorno en el primer arranque.
 if (process.env.ADMIN_PASSWORD && process.env.FORCE_ADMIN_PASSWORD === '1') {
@@ -973,7 +974,12 @@ async function handleApi(req, res, url) {
     if (buffer.length > 8 * 1024 * 1024) throw new AppError('La imagen supera los 8 MB.', 413, 'too_large');
     if (buffer.length < 100) throw new AppError('La imagen está vacía.', 422, 'validation');
     const filename = `${Date.now().toString(36)}-${randomToken(5).replace(/[^a-zA-Z0-9]/g, '').slice(0, 8)}.${ext}`;
-    fs.writeFileSync(path.join(UPLOADS, filename), buffer);
+    if (usesDatabase()) {
+      const mime = ext === 'jpg' ? 'image/jpeg' : `image/${ext}`;
+      await saveUploadToDb(filename, mime, buffer);
+    } else {
+      fs.writeFileSync(path.join(UPLOADS, filename), buffer);
+    }
     return sendJson(res, 201, { ok: true, url: `/uploads/${filename}`, size: buffer.length });
   }
 
@@ -996,7 +1002,7 @@ function resolveStaticPath(pathname) {
   return filePath;
 }
 
-function serveStatic(req, res, url) {
+async function serveStatic(req, res, url) {
   let pathname;
   try {
     pathname = decodeURIComponent(url.pathname);
@@ -1018,6 +1024,27 @@ function serveStatic(req, res, url) {
   if (pathname === '/comprobante') pathname = '/comprobante.html';
   if (pathname === '/mi-reserva') pathname = '/mi-reserva.html';
   if (pathname === '/favicon.ico') pathname = '/assets/favicon.svg';
+
+  // Imágenes subidas: en modo PostgreSQL viven en la tabla kanba_media.
+  if (usesDatabase() && pathname.startsWith('/uploads/')) {
+    const name = pathname.slice('/uploads/'.length);
+    if (!name || name !== path.basename(name)) {
+      return sendError(res, 404, 'No encontrado.');
+    }
+    const file = await readUploadFromDb(name);
+    if (!file) {
+      securityHeaders(res);
+      res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+      return res.end('No encontrado');
+    }
+    securityHeaders(res);
+    res.writeHead(200, {
+      'Content-Type': file.mime || MIME[path.extname(name).toLowerCase()] || 'application/octet-stream',
+      'Content-Length': file.data.length,
+      'Cache-Control': 'public, max-age=604800'
+    });
+    return res.end(file.data);
+  }
 
   const filePath = resolveStaticPath(pathname);
   if (!filePath) {
@@ -1063,7 +1090,7 @@ const server = http.createServer(async (req, res) => {
     if (req.method !== 'GET' && req.method !== 'HEAD') {
       return sendError(res, 405, 'Método no permitido.');
     }
-    serveStatic(req, res, url);
+    await serveStatic(req, res, url);
   } catch (err) {
     if (res.headersSent) {
       try { res.end(); } catch { /* noop */ }
@@ -1091,10 +1118,29 @@ const expiryTimer = setInterval(() => {
 }, 15000);
 expiryTimer.unref?.();
 
+// Render envía SIGTERM al reiniciar/redeployar: guarda lo pendiente antes de salir.
+let shuttingDown = false;
+async function shutdown(signal) {
+  if (shuttingDown) return;
+  shuttingDown = true;
+  console.log(`[server] ${signal}: cerrando y guardando datos…`);
+  clearInterval(expiryTimer);
+  server.close();
+  try {
+    await flushDb();
+  } catch (err) {
+    console.error('[server] no se pudo guardar antes de salir:', err.message);
+  }
+  process.exit(0);
+}
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT', () => shutdown('SIGINT'));
+
 server.listen(PORT, HOST, () => {
   console.log(`\n  K’anba · Cuevas Vivas`);
   console.log(`  http://localhost:${PORT}`);
   console.log(`  Panel: http://localhost:${PORT}/admin.html`);
+  console.log(`  Almacenamiento: ${usesDatabase() ? 'PostgreSQL' : 'archivo local data/db.json'}`);
   if (process.env.NODE_ENV === 'production') {
     console.log('');
   } else {

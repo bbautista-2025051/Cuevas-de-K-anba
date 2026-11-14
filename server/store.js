@@ -582,7 +582,7 @@ function seedDatabase() {
   const content = defaultContent();
   const tours = defaultTours();
   const settings = defaultSettings();
-  const admin = hashPassword('kanba2026');
+  const admin = hashPassword(process.env.ADMIN_PASSWORD || 'kanba2026');
 
   const makeCode = (n) => `KAN-${new Date().getFullYear()}-${String(n).padStart(5, '0')}`;
   const r1 = {
@@ -788,6 +788,100 @@ function seedDatabase() {
 /* ------------------------------------------------------------------ */
 
 let db = null;
+let pool = null;
+let usingPostgres = false;
+let pendingSnapshot = null;
+let flushPromise = null;
+let retryTimer = null;
+
+const STORE_SCHEMA = `
+  CREATE TABLE IF NOT EXISTS kanba_store (
+    id smallint PRIMARY KEY,
+    doc jsonb NOT NULL,
+    updated_at timestamptz NOT NULL DEFAULT now(),
+    CONSTRAINT kanba_store_single_row CHECK (id = 1)
+  );
+  CREATE TABLE IF NOT EXISTS kanba_media (
+    name text PRIMARY KEY,
+    mime text NOT NULL,
+    size integer NOT NULL,
+    data bytea NOT NULL,
+    created_at timestamptz NOT NULL DEFAULT now()
+  );
+`;
+
+async function writeSnapshot(snapshot) {
+  await pool.query(
+    `INSERT INTO kanba_store (id, doc, updated_at) VALUES (1, $1::jsonb, now())
+     ON CONFLICT (id) DO UPDATE SET doc = EXCLUDED.doc, updated_at = now()`,
+    [snapshot]
+  );
+}
+
+function scheduleFlush() {
+  if (flushPromise) return flushPromise;
+  flushPromise = (async () => {
+    let current = null;
+    try {
+      while (pendingSnapshot) {
+        current = pendingSnapshot;
+        pendingSnapshot = null;
+        await writeSnapshot(current);
+        current = null;
+      }
+    } catch (err) {
+      console.error('[store] error al guardar en Postgres:', err.message);
+      if (current && !pendingSnapshot) pendingSnapshot = current;
+      clearTimeout(retryTimer);
+      retryTimer = setTimeout(() => {
+        retryTimer = null;
+        scheduleFlush();
+      }, 2000);
+      retryTimer.unref?.();
+    } finally {
+      flushPromise = null;
+    }
+  })();
+  return flushPromise;
+}
+
+/**
+ * Inicializa el almacenamiento. Con DATABASE_URL usa PostgreSQL (Neon, Supabase,
+ * Render Postgres, etc.); sin ella usa data/db.json como hasta ahora.
+ */
+export async function initStore() {
+  const url = process.env.DATABASE_URL;
+  if (!url) return loadDb();
+
+  const { default: pg } = await import('pg');
+  const ssl = process.env.PGSSLMODE === 'disable' ? false : { rejectUnauthorized: false };
+  pool = new pg.Pool({
+    connectionString: url,
+    ssl,
+    max: 4,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 15000
+  });
+  usingPostgres = true;
+
+  await pool.query(STORE_SCHEMA);
+
+  const { rows } = await pool.query('SELECT doc FROM kanba_store WHERE id = 1');
+  if (rows.length) {
+    db = rows[0].doc;
+    db.sessions = db.sessions || {};
+    return db;
+  }
+
+  db = seedDatabase();
+  db.sessions = db.sessions || {};
+  await writeSnapshot(JSON.stringify(db));
+  return db;
+}
+
+export function usesDatabase() {
+  return usingPostgres;
+}
 
 export function loadDb() {
   fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -815,10 +909,46 @@ export function getDb() {
 export function saveDb() {
   if (!db) return;
   db.meta.updatedAt = new Date().toISOString();
+
+  if (usingPostgres) {
+    // Guardado por lotes: varias mutaciones seguidas producen una sola escritura.
+    pendingSnapshot = JSON.stringify(db);
+    scheduleFlush();
+    return;
+  }
+
   const tmp = `${DB_FILE}.tmp`;
   fs.writeFileSync(tmp, JSON.stringify(db, null, 2));
   fs.renameSync(tmp, DB_FILE);
 }
+
+/** Fuerza la escritura pendiente (se usa al apagar el servicio). */
+export async function flushDb() {
+  if (!usingPostgres) return;
+  // Espera cualquier escritura en curso y luego vacía la última instantánea.
+  if (flushPromise) await flushPromise.catch(() => {});
+  if (pendingSnapshot) await scheduleFlush();
+}
+
+/* ------------------------------------------------------------------ */
+/* Uploaded media                                                     */
+/* ------------------------------------------------------------------ */
+
+export async function saveUploadToDb(name, mime, buffer) {
+  await pool.query(
+    `INSERT INTO kanba_media (name, mime, size, data) VALUES ($1, $2, $3, $4)
+     ON CONFLICT (name) DO UPDATE SET mime = EXCLUDED.mime, size = EXCLUDED.size, data = EXCLUDED.data`,
+    [name, mime, buffer.length, buffer]
+  );
+}
+
+export async function readUploadFromDb(name) {
+  if (!pool) return null;
+  const { rows } = await pool.query('SELECT mime, data FROM kanba_media WHERE name = $1', [name]);
+  if (!rows.length) return null;
+  return { mime: rows[0].mime, data: rows[0].data };
+}
+
 
 export function ensureOutbox() {
   fs.mkdirSync(OUTBOX_DIR, { recursive: true });

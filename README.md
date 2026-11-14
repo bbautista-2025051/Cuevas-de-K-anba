@@ -20,7 +20,7 @@ Sitio web demostrativo y sistema de reservas para las Cuevas de K’anba, en Lan
 - [Pagos](#pagos)
 - [Pruebas y QA](#pruebas-y-qa)
 - [Reiniciar los datos](#reiniciar-los-datos)
-- [Despliegue en Render](#despliegue-en-render)
+- [Despliegue en Render (gratis)](#despliegue-en-render-gratis)
 - [Notas para producción](#notas-para-producción)
 
 ---
@@ -60,7 +60,7 @@ Sitio web demostrativo y sistema de reservas para las Cuevas de K’anba, en Lan
 ## Requisitos y arranque
 
 - **Node.js 20 o superior** (probado con Node 24).
-- **Sin dependencias externas**: no requiere `npm install`. El servidor usa solo módulos nativos de Node.
+- **Modo local sin dependencias**: con el archivo `data/db.json` no hace falta `npm install`. Para usar PostgreSQL (recomendado en la nube) ejecuta `npm install`; solo se instala `pg`.
 - Mapas y medios se sirven localmente; solo los videos incrustados y las fuentes usan recursos externos.
 
 ```bash
@@ -139,7 +139,7 @@ El archivo `data/db.json` se crea al primer arranque e incluye:
 - Cinco reservas de ejemplo que cubren los estados `confirmed`, `pending_payment`, `cancelled` y `expired`, incluido un reembolso procesado.
 - Cinco correos de ejemplo en la bandeja de salida.
 
-Los correos se guardan como archivos `.eml` en `data/outbox/` y también se listan en **Panel → Correos**.
+Los correos se guardan como archivos `.eml` en `data/outbox/` y también se listan en **Panel → Correos**. En Render Free los `.eml` son efímeros; la copia que importa vive en la base de datos y se ve en el panel.
 
 ---
 
@@ -153,8 +153,10 @@ Los correos se guardan como archivos `.eml` en `data/outbox/` y también se list
 | `FORCE_ADMIN_PASSWORD` | — | Con `1`, vuelve a aplicar `ADMIN_PASSWORD` al arrancar. |
 | `PUBLIC_URL` | `http://localhost:3000` | URL base usada en enlaces de correos. También se puede configurar en el panel (`business.siteUrl`). |
 | `RENDER_EXTERNAL_URL` | — | Render la define sola; se usa como `PUBLIC_URL` si esta no existe. |
-| `DATA_DIR` | `./data` | Carpeta de `db.json` y `outbox/`. En Render apunta al disco: `/var/data`. |
-| `UPLOADS_DIR` | `./public/uploads` | Carpeta de imágenes subidas desde el panel. En Render: `/var/data/uploads`. |
+| `DATABASE_URL` | — | Cadena de conexión PostgreSQL (Neon, Supabase, Render Postgres). Si existe, la app guarda todo en Postgres; es lo que permite persistencia en Render Free. |
+| `PGSSLMODE` | — | Con `disable` desactiva SSL (solo para PostgreSQL local sin TLS). |
+| `DATA_DIR` | `./data` | Modo archivo: carpeta de `db.json` y `outbox/`. También sirve para montar un disco de pago. |
+| `UPLOADS_DIR` | `./public/uploads` | Modo archivo: carpeta de imágenes subidas desde el panel. |
 
 Ejemplo en PowerShell:
 
@@ -172,8 +174,8 @@ node server/index.js
 .
 ├── package.json
 ├── README.md
-├── render.yaml               # Blueprint de Render (web service + disco persistente)
-├── data/                     # creado en tiempo de ejecución
+├── render.yaml               # Blueprint de Render (plan Free + PostgreSQL externo)
+├── data/                     # modo archivo local (se ignora si hay DATABASE_URL)
 │   ├── db.json               # contenido, tours, reservas, ajustes, sesiones
 │   └── outbox/               # correos generados en formato .eml
 ├── public/
@@ -345,68 +347,83 @@ Se volverán a crear el contenido, los tours y las cinco reservas de ejemplo. La
 
 ---
 
-## Despliegue en Render
+## Despliegue en Render (gratis)
 
-El proyecto ya incluye `render.yaml` (Blueprint de Render). Un solo **Web Service** sirve el sitio público, el panel y la API; no hace falta un servicio aparte para el frontend.
+El plan **Free** de Render no permite discos persistentes y su filesystem es efímero. Por eso la app usa una **base PostgreSQL externa gratuita** (Neon, Supabase, etc.) mediante `DATABASE_URL`. El sitio, el panel y la API corren en un solo Web Service Free.
 
-### Arquitectura en Render
+### Arquitectura
 
 ```text
-Web Service (Node 22, npm start)
-├── /opt/render/project/src/public   → sitio, panel y assets (desde el repo)
-└── Disco persistente montado en /var/data
-    ├── db.json      → "base de datos" (reservas, tours, contenido, sesiones)
-    ├── outbox/      → correos .eml
-    └── uploads/     → imágenes subidas desde el panel
+Render Web Service (Free · Node 22 · sin disco)
+├── public/            → sitio, panel y assets (desde el repo)
+└── PostgreSQL gratuito (Neon / Supabase)
+    ├── kanba_store    → documento completo: contenido, tours, reservas, sesiones
+    └── kanba_media    → imágenes subidas desde el panel
 ```
 
-`DATA_DIR=/var/data` y `UPLOADS_DIR=/var/data/uploads` conectan la app al disco. Si el disco no existiera, la app seguiría funcionando pero perdería los datos en cada reinicio.
+Sin `DATABASE_URL` la app sigue usando `data/db.json`; en Render Free eso significa perder los datos en cada reinicio.
 
-### Pasos
+### 1. Crear la base gratuita en Neon
 
-1. **Sube los cambios a GitHub** (rama `main`). Render despliega desde el repositorio `bbautista-2025051/Cuevas-de-K-anba`.
-2. En el panel de Render entra a **New + → Blueprint**.
-3. Selecciona el repositorio. Render detecta `render.yaml` y muestra el servicio `cuevas-de-kanba` con su disco de 1 GB.
-4. Pulsa **Apply**. Cuando lo pida, escribe el valor de `ADMIN_PASSWORD` (la contraseña del panel en producción). No queda guardada en el repositorio.
-5. Espera el primer deploy. El chequeo de salud es `GET /api/health`.
-6. Abre la URL del servicio:
-   - Sitio: `https://<servicio>.onrender.com`
-   - Panel: `https://<servicio>.onrender.com/admin.html`
-   - El primer arranque crea `db.json` con el contenido, los tours y las reservas de demostración.
-7. En **Panel → Configuración → Pagos / SMTP** reemplaza las llaves sandbox y configura el correo real.
+1. Entra a <https://neon.com> y crea la cuenta con GitHub o Google (no pide tarjeta).
+2. **Create project**: nombre `kanba` y región **US West (Oregon)** para que quede cerca del servicio de Render.
+3. En el panel del proyecto copia la **Connection string**. Se ve así:
 
-### Costo y límites
+   ```text
+   postgresql://usuario:clave@ep-xxxx.us-west-2.aws.neon.tech/neondb?sslmode=require
+   ```
 
-- El disco persistente **no está disponible en el plan gratuito**. El blueprint usa `plan: starter` (unos US$7/mes) + disco de 1 GB (unos US$0.25/mes).
-- Usa **una sola instancia**. La base es un archivo JSON y el limitador de login vive en memoria: varias instancias se pisarían.
-- Render crea **snapshots automáticos del disco cada 24 h** y los conserva 7 días. Aun así, conviene descargar una copia de `db.json` de vez en cuando desde la consola del servicio.
-- Si más adelante necesitas varias instancias, usuarios concurrentes o reportes pesados, conviene migrar `server/store.js` a PostgreSQL (Render ofrece Postgres gestionado).
+4. Guárdala en un lugar seguro. **No la subas a GitHub.**
 
-### Operaciones útiles
+Neon Free incluye 0.5 GB y suspende el compute tras unos minutos sin uso; el primer acceso puede tardar alrededor de un segundo. También funciona cualquier otro PostgreSQL gratuito (Supabase, Aiven, etc.).
 
-```bash
-# Ver la base dentro del servicio (Render → Shell)
-ls -la /var/data
-cat /var/data/db.json | head
+### 2. Desplegar el Blueprint
 
-# Reiniciar los datos en producción (borra reservas y vuelve a sembrar)
-rm /var/data/db.json
-# luego reinicia el servicio desde el panel de Render
-```
+1. Sube los cambios a GitHub (rama `main`).
+2. En Render: **New + → Blueprint**.
+3. Elige el repositorio `bbautista-2025051/Cuevas-de-K-anba`.
+4. Nombre: `cuevas-de-kanba` · Branch: `main` · Blueprint Path: `render.yaml`.
+5. En la revisión verás **1 Web Service Free** y dos variables pendientes:
+   - **DATABASE_URL**: pega la cadena de conexión de Neon.
+   - **ADMIN_PASSWORD**: escribe la contraseña del panel en producción.
+6. Pulsa **Deploy Blueprint**.
+7. El build ejecuta `npm install --omit=dev` (instala `pg`) y arranca con `npm start`. En el primer arranque se crean las tablas y se siembran el contenido y los tours.
 
-Para cambiar solo la contraseña sin borrar datos: **Panel → Configuración → Actualizar contraseña**, o define `FORCE_ADMIN_PASSWORD=1` junto con `ADMIN_PASSWORD` y reinicia una vez (después quita `FORCE_ADMIN_PASSWORD` para que el panel no se sobrescriba en cada arranque).
+### 3. Verificar
 
-### Probar el despliegue en local
+- Salud: `https://<servicio>.onrender.com/api/health`
+- Sitio: `https://<servicio>.onrender.com`
+- Panel: `https://<servicio>.onrender.com/admin.html`
+- **Prueba de persistencia:** sube una imagen o edita un tour, luego **Manual Deploy → Restart service**; el cambio debe seguir ahí. Eso confirma que Postgres está conectado.
 
-Para simular el disco de Render antes de subir:
+### 4. Límites del plan Free
+
+- 750 horas de instancia al mes. El servicio **se duerme a los 15 minutos sin tráfico** y tarda ~30–60 s en despertar; es normal.
+- Sin disco persistente: las imágenes subidas se guardan en la tabla `kanba_media`, no en el filesystem.
+- Neon Free: 0.5 GB. Cada imagen suele pesar entre 50 KB y 1 MB; para una demo sobra. Si crece, puedes pagar almacenamiento o mover las imágenes a un servicio de objetos.
+- Usa **una sola instancia**: las sesiones y el documento se manejan en memoria; varias instancias se pisarían.
+- El dominio personalizado y el HTTPS también funcionan en el plan Free.
+
+### 5. Actualizaciones y operación
+
+- Cada `git push` a `main` redepliega automáticamente.
+- **Reiniciar datos**: en el SQL Editor de Neon ejecuta `DELETE FROM kanba_store; DELETE FROM kanba_media;` y reinicia el servicio; se vuelve a sembrar la base.
+- **Respaldo**: en Neon puedes crear una branch/copia o exportar con `pg_dump` usando la misma `DATABASE_URL`.
+- Para cambiar la contraseña sin borrar datos: **Panel → Configuración → Actualizar contraseña**, o define `FORCE_ADMIN_PASSWORD=1` + `ADMIN_PASSWORD`, reinicia una vez y luego quita `FORCE_ADMIN_PASSWORD`.
+
+### Probar el modo PostgreSQL en local
 
 ```powershell
-$env:DATA_DIR = "$env:TEMP\kanba-data"
-$env:UPLOADS_DIR = "$env:TEMP\kanba-data\uploads"
+$env:DATABASE_URL = "postgresql://usuario:clave@host/neondb?sslmode=require"
 $env:ADMIN_PASSWORD = "una-clave-segura"
 $env:PORT = "8080"
-node server/index.js
+npm install
+npm start
 ```
+
+### Alternativa con disco persistente (plan pago)
+
+Si prefieres no depender de una base externa, puedes volver al esquema anterior: plan **Starter** + disco de 1 GB montado en `/var/data`, con `DATA_DIR=/var/data` y `UPLOADS_DIR=/var/data/uploads`, y sin `DATABASE_URL`. Cuesta unos US$7/mes + US$0.25/mes por el disco. El proyecto soporta ambos modos sin cambios de código.
 
 ---
 
@@ -418,8 +435,9 @@ Esta implementación es una demo funcional, no un sistema listo para producción
 - Sirve el sitio detrás de HTTPS y un proxy inverso (Caddy, Nginx, IIS).
 - Sustituye la pasarela sandbox por una real y configura el webhook firmado.
 - Configura SMTP real y verifica SPF, DKIM y DMARC del dominio remitente.
-- Haz respaldos de `data/db.json`, `data/outbox/` y `public/uploads/`.
+- Haz respaldos de la base PostgreSQL (`pg_dump` de `DATABASE_URL`) y de `data/` si usas el modo archivo local.
 - Revisa las políticas, requisitos y precios con la operación real antes de publicar.
-- La persistencia es un archivo JSON con escritura atómica: suficiente para demo y bajo tráfico, pero para producción se recomienda una base de datos transaccional y almacenamiento de archivos externo.
+- Con `DATABASE_URL` la persistencia es PostgreSQL; sin ella es un archivo JSON con escritura atómica, suficiente para demo y bajo tráfico.
+- Las imágenes subidas en modo PostgreSQL viven en la tabla `kanba_media`; para mucho volumen conviene almacenamiento de objetos (S3, Cloudflare R2, etc.).
 - El limitador de intentos de login es en memoria; con varias instancias usa un almacén compartido.
 - Revisa la licencia y los créditos de cada fotografía antes de un uso comercial.
