@@ -7,19 +7,19 @@
   <meta name="description" content="Panel administrativo de reservas, disponibilidad, contenido y configuración de K’anba Cuevas Vivas.">
   <meta name="theme-color" content="#0b1a16">
   <meta name="robots" content="noindex">
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/styles.css">
-  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/admin.css">
 </head>
 <body class="admin-body">
   <!-- Acceso -->
   <div class="login-screen" id="loginScreen">
     <div class="login-glow" aria-hidden="true"></div>
     <form class="login-card" id="loginForm" novalidate>
-      <a class="brand brand-light login-brand" href="/" aria-label="K’anba, inicio">
+      <a class="brand brand-light login-brand" href="index.html" aria-label="K’anba, inicio">
         <span class="brand-mark" aria-hidden="true">
           <svg viewBox="0 0 40 40"><path d="M5 35V20a15 15 0 0 1 30 0v15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 31c-4.7-3.6-7-6.8-7-10.4a7 7 0 0 1 14 0c0 3.6-2.3 6.8-7 10.4Z" fill="currentColor"/><path d="M19 25.8c.1-2.9.8-4.7 1.8-6.3.6 2 1.9 3 2.4 5 .3 1.2-.4 2.5-2 2.8-1.6.3-2.3-.7-2.2-1.5Z" fill="#0e2420"/></svg>
         </span>
@@ -42,7 +42,7 @@
   <div class="admin-shell" id="adminShell" hidden>
     <aside class="admin-sidebar" id="adminSidebar" aria-label="Navegación administrativa">
       <div class="admin-brand">
-        <a class="brand brand-light" href="/" aria-label="K’anba, inicio">
+        <a class="brand brand-light" href="index.html" aria-label="K’anba, inicio">
           <span class="brand-mark" aria-hidden="true">
             <svg viewBox="0 0 40 40"><path d="M5 35V20a15 15 0 0 1 30 0v15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 31c-4.7-3.6-7-6.8-7-10.4a7 7 0 0 1 14 0c0 3.6-2.3 6.8-7 10.4Z" fill="currentColor"/><path d="M19 25.8c.1-2.9.8-4.7 1.8-6.3.6 2 1.9 3 2.4 5 .3 1.2-.4 2.5-2 2.8-1.6.3-2.3-.7-2.2-1.5Z" fill="#0e2420"/></svg>
           </span>
@@ -103,7 +103,7 @@
           <div><strong>Administración</strong><small id="sessionInfo">Sesión activa</small></div>
         </div>
         <div class="sidebar-links">
-          <a href="/" target="_blank" rel="noopener">Ver sitio ↗</a>
+          <a href="index.html" target="_blank" rel="noopener">Ver sitio ↗</a>
           <button type="button" id="logoutButton">Cerrar sesión</button>
         </div>
       </div>
@@ -353,6 +353,7 @@
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="/js/admin.js" defer></script>
+  <script src="js/admin.js" defer></script>
+  <script src="js/file-notice.js"></script>
 </body>
 </html>

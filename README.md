@@ -76,6 +76,8 @@ Abrir:
 - Verificación de comprobantes: <http://localhost:3000/verificar.html>
 - Consulta de reserva: <http://localhost:3000/mi-reserva.html>
 
+> **No abras `public/index.html` con doble clic.** Así el navegador usa `file://`, no hay servidor ni API y el contenido dinámico (tours, galería, reservas) no carga. Entra siempre por <http://localhost:3000> con `npm start` en ejecución. Si abres el archivo directamente, el sitio muestra un aviso con la dirección correcta.
+
 Para desarrollo con recarga automática del servidor:
 
 ```bash
