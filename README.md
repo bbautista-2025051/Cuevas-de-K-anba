@@ -153,7 +153,7 @@ Los correos se guardan como archivos `.eml` en `data/outbox/` y también se list
 | `FORCE_ADMIN_PASSWORD` | — | Con `1`, vuelve a aplicar `ADMIN_PASSWORD` al arrancar. |
 | `PUBLIC_URL` | `http://localhost:3000` | URL base usada en enlaces de correos. También se puede configurar en el panel (`business.siteUrl`). |
 | `RENDER_EXTERNAL_URL` | — | Render la define sola; se usa como `PUBLIC_URL` si esta no existe. |
-| `DATABASE_URL` | — | Cadena de conexión PostgreSQL (Neon, Supabase, Render Postgres). Si existe, la app guarda todo en Postgres; es lo que permite persistencia en Render Free. |
+| `DATABASE_URL` | — | Cadena de conexión PostgreSQL. En el Blueprint se inyecta sola desde `kanba-db` (Render Postgres). Si existe, la app guarda todo en Postgres; es lo que permite persistencia en Render Free. |
 | `PGSSLMODE` | — | Con `disable` desactiva SSL (solo para PostgreSQL local sin TLS). |
 | `DATA_DIR` | `./data` | Modo archivo: carpeta de `db.json` y `outbox/`. También sirve para montar un disco de pago. |
 | `UPLOADS_DIR` | `./public/uploads` | Modo archivo: carpeta de imágenes subidas desde el panel. |
@@ -349,81 +349,84 @@ Se volverán a crear el contenido, los tours y las cinco reservas de ejemplo. La
 
 ## Despliegue en Render (gratis)
 
-El plan **Free** de Render no permite discos persistentes y su filesystem es efímero. Por eso la app usa una **base PostgreSQL externa gratuita** (Neon, Supabase, etc.) mediante `DATABASE_URL`. El sitio, el panel y la API corren en un solo Web Service Free.
+El `render.yaml` del repositorio crea **dos recursos en un solo Blueprint**: un **Web Service Free** (sitio público, panel y API) y una **Render Postgres Free** (`kanba-db`). Render conecta la base al servicio mediante `DATABASE_URL`; no hay que crear nada a mano ni usar otro proveedor.
+
+Como el filesystem de un Web Service Free es efímero, el `db.json` y las imágenes no pueden vivir en disco: se guardan en Postgres.
 
 ### Arquitectura
 
 ```text
-Render Web Service (Free · Node 22 · sin disco)
-├── public/            → sitio, panel y assets (desde el repo)
-└── PostgreSQL gratuito (Neon / Supabase)
-    ├── kanba_store    → documento completo: contenido, tours, reservas, sesiones
-    └── kanba_media    → imágenes subidas desde el panel
+Blueprint de Render
+├── Web Service Free (Node 22 · npm start · sin disco)
+│   └── public/          → sitio, panel y assets (desde el repo)
+└── Render Postgres Free (kanba-db)
+    ├── kanba_store      → documento completo: contenido, tours, reservas, sesiones
+    └── kanba_media      → imágenes subidas desde el panel
 ```
 
-Sin `DATABASE_URL` la app sigue usando `data/db.json`; en Render Free eso significa perder los datos en cada reinicio.
+Sin `DATABASE_URL` la app sigue usando `data/db.json` (modo local); en Render eso perdería los datos en cada reinicio.
 
-### 1. Crear la base gratuita en Neon
-
-1. Entra a <https://neon.com> y crea la cuenta con GitHub o Google (no pide tarjeta).
-2. **Create project**: nombre `kanba` y región **US West (Oregon)** para que quede cerca del servicio de Render.
-3. En el panel del proyecto copia la **Connection string**. Se ve así:
-
-   ```text
-   postgresql://usuario:clave@ep-xxxx.us-west-2.aws.neon.tech/neondb?sslmode=require
-   ```
-
-4. Guárdala en un lugar seguro. **No la subas a GitHub.**
-
-Neon Free incluye 0.5 GB y suspende el compute tras unos minutos sin uso; el primer acceso puede tardar alrededor de un segundo. También funciona cualquier otro PostgreSQL gratuito (Supabase, Aiven, etc.).
-
-### 2. Desplegar el Blueprint
+### 1. Desplegar el Blueprint
 
 1. Sube los cambios a GitHub (rama `main`).
 2. En Render: **New + → Blueprint**.
 3. Elige el repositorio `bbautista-2025051/Cuevas-de-K-anba`.
 4. Nombre: `cuevas-de-kanba` · Branch: `main` · Blueprint Path: `render.yaml`.
-5. En la revisión verás **1 Web Service Free** y dos variables pendientes:
-   - **DATABASE_URL**: pega la cadena de conexión de Neon.
+5. En la revisión verás **1 Web Service Free**, **1 Postgres Free** (`kanba-db`) y una sola variable pendiente:
    - **ADMIN_PASSWORD**: escribe la contraseña del panel en producción.
-6. Pulsa **Deploy Blueprint**.
+   No hay que pegar ninguna cadena de conexión: Render inyecta `DATABASE_URL` desde la base del Blueprint.
+6. Pulsa **Deploy Blueprint**. Render crea primero la base y después el servicio.
 7. El build ejecuta `npm install --omit=dev` (instala `pg`) y arranca con `npm start`. En el primer arranque se crean las tablas y se siembran el contenido y los tours.
 
-### 3. Verificar
+### 2. Verificar
 
 - Salud: `https://<servicio>.onrender.com/api/health`
 - Sitio: `https://<servicio>.onrender.com`
 - Panel: `https://<servicio>.onrender.com/admin.html`
 - **Prueba de persistencia:** sube una imagen o edita un tour, luego **Manual Deploy → Restart service**; el cambio debe seguir ahí. Eso confirma que Postgres está conectado.
 
-### 4. Límites del plan Free
+### 3. Límites y caducidad del plan Free
+
+**Web Service Free**
 
 - 750 horas de instancia al mes. El servicio **se duerme a los 15 minutos sin tráfico** y tarda ~30–60 s en despertar; es normal.
 - Sin disco persistente: las imágenes subidas se guardan en la tabla `kanba_media`, no en el filesystem.
-- Neon Free: 0.5 GB. Cada imagen suele pesar entre 50 KB y 1 MB; para una demo sobra. Si crece, puedes pagar almacenamiento o mover las imágenes a un servicio de objetos.
 - Usa **una sola instancia**: las sesiones y el documento se manejan en memoria; varias instancias se pisarían.
 - El dominio personalizado y el HTTPS también funcionan en el plan Free.
 
-### 5. Actualizaciones y operación
+**Render Postgres Free (`kanba-db`)**
+
+- **1 GB fijo** de almacenamiento y **solo una base Free por workspace**.
+- **Expira 30 días después de crearla.** A partir de ahí queda inaccesible, pero tienes **14 días de gracia** para pasarla a un plan pago sin perder datos. Si no la actualizas, Render la **elimina con todo su contenido**.
+- Sin respaldos automáticos ni recuperación a un punto en el tiempo.
+- Render puede reiniciarla o hacer mantenimiento en cualquier momento (breve indisponibilidad).
+- Render envía correos de aviso antes del vencimiento y antes de que termine la gracia.
+
+> Para una demo o entrega dentro de ese mes no cuesta nada. Si necesitas que siga viva, actualiza la base a un plan pago antes de que termine la gracia: los datos se conservan. Si no quieres pagar, usa una base gratuita sin caducidad (Neon, Supabase) y define `DATABASE_URL` a mano, como se explica más abajo.
+
+### 4. Actualizaciones y operación
 
 - Cada `git push` a `main` redepliega automáticamente.
-- **Reiniciar datos**: en el SQL Editor de Neon ejecuta `DELETE FROM kanba_store; DELETE FROM kanba_media;` y reinicia el servicio; se vuelve a sembrar la base.
-- **Respaldo**: en Neon puedes crear una branch/copia o exportar con `pg_dump` usando la misma `DATABASE_URL`.
+- **Ver la base:** en Render abre `kanba-db` → **Connect** y copia el comando `psql` o la *External Database URL*.
+- **Reiniciar datos:** con `psql` sobre la base ejecuta `DELETE FROM kanba_store; DELETE FROM kanba_media;` y reinicia el servicio; se vuelve a sembrar la base.
+- **Respaldo:** la base Free no tiene respaldos automáticos. Exporta con `pg_dump "<external database url>" > kanba.sql`.
 - Para cambiar la contraseña sin borrar datos: **Panel → Configuración → Actualizar contraseña**, o define `FORCE_ADMIN_PASSWORD=1` + `ADMIN_PASSWORD`, reinicia una vez y luego quita `FORCE_ADMIN_PASSWORD`.
 
 ### Probar el modo PostgreSQL en local
 
 ```powershell
-$env:DATABASE_URL = "postgresql://usuario:clave@host/neondb?sslmode=require"
+$env:DATABASE_URL = "postgresql://usuario:clave@host:5432/kanba"
+$env:PGSSLMODE = "disable"   # solo si tu Postgres local no usa TLS
 $env:ADMIN_PASSWORD = "una-clave-segura"
 $env:PORT = "8080"
 npm install
 npm start
 ```
 
-### Alternativa con disco persistente (plan pago)
+### Alternativas sin caducidad
 
-Si prefieres no depender de una base externa, puedes volver al esquema anterior: plan **Starter** + disco de 1 GB montado en `/var/data`, con `DATA_DIR=/var/data` y `UPLOADS_DIR=/var/data/uploads`, y sin `DATABASE_URL`. Cuesta unos US$7/mes + US$0.25/mes por el disco. El proyecto soporta ambos modos sin cambios de código.
+- **Neon / Supabase / Aiven (gratis):** crea la base, copia su cadena de conexión y, en `render.yaml`, borra el bloque `databases:` y cambia `DATABASE_URL` por `sync: false`. Al desplegar, pega la cadena en el panel. Luego ajusta `region` si quieres acercarla a la base.
+- **Disco persistente (plan pago):** plan Starter + disco de 1 GB montado en `/var/data`, con `DATA_DIR=/var/data` y `UPLOADS_DIR=/var/data/uploads`, y sin `DATABASE_URL`. Cuesta aparte del plan del servicio. El proyecto soporta ambos modos sin cambios de código.
 
 ---
 
@@ -435,7 +438,7 @@ Esta implementación es una demo funcional, no un sistema listo para producción
 - Sirve el sitio detrás de HTTPS y un proxy inverso (Caddy, Nginx, IIS).
 - Sustituye la pasarela sandbox por una real y configura el webhook firmado.
 - Configura SMTP real y verifica SPF, DKIM y DMARC del dominio remitente.
-- Haz respaldos de la base PostgreSQL (`pg_dump` de `DATABASE_URL`) y de `data/` si usas el modo archivo local.
+- Haz respaldos de la base PostgreSQL (`pg_dump` de `DATABASE_URL`) y de `data/` si usas el modo archivo local. La base Free de Render no tiene respaldos y caduca a los 30 días.
 - Revisa las políticas, requisitos y precios con la operación real antes de publicar.
 - Con `DATABASE_URL` la persistencia es PostgreSQL; sin ella es un archivo JSON con escritura atómica, suficiente para demo y bajo tráfico.
 - Las imágenes subidas en modo PostgreSQL viven en la tabla `kanba_media`; para mucho volumen conviene almacenamiento de objetos (S3, Cloudflare R2, etc.).

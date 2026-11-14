@@ -1,10 +1,23 @@
 # Blueprint de Render para K'anba · Cuevas Vivas — plan gratuito
 # Documentación: https://render.com/docs/blueprint-spec
 #
-# Un único Web Service (plan Free) sirve el sitio público, el panel y la API.
-# La persistencia va a una base PostgreSQL externa gratuita (Neon, Supabase, etc.)
-# configurada con la variable DATABASE_URL. Sin ella se usa data/db.json y los
-# datos se pierden en cada reinicio (el filesystem de Render Free es efímero).
+# Crea dos recursos en un solo Blueprint:
+#   1. Un Web Service Free que sirve el sitio público, el panel y la API.
+#   2. Una base Render Postgres Free conectada como DATABASE_URL.
+#
+# Importante: la base Free de Render expira 30 días después de crearla.
+# Después hay 14 días de gracia para pasarla a un plan pago sin perder datos;
+# si no se actualiza, Render la elimina junto con todo su contenido.
+# Detalles en el README → "Despliegue en Render (gratis)".
+
+databases:
+  - name: kanba-db
+    databaseName: kanba
+    user: kanba
+    plan: free
+    region: oregon
+    postgresMajorVersion: "17"
+
 services:
   - type: web
     name: cuevas-de-kanba
@@ -20,10 +33,11 @@ services:
         value: production
       - key: NODE_VERSION
         value: "22"
-      # Cadena de conexión de PostgreSQL (Neon/Supabase/Render Postgres).
-      # Render pedirá este valor al crear el servicio (no se guarda en el repositorio).
+      # Cadena de conexión interna de la base creada arriba (red privada de Render).
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: kanba-db
+          property: connectionString
       # Render pedirá este valor al crear el servicio (no se guarda en el repositorio).
       - key: ADMIN_PASSWORD
         sync: false
