@@ -153,7 +153,8 @@ Los correos se guardan como archivos `.eml` en `data/outbox/` y también se list
 | `FORCE_ADMIN_PASSWORD` | — | Con `1`, vuelve a aplicar `ADMIN_PASSWORD` al arrancar. |
 | `PUBLIC_URL` | `http://localhost:3000` | URL base usada en enlaces de correos. También se puede configurar en el panel (`business.siteUrl`). |
 | `RENDER_EXTERNAL_URL` | — | Render la define sola; se usa como `PUBLIC_URL` si esta no existe. |
-| `DATABASE_URL` | — | Cadena de conexión PostgreSQL. En el Blueprint se inyecta sola desde `kanba-db` (Render Postgres). Si existe, la app guarda todo en Postgres; es lo que permite persistencia en Render Free. |
+| `DATABASE_URL` | — | Cadena de conexión PostgreSQL. Si existe, la app guarda todo en Postgres; es lo que permite persistencia en Render Free. |
+| `DB_SCHEMA` | `public` | Esquema donde se crean `kanba_store` y `kanba_media`. En Render se usa `kanba` para compartir la base con otra app sin tocar sus tablas. |
 | `PGSSLMODE` | — | Con `disable` desactiva SSL (solo para PostgreSQL local sin TLS). |
 | `DATA_DIR` | `./data` | Modo archivo: carpeta de `db.json` y `outbox/`. También sirve para montar un disco de pago. |
 | `UPLOADS_DIR` | `./public/uploads` | Modo archivo: carpeta de imágenes subidas desde el panel. |
@@ -174,7 +175,7 @@ node server/index.js
 .
 ├── package.json
 ├── README.md
-├── render.yaml               # Blueprint de Render (plan Free + PostgreSQL externo)
+├── render.yaml               # Blueprint de Render (Web Service Free + Postgres vía DATABASE_URL)
 ├── data/                     # modo archivo local (se ignora si hay DATABASE_URL)
 │   ├── db.json               # contenido, tours, reservas, ajustes, sesiones
 │   └── outbox/               # correos generados en formato .eml
@@ -349,43 +350,56 @@ Se volverán a crear el contenido, los tours y las cinco reservas de ejemplo. La
 
 ## Despliegue en Render (gratis)
 
-El `render.yaml` del repositorio crea **dos recursos en un solo Blueprint**: un **Web Service Free** (sitio público, panel y API) y una **Render Postgres Free** (`kanba-db`). Render conecta la base al servicio mediante `DATABASE_URL`; no hay que crear nada a mano ni usar otro proveedor.
+El `render.yaml` crea **un solo Web Service Free** (sitio público, panel y API). No crea base de datos: **Render solo permite una Render Postgres Free por workspace** y tu CRM ya ocupa la de este workspace. Para no pagar nada, K'anba reutiliza esa misma base con un **esquema propio** (`DB_SCHEMA=kanba`), de modo que sus tablas viven separadas de las del CRM (que usa `public`).
 
 Como el filesystem de un Web Service Free es efímero, el `db.json` y las imágenes no pueden vivir en disco: se guardan en Postgres.
 
 ### Arquitectura
 
 ```text
-Blueprint de Render
-├── Web Service Free (Node 22 · npm start · sin disco)
-│   └── public/          → sitio, panel y assets (desde el repo)
-└── Render Postgres Free (kanba-db)
-    ├── kanba_store      → documento completo: contenido, tours, reservas, sesiones
-    └── kanba_media      → imágenes subidas desde el panel
+Render (mismo workspace · región oregon)
+├── Web Service Free de K'anba (Node 22 · npm start · sin disco)
+│   └── public/              → sitio, panel y assets (desde el repo)
+├── Web Service + Static Site de tu CRM  (no se tocan)
+└── Render Postgres Free existente (la del CRM · 1 GB)
+    ├── public.*             → tablas de Prisma del CRM (intactas)
+    └── kanba.*              → esquema exclusivo de K'anba (DB_SCHEMA)
+        ├── kanba_store      → contenido, tours, reservas y sesiones
+        └── kanba_media      → imágenes subidas desde el panel
 ```
 
 Sin `DATABASE_URL` la app sigue usando `data/db.json` (modo local); en Render eso perdería los datos en cada reinicio.
 
-### 1. Desplegar el Blueprint
+### 1. Copiar la conexión de la base existente
+
+1. En Render abre tu base Postgres (la del CRM) → pestaña **Connect**.
+2. Copia la **Internal Database URL** (recomendado). Funciona si K'anba y la base están en el **mismo workspace y región** (`oregon`).
+3. Si están en regiones distintas o la base tiene la lista de IPs restringida, usa la **External Database URL**.
+4. No la subas a GitHub.
+
+### 2. Desplegar el Blueprint
 
 1. Sube los cambios a GitHub (rama `main`).
 2. En Render: **New + → Blueprint**.
 3. Elige el repositorio `bbautista-2025051/Cuevas-de-K-anba`.
 4. Nombre: `cuevas-de-kanba` · Branch: `main` · Blueprint Path: `render.yaml`.
-5. En la revisión verás **1 Web Service Free**, **1 Postgres Free** (`kanba-db`) y una sola variable pendiente:
-   - **ADMIN_PASSWORD**: escribe la contraseña del panel en producción.
-   No hay que pegar ninguna cadena de conexión: Render inyecta `DATABASE_URL` desde la base del Blueprint.
-6. Pulsa **Deploy Blueprint**. Render crea primero la base y después el servicio.
-7. El build ejecuta `npm install --omit=dev` (instala `pg`) y arranca con `npm start`. En el primer arranque se crean las tablas y se siembran el contenido y los tours.
+5. En la revisión verás **1 Web Service Free** y dos variables pendientes:
+   - **DATABASE_URL**: pega la cadena del paso 1.
+   - **ADMIN_PASSWORD**: contraseña del panel en producción.
+   `DB_SCHEMA=kanba` ya viene definido en el Blueprint.
+6. Pulsa **Deploy Blueprint**.
+7. El build ejecuta `npm install --omit=dev` (instala `pg`) y arranca con `npm start`. En el primer arranque se crea el esquema `kanba`, sus tablas y el contenido de demostración.
 
-### 2. Verificar
+> El usuario de Render Postgres es dueño de la base, así que puede crear el esquema sin pedir permisos. K'anba nunca lee ni modifica las tablas del CRM.
+
+### 3. Verificar
 
 - Salud: `https://<servicio>.onrender.com/api/health`
 - Sitio: `https://<servicio>.onrender.com`
 - Panel: `https://<servicio>.onrender.com/admin.html`
-- **Prueba de persistencia:** sube una imagen o edita un tour, luego **Manual Deploy → Restart service**; el cambio debe seguir ahí. Eso confirma que Postgres está conectado.
+- **Prueba de persistencia:** sube una imagen o edita un tour, luego **Manual Deploy → Restart service**; el cambio debe seguir ahí y el CRM debe seguir funcionando igual.
 
-### 3. Límites y caducidad del plan Free
+### 4. Límites y caducidad del plan Free
 
 **Web Service Free**
 
@@ -394,39 +408,40 @@ Sin `DATABASE_URL` la app sigue usando `data/db.json` (modo local); en Render es
 - Usa **una sola instancia**: las sesiones y el documento se manejan en memoria; varias instancias se pisarían.
 - El dominio personalizado y el HTTPS también funcionan en el plan Free.
 
-**Render Postgres Free (`kanba-db`)**
+**Render Postgres Free compartida con el CRM**
 
-- **1 GB fijo** de almacenamiento y **solo una base Free por workspace**.
-- **Expira 30 días después de crearla.** A partir de ahí queda inaccesible, pero tienes **14 días de gracia** para pasarla a un plan pago sin perder datos. Si no la actualizas, Render la **elimina con todo su contenido**.
+- **1 GB compartido** entre el CRM y K'anba. Los datos de K'anba son pequeños (documento JSON + imágenes); para una demo sobra.
+- **La caducidad cuenta desde que se creó la base del CRM**, no desde el deploy de K'anba: expira **30 días después de su creación**, con **14 días de gracia** para pasarla a un plan pago antes de que Render la elimine con todo (CRM incluido). Revisa la fecha en el panel de Render.
 - Sin respaldos automáticos ni recuperación a un punto en el tiempo.
 - Render puede reiniciarla o hacer mantenimiento en cualquier momento (breve indisponibilidad).
-- Render envía correos de aviso antes del vencimiento y antes de que termine la gracia.
 
-> Para una demo o entrega dentro de ese mes no cuesta nada. Si necesitas que siga viva, actualiza la base a un plan pago antes de que termine la gracia: los datos se conservan. Si no quieres pagar, usa una base gratuita sin caducidad (Neon, Supabase) y define `DATABASE_URL` a mano, como se explica más abajo.
+> Para una entrega dentro de esos días no cuesta nada. Si necesitas algo permanente y gratis, mueve **K'anba** (o el CRM) a una base gratuita sin caducidad como **Neon** o **Supabase**; es el único modo de seguir a costo cero sin depender de la fecha de expiración de Render.
 
-### 4. Actualizaciones y operación
+### 5. Actualizaciones y operación
 
 - Cada `git push` a `main` redepliega automáticamente.
-- **Ver la base:** en Render abre `kanba-db` → **Connect** y copia el comando `psql` o la *External Database URL*.
-- **Reiniciar datos:** con `psql` sobre la base ejecuta `DELETE FROM kanba_store; DELETE FROM kanba_media;` y reinicia el servicio; se vuelve a sembrar la base.
-- **Respaldo:** la base Free no tiene respaldos automáticos. Exporta con `pg_dump "<external database url>" > kanba.sql`.
+- **Ver la base:** en Render abre la Postgres → **Connect** y copia el comando `psql` o la *External Database URL*.
+- **Reiniciar solo los datos de K'anba:** con `psql` sobre la base ejecuta `DELETE FROM kanba.kanba_store; DELETE FROM kanba.kanba_media;` y reinicia el servicio. Las tablas del CRM (`public.*`) no se tocan.
+- **Respaldo de K'anba:** `pg_dump "<external database url>" --schema=kanba > kanba.sql`.
 - Para cambiar la contraseña sin borrar datos: **Panel → Configuración → Actualizar contraseña**, o define `FORCE_ADMIN_PASSWORD=1` + `ADMIN_PASSWORD`, reinicia una vez y luego quita `FORCE_ADMIN_PASSWORD`.
 
 ### Probar el modo PostgreSQL en local
 
 ```powershell
 $env:DATABASE_URL = "postgresql://usuario:clave@host:5432/kanba"
-$env:PGSSLMODE = "disable"   # solo si tu Postgres local no usa TLS
+$env:DB_SCHEMA = "kanba"       # opcional: aísla las tablas en su propio esquema
+$env:PGSSLMODE = "disable"     # solo si tu Postgres local no usa TLS
 $env:ADMIN_PASSWORD = "una-clave-segura"
 $env:PORT = "8080"
 npm install
 npm start
 ```
 
-### Alternativas sin caducidad
+### Alternativas si no quieres compartir la base del CRM
 
-- **Neon / Supabase / Aiven (gratis):** crea la base, copia su cadena de conexión y, en `render.yaml`, borra el bloque `databases:` y cambia `DATABASE_URL` por `sync: false`. Al desplegar, pega la cadena en el panel. Luego ajusta `region` si quieres acercarla a la base.
-- **Disco persistente (plan pago):** plan Starter + disco de 1 GB montado en `/var/data`, con `DATA_DIR=/var/data` y `UPLOADS_DIR=/var/data/uploads`, y sin `DATABASE_URL`. Cuesta aparte del plan del servicio. El proyecto soporta ambos modos sin cambios de código.
+- **Otro workspace de Render (gratis):** Render permite una base Free por workspace. Crea un workspace nuevo, colócalo en `oregon`, crea ahí la Postgres Free y despliega K'anba en ese workspace con su **Internal Database URL**. Sigue siendo gratis, pero esa base también caduca a los 30 días.
+- **Neon / Supabase / Aiven (gratis y sin caducidad):** crea la base, copia su cadena de conexión y pégala en `DATABASE_URL`. Funciona con el mismo `render.yaml` (puedes dejar `DB_SCHEMA=kanba`).
+- **Disco persistente (plan pago):** plan Starter + disco de 1 GB montado en `/var/data`, con `DATA_DIR=/var/data` y `UPLOADS_DIR=/var/data/uploads`, y sin `DATABASE_URL`. Cuesta aparte del plan del servicio.
 
 ---
 

@@ -845,9 +845,21 @@ function scheduleFlush() {
   return flushPromise;
 }
 
+function normalizeSchema(value) {
+  const schema = String(value || '').trim();
+  if (!schema) return 'public';
+  if (!/^[a-zA-Z_][a-zA-Z0-9_]{0,62}$/.test(schema)) {
+    throw new Error('DB_SCHEMA inválido: usa solo letras, números y guion bajo (máximo 63 caracteres).');
+  }
+  return schema;
+}
+
 /**
- * Inicializa el almacenamiento. Con DATABASE_URL usa PostgreSQL (Neon, Supabase,
- * Render Postgres, etc.); sin ella usa data/db.json como hasta ahora.
+ * Inicializa el almacenamiento. Con DATABASE_URL usa PostgreSQL (Render Postgres,
+ * Neon, Supabase, etc.); sin ella usa data/db.json como hasta ahora.
+ *
+ * DB_SCHEMA permite compartir una misma base con otra aplicación sin chocar:
+ * las tablas se crean en ese esquema en vez de `public`.
  */
 export async function initStore() {
   const url = process.env.DATABASE_URL;
@@ -855,14 +867,25 @@ export async function initStore() {
 
   const { default: pg } = await import('pg');
   const ssl = process.env.PGSSLMODE === 'disable' ? false : { rejectUnauthorized: false };
-  pool = new pg.Pool({
+  const schema = normalizeSchema(process.env.DB_SCHEMA);
+  const poolConfig = {
     connectionString: url,
     ssl,
     max: 4,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 15000
-  });
+  };
+  if (schema !== 'public') {
+    // search_path se aplica a cada conexión nueva del pool.
+    poolConfig.options = `-c search_path=${schema},public`;
+  }
+  pool = new pg.Pool(poolConfig);
   usingPostgres = true;
+
+  if (schema !== 'public') {
+    await pool.query(`CREATE SCHEMA IF NOT EXISTS "${schema}"`);
+    console.log(`[store] esquema PostgreSQL: ${schema}`);
+  }
 
   await pool.query(STORE_SCHEMA);
 

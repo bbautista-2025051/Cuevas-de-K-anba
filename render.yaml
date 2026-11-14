@@ -1,22 +1,13 @@
 # Blueprint de Render para K'anba · Cuevas Vivas — plan gratuito
 # Documentación: https://render.com/docs/blueprint-spec
 #
-# Crea dos recursos en un solo Blueprint:
-#   1. Un Web Service Free que sirve el sitio público, el panel y la API.
-#   2. Una base Render Postgres Free conectada como DATABASE_URL.
+# Un único Web Service Free sirve el sitio público, el panel y la API.
+# La persistencia va a PostgreSQL mediante DATABASE_URL.
 #
-# Importante: la base Free de Render expira 30 días después de crearla.
-# Después hay 14 días de gracia para pasarla a un plan pago sin perder datos;
-# si no se actualiza, Render la elimina junto con todo su contenido.
-# Detalles en el README → "Despliegue en Render (gratis)".
-
-databases:
-  - name: kanba-db
-    databaseName: kanba
-    user: kanba
-    plan: free
-    region: oregon
-    postgresMajorVersion: "17"
+# Este Blueprint NO crea una base de datos: Render solo permite UNA base
+# Postgres Free por workspace. Si ya tienes otra (por ejemplo tu CRM),
+# reutilízala con un esquema propio (DB_SCHEMA=kanba) o usa una base
+# gratuita externa (Neon, Supabase). Ver README → "Despliegue en Render (gratis)".
 
 services:
   - type: web
@@ -33,11 +24,16 @@ services:
         value: production
       - key: NODE_VERSION
         value: "22"
-      # Cadena de conexión interna de la base creada arriba (red privada de Render).
+      # Render pedirá este valor al crear el servicio (no se guarda en el repositorio).
+      # Pega la cadena de conexión de tu PostgreSQL:
+      #   - Render Postgres existente → "Internal Database URL" (mismo workspace/región)
+      #   - Neon / Supabase            → su connection string
       - key: DATABASE_URL
-        fromDatabase:
-          name: kanba-db
-          property: connectionString
+        sync: false
+      # Esquema propio dentro de esa base para no chocar con las tablas de otra app.
+      # Si usas una base exclusiva para K'anba puedes dejarlo o cambiar a "public".
+      - key: DB_SCHEMA
+        value: kanba
       # Render pedirá este valor al crear el servicio (no se guarda en el repositorio).
       - key: ADMIN_PASSWORD
         sync: false
