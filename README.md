@@ -379,7 +379,7 @@ Web Service (Node 22, npm start)
 
 - El disco persistente **no está disponible en el plan gratuito**. El blueprint usa `plan: starter` (unos US$7/mes) + disco de 1 GB (unos US$0.25/mes).
 - Usa **una sola instancia**. La base es un archivo JSON y el limitador de login vive en memoria: varias instancias se pisarían.
-- Render no respalda el disco automáticamente. Descarga `db.json` de vez en cuando desde la consola del servicio o guarda una copia externa.
+- Render crea **snapshots automáticos del disco cada 24 h** y los conserva 7 días. Aun así, conviene descargar una copia de `db.json` de vez en cuando desde la consola del servicio.
 - Si más adelante necesitas varias instancias, usuarios concurrentes o reportes pesados, conviene migrar `server/store.js` a PostgreSQL (Render ofrece Postgres gestionado).
 
 ### Operaciones útiles
